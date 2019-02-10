@@ -9,7 +9,10 @@ namespace HabiticaSimpleToDo
     {
         static void Main(string[] args)
         {
-            newTodo();
+            HabiticaHttpClient c = HabiticaHttpClient.getInstance();
+
+            c.createNewTodo("Httpclient success", "i did it");
+            //newTodo();
             //getTodos();
         }
 
