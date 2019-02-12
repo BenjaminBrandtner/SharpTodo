@@ -29,8 +29,11 @@ namespace HabiticaSimpleToDo
             DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
         }
 
-        public void createNewTodo(String Title, String Description)
+        public async void createNewTodo(String Title, String Description)
         {
+            Uri url = new Uri("tasks/user");
+
+            //TODO: Stringbuilder ersetzen wenn json eingebunden ist
             StringBuilder jsonText = new StringBuilder();
             jsonText.Append("{");
             jsonText.Append("\"text\": \"");
@@ -39,25 +42,14 @@ namespace HabiticaSimpleToDo
             jsonText.Append("\"type\": ");
             jsonText.Append("\"todo\"");
             jsonText.Append("}");
+            StringContent requestContent = new StringContent(jsonText.ToString(), Encoding.UTF8, "application/json");
 
-            Console.WriteLine(jsonText.ToString());
+            HttpResponseMessage response = await PostAsync(url,requestContent);
 
-            Task<HttpResponseMessage> t = PostAsync("tasks/user", new StringContent(jsonText.ToString(), Encoding.UTF8, "application/json"));
+            Stream stream = await response.Content.ReadAsStreamAsync();
 
-            Console.WriteLine("Press something to continue:");
-            Console.ReadKey();
-
-            HttpResponseMessage result = t.Result;
-            Task<Stream> t2 = result.Content.ReadAsStreamAsync();
-
-            Console.WriteLine("Press something to continue:");
-            Console.ReadKey();
-
-            Stream s = t2.Result;
-
-            StreamReader sr = new StreamReader(s);
-            Console.WriteLine(sr.ReadToEnd());
+            //TODO: parse Json instead of writing to console
+            Console.WriteLine(new StreamReader(stream).ReadToEnd());
         }
-
     }
 }

@@ -12,8 +12,9 @@ namespace HabiticaSimpleToDo
             HabiticaHttpClient c = HabiticaHttpClient.getInstance();
 
             c.createNewTodo("Httpclient success", "i did it");
-            //newTodo();
-            //getTodos();
+
+            Console.WriteLine("Press something to continue:");
+            Console.ReadKey();
         }
 
         private static void newTodo()
