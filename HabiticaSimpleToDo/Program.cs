@@ -9,12 +9,14 @@ namespace HabiticaSimpleToDo
     {
         static void Main(string[] args)
         {
-            HabiticaHttpClient c = HabiticaHttpClient.getInstance();
+            using (HabiticaHttpClient c = HabiticaHttpClient.getInstance())
+            {
+                //c.createNewTodo("Httpclient success", "i did it");
+                c.getTodos();
 
-            c.createNewTodo("Httpclient success", "i did it");
-
-            Console.WriteLine("Press something to continue:");
-            Console.ReadKey();
+                Console.WriteLine("Press something to continue:");
+                Console.ReadKey();
+            }
         }
 
         private static void newTodo()

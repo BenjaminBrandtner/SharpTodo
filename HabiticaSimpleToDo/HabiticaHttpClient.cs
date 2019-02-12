@@ -48,7 +48,19 @@ namespace HabiticaSimpleToDo
 
             Stream stream = await response.Content.ReadAsStreamAsync();
 
-            //TODO: parse Json instead of writing to console
+            //TODO: parse Json and return result instead of writing to console
+            Console.WriteLine(new StreamReader(stream).ReadToEnd());
+        }
+
+        public async void getTodos()
+        {
+            string url = "tasks/user?type=todos";
+            
+            HttpResponseMessage response = await GetAsync(url);
+
+            Stream stream = await response.Content.ReadAsStreamAsync();
+
+            //TODO: parse Json and return list instead of writing to console
             Console.WriteLine(new StreamReader(stream).ReadToEnd());
         }
     }
