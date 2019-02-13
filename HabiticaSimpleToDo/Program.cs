@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.IO;
 using System.Net;
 using System.Text;
@@ -9,8 +10,8 @@ namespace HabiticaSimpleToDo
     {
         static void Main(string[] args)
         {
-            newTodo();
-            //getTodos();
+            //newTodo();
+            getTodos();
         }
 
         private static void newTodo()
@@ -95,9 +96,15 @@ namespace HabiticaSimpleToDo
                 //TODO: Parse json instead of just printing it to console.
                 Stream dataStream = response.GetResponseStream();
                 StreamReader reader = new StreamReader(dataStream);
-                Console.WriteLine(reader.ReadToEnd());
-
+                string json = reader.ReadToEnd();
                 response.Close();
+
+                dynamic something = JsonConvert.DeserializeObject(json);
+
+                foreach (var item in something.data)
+                {
+                    Console.WriteLine(item.text);
+                }
             }
             catch (WebException)
             {
