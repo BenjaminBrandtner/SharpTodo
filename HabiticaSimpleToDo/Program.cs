@@ -1,7 +1,9 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.IO;
 using System.Net;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace HabiticaSimpleToDo
@@ -77,7 +79,11 @@ namespace HabiticaSimpleToDo
 
         private static void getTodos()
         {
-            String url = "https://habitica.com/api/v3/tasks/user?type=todos";
+            //One Todo
+            //String url = "https://habitica.com/api/v3/tasks/9072949e-e3ca-402f-ae3c-e50434117693";
+
+            //All Todos
+            String url = "https://habitica.com/api/v3/tasks/user?type=todos/";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers["x-api-user"] = Properties.settings.Default.userID;
@@ -89,8 +95,8 @@ namespace HabiticaSimpleToDo
                 HttpWebResponse response = (HttpWebResponse)request.GetResponse();
 
                 //Read some headers from response
-                Console.WriteLine("Status: " + response.StatusCode);
-                Console.WriteLine("ContentType: " + response.ContentType);
+                //Console.WriteLine("Status: " + response.StatusCode);
+                //Console.WriteLine("ContentType: " + response.ContentType);
 
                 //Output data
                 //TODO: Parse json instead of just printing it to console.
@@ -99,17 +105,16 @@ namespace HabiticaSimpleToDo
                 string json = reader.ReadToEnd();
                 response.Close();
 
-                dynamic something = JsonConvert.DeserializeObject(json);
+                HabiticaSerializer hs = new HabiticaSerializer();
+                HabiticaTodo todo = hs.deserializeTodo(json);
 
-                foreach (var item in something.data)
-                {
-                    Console.WriteLine(item.text);
-                }
+                Console.WriteLine(todo);
             }
             catch (WebException)
             {
                 throw;
             }
         }
+
     }
 }
