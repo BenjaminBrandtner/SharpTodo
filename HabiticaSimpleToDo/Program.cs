@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Runtime.Serialization;
@@ -83,7 +84,7 @@ namespace HabiticaSimpleToDo
             //String url = "https://habitica.com/api/v3/tasks/9072949e-e3ca-402f-ae3c-e50434117693";
 
             //All Todos
-            String url = "https://habitica.com/api/v3/tasks/user?type=todos/";
+            String url = "https://habitica.com/api/v3/tasks/user?type=todos";
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Headers["x-api-user"] = Properties.settings.Default.userID;
@@ -106,9 +107,12 @@ namespace HabiticaSimpleToDo
                 response.Close();
 
                 HabiticaSerializer hs = new HabiticaSerializer();
-                HabiticaTodo todo = hs.deserializeTodo(json);
 
-                Console.WriteLine(todo);
+                //HabiticaTodo todo = hs.deserializeTodo(json);
+                //Console.WriteLine(todo.ToString());
+
+                IList<HabiticaTodo> todolist = hs.deserializeTodos(json);
+                Console.WriteLine(todolist.ToString());
             }
             catch (WebException)
             {

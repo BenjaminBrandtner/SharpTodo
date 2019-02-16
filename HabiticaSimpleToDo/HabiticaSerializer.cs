@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,13 +9,36 @@ namespace HabiticaSimpleToDo
 {
     class HabiticaSerializer
     {
+        private readonly JsonSerializer ser;
+
+        public HabiticaSerializer()
+        {
+            ser = new JsonSerializer();
+
+            //Clearing the DueDate of a todo on the website will explicitly set it to null, so we need to specify
+            ser.NullValueHandling = NullValueHandling.Ignore;
+            //and pass the JsonSerializer to all ToObject() Methods.
+        }
+
         public HabiticaTodo deserializeTodo(string json)
         {
             JToken data = parseResponseData(json);
 
-            HabiticaTodo todo = data.ToObject<HabiticaTodo>();
+            HabiticaTodo habiticaTodo = data.ToObject<HabiticaTodo>(ser);
 
-            return todo;
+            return habiticaTodo;
+        }
+        public IList<HabiticaTodo> deserializeTodos(string json)
+        {
+            JToken data = parseResponseData(json);
+            IList<HabiticaTodo> habiticaTodoList = new List<HabiticaTodo>();
+
+            foreach(JToken todo in data)
+            {
+                habiticaTodoList.Add(todo.ToObject<HabiticaTodo>(ser));
+            }
+
+            return habiticaTodoList;
         }
 
         private JToken parseResponseData(string json)
