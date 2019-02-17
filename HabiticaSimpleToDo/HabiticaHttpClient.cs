@@ -60,24 +60,41 @@ namespace HabiticaSimpleToDo
             string url = "tasks/user?type=todos";
             
             HttpResponseMessage response = await GetAsync(url);
-
             string json = await response.Content.ReadAsStringAsync();
-
             response.Dispose();
 
             return ser.deserializeTodos(json);
         }
-        public async Task<HabiticaTodo> getTodo(String id)
+        public async Task<HabiticaTodo> getTodo(string id)
         {
             string url = "tasks/" + id;
             
             HttpResponseMessage response = await GetAsync(url);
-
             string json = await response.Content.ReadAsStringAsync();
-
             response.Dispose();
 
             return ser.deserializeTodo(json);
+        }
+
+        public async Task checkOffTodo(string id)
+        {
+            string url = "tasks/" + id + "/score/up";
+
+            HttpResponseMessage response = await PostAsync(url, new StringContent(""));
+            string json = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+
+            ser.parseResponseData(json);
+        }
+        public async Task uncheckTodo(string id)
+        {
+            string url = "tasks/" + id + "/score/down";
+
+            HttpResponseMessage response = await PostAsync(url, new StringContent(""));
+            string json = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+
+            ser.parseResponseData(json);
         }
     }
 }

@@ -42,7 +42,9 @@ namespace HabiticaSimpleToDo
             return habiticaTodoList;
         }
 
-        private JToken parseResponseData(string json)
+        //TODO: Write methods to parse response of Score Task and Score Checklist Item
+
+        public JToken parseResponseData(string json)
         {
             JObject habiticaResponse = JObject.Parse(json);
             bool success = (bool)habiticaResponse["success"];

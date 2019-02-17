@@ -14,8 +14,19 @@ namespace HabiticaSimpleToDo
     {
         static void Main(string[] args)
         {
-            getTodoTest();
             //getTodosTest();
+            //checkOffTodoTest();
+            getTodoTest();
+        }
+
+        private static void checkOffTodoTest()
+        {
+            HabiticaHttpClient c = HabiticaHttpClient.getInstance();
+            Task checkOffTodo = c.checkOffTodo("05061a0b-9952-4f3e-aa55-b7ccd6d4cc31");
+
+            Console.WriteLine("Warten auf Antwort...");
+
+            checkOffTodo.Wait();
         }
 
         private static void getTodoTest()
