@@ -11,6 +11,7 @@ namespace HabiticaSimpleToDo
     class HabiticaHttpClient : HttpClient
     {
         private static HabiticaHttpClient instance;
+        private HabiticaSerializer ser;
 
         public static HabiticaHttpClient getInstance()
         {
@@ -22,11 +23,13 @@ namespace HabiticaSimpleToDo
             return instance;
         }
 
-        HabiticaHttpClient()
+        private HabiticaHttpClient()
         {
             BaseAddress = new Uri("https://habitica.com/api/v3/");
             DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
             DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
+
+            ser = new HabiticaSerializer();
         }
 
         public async void createNewTodo(String Title, String Description)
@@ -52,16 +55,17 @@ namespace HabiticaSimpleToDo
             Console.WriteLine(new StreamReader(stream).ReadToEnd());
         }
 
-        public async void getTodos()
+        public async Task<IList<HabiticaTodo>> getTodos()
         {
             string url = "tasks/user?type=todos";
             
             HttpResponseMessage response = await GetAsync(url);
 
-            Stream stream = await response.Content.ReadAsStreamAsync();
+            string json = await response.Content.ReadAsStringAsync();
 
-            //TODO: parse Json and return list instead of writing to console
-            Console.WriteLine(new StreamReader(stream).ReadToEnd());
+            response.Dispose();
+
+            return ser.deserializeTodos(json);
         }
     }
 }

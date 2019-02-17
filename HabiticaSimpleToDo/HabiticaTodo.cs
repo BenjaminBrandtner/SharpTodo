@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace HabiticaSimpleToDo
 {
@@ -35,9 +36,28 @@ namespace HabiticaSimpleToDo
         {
             completed = true;
         }
-        public override String ToString()
+        public override string ToString()
         {
-            return text + " (" + notes + ")";
+            StringBuilder todoString = new StringBuilder();
+
+            if(completed)
+            {
+                todoString.Append("[X] ");
+            }
+            else
+            {
+                todoString.Append("[ ] ");
+            }
+                       
+            todoString.Append(text);
+
+            if(!(string.IsNullOrWhiteSpace(notes)))
+            {
+                todoString.Append(" - ");
+                todoString.Append(notes);
+            }
+
+            return todoString.ToString();
         }
     }
 

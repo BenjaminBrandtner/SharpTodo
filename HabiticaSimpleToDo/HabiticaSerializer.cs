@@ -30,8 +30,9 @@ namespace HabiticaSimpleToDo
         }
         public IList<HabiticaTodo> deserializeTodos(string json)
         {
-            JToken data = parseResponseData(json);
             IList<HabiticaTodo> habiticaTodoList = new List<HabiticaTodo>();
+
+            JToken data = parseResponseData(json);
 
             foreach(JToken todo in data)
             {
