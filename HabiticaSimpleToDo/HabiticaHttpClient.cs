@@ -67,5 +67,17 @@ namespace HabiticaSimpleToDo
 
             return ser.deserializeTodos(json);
         }
+        public async Task<HabiticaTodo> getTodo(String id)
+        {
+            string url = "tasks/" + id;
+            
+            HttpResponseMessage response = await GetAsync(url);
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            response.Dispose();
+
+            return ser.deserializeTodo(json);
+        }
     }
 }

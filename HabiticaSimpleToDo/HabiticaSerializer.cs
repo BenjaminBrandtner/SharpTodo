@@ -49,8 +49,8 @@ namespace HabiticaSimpleToDo
 
             if(!success)
             {
-                String dataString = habiticaResponse["Data"].ToString();
-                throw new Exception("Request was recieved, but operation was unsuccessful.\n"+dataString);
+                String message = habiticaResponse["message"].ToString();
+                throw new Exception("Habitica recieved the request, but operation was unsuccessful: " + message);
             }
 
             return habiticaResponse["data"];
