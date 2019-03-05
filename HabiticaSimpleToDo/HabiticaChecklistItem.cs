@@ -1,6 +1,6 @@
 ﻿namespace HabiticaSimpleToDo
 {
-    internal class HabiticaChecklistItem
+    public class HabiticaChecklistItem
     {
         private readonly string id;
         private string text;

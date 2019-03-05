@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace HabiticaSimpleToDo
+{
+    public interface ITodoCollection
+    {
+        void create(String title);
+
+        void checkOffTodo(Todo todo);
+        void uncheckTodo(Todo todo);
+        void serializeTodo(Todo todo);
+
+        void checkOffIndex(int index);
+        void uncheckIndex(int index);
+        void serializeIndex(int index);
+    }
+}
