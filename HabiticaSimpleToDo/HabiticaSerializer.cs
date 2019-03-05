@@ -13,11 +13,12 @@ namespace HabiticaSimpleToDo
 
         public HabiticaSerializer()
         {
-            ser = new JsonSerializer();
-
-            //Clearing the DueDate of a todo on the website will explicitly set it to null, so we need to specify
-            ser.NullValueHandling = NullValueHandling.Ignore;
-            //and pass the JsonSerializer to all ToObject() Methods.
+            ser = new JsonSerializer
+            {
+                //Clearing the DueDate of a todo on the website will set it to null, so we need to specify
+                NullValueHandling = NullValueHandling.Ignore
+                //and pass the JsonSerializer to all ToObject() Methods.
+            };
         }
 
         public HabiticaTodo deserializeTodo(string json)
@@ -52,7 +53,7 @@ namespace HabiticaSimpleToDo
             if(!success)
             {
                 String message = habiticaResponse["message"].ToString();
-                throw new Exception("Habitica recieved the request, but operation was unsuccessful: " + message);
+                throw new UnsuccessfulException("Habitica recieved the request, but operation was unsuccessful: " + message);
             }
 
             return habiticaResponse["data"];
