@@ -6,10 +6,13 @@ namespace HabiticaSimpleToDo
 {
     public class HabiticaTodo : Todo
     {
+        private List<HabiticaChecklistItem> checklist;
         private HabiticaTodo()
         {
 
         }
+
+        public new List<HabiticaChecklistItem> Checklist { get => checklist; set => checklist = value; }
     }
 
     internal class Priority

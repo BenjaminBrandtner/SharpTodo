@@ -16,7 +16,7 @@ namespace HabiticaSimpleToDo
 
         //TODO: Rename text to title and date to dueDate and find out how to deserialize correctly
 
-        private List<HabiticaChecklistItem> checklist;
+        private List<ChecklistItem> checklist;
         private bool collapseChecklist;
 
         private DateTime createdAt;
@@ -32,7 +32,7 @@ namespace HabiticaSimpleToDo
         public bool CollapseChecklist { get => collapseChecklist; set => collapseChecklist = value; }
         public DateTime CreatedAt { get => createdAt; set => createdAt = value; }
         public DateTime UpdatedAt { get => updatedAt; set => updatedAt = value; }
-        public List<HabiticaChecklistItem> Checklist { get => checklist; set => checklist = value; }
+        public List<ChecklistItem> Checklist { get => checklist; set => checklist = value; }
 
         public override string ToString()
         {

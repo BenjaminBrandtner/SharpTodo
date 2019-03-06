@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,16 @@ namespace HabiticaSimpleToDo
 {
     public class HabiticaTodoCollection : ITodoCollection
     {
+        private HabiticaHttpClient client;
+        private IList<HabiticaTodo> todoList;
+
+        public HabiticaTodoCollection()
+        {
+            client = HabiticaHttpClient.getInstance();
+            todoList = new List<HabiticaTodo>();
+        }
+
+        //Interface Methods
         public void checkOffIndex(int index)
         {
             throw new NotImplementedException();
@@ -20,14 +31,24 @@ namespace HabiticaSimpleToDo
 
         public void create(string title)
         {
-            throw new NotImplementedException();
+            client.createNewTodo(title, "");
+            //add the result to todoList, once this method returns a result
         }
 
-        public async Task<IList<HabiticaTodo>> deserializeAllTodos()
+        public void create(string title, string notes)
         {
-            //A quick and dirty test method
-            HabiticaHttpClient client = HabiticaHttpClient.getInstance();
-            return await client.getTodos();
+            client.createNewTodo(title, notes);
+            //add the result to todoList, once this method returns a result
+        }
+
+        public async void deserializeAllTodos()
+        {
+            todoList = await client.getTodos();
+        }
+
+        public void serializeAllTodos()
+        {
+            throw new NotImplementedException();
         }
 
         public void serializeIndex(int index)

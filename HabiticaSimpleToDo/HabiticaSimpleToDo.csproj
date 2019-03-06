@@ -61,10 +61,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChecklistItem.cs" />
     <Compile Include="HabiticaChecklistItem.cs" />
     <Compile Include="HabiticaSerializer.cs" />
     <Compile Include="HabiticaTodoCollection.cs" />
-    <Compile Include="ITodo.cs" />
     <Compile Include="HabiticaHttpClient.cs" />
     <Compile Include="ITodoCollection.cs" />
     <Compile Include="Program.cs" />

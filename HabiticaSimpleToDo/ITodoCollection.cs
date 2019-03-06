@@ -9,6 +9,7 @@ namespace HabiticaSimpleToDo
     public interface ITodoCollection
     {
         void create(String title);
+        void create(String title, String notes);
 
         void checkOffTodo(Todo todo);
         void uncheckTodo(Todo todo);
@@ -17,5 +18,8 @@ namespace HabiticaSimpleToDo
         void checkOffIndex(int index);
         void uncheckIndex(int index);
         void serializeIndex(int index);
+
+        void serializeAllTodos();
+        void deserializeAllTodos();
     }
 }

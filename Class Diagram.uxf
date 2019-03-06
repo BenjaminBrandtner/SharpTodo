@@ -29,8 +29,8 @@ fontsize=14
     <id>UMLClass</id>
     <coordinates>
       <x>260</x>
-      <y>550</y>
-      <w>200</w>
+      <y>390</y>
+      <w>210</w>
       <h>240</h>
     </coordinates>
     <panel_attributes>/Todo/
@@ -38,7 +38,7 @@ fontsize=14
 # id
 # title
 # notes
-# checklist
+# checklist:List&lt;ChecklistItem&gt;
 # ...
 -
 
@@ -49,38 +49,39 @@ fontsize=14
     <id>UMLClass</id>
     <coordinates>
       <x>520</x>
-      <y>550</y>
-      <w>210</w>
+      <y>390</y>
+      <w>270</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>HabiticaTodo
 -
-
+- checklist:List&lt;HabiticaChecklistItem&gt;
 -
-- HabiticaTodo(title:String)</panel_attributes>
+</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>590</y>
-      <w>90</w>
+      <x>460</x>
+      <y>430</y>
+      <w>80</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;70.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>1020</x>
-      <y>690</y>
-      <w>210</w>
+      <y>530</y>
+      <w>240</w>
       <h>80</h>
     </coordinates>
     <panel_attributes>LocalTodo
 -
+- checklist:List&lt;LocalChecklistItem&gt;
 - ...
 -
 ~ LocalTodo(title:String)</panel_attributes>
@@ -89,19 +90,19 @@ fontsize=14
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>450</x>
-      <y>710</y>
-      <w>590</w>
+      <x>460</x>
+      <y>550</y>
+      <w>580</w>
       <h>30</h>
     </coordinates>
     <panel_attributes>lt=&lt;&lt;-</panel_attributes>
-    <additional_attributes>10.0;10.0;570.0;10.0</additional_attributes>
+    <additional_attributes>10.0;10.0;560.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLClass</id>
     <coordinates>
       <x>0</x>
-      <y>380</y>
+      <y>220</y>
       <w>100</w>
       <h>30</h>
     </coordinates>
@@ -112,7 +113,7 @@ fontsize=14
     <id>UMLClass</id>
     <coordinates>
       <x>260</x>
-      <y>320</y>
+      <y>160</y>
       <w>210</w>
       <h>190</h>
     </coordinates>
@@ -133,7 +134,7 @@ ITodoCollection
     <id>UMLClass</id>
     <coordinates>
       <x>540</x>
-      <y>380</y>
+      <y>220</y>
       <w>230</w>
       <h>30</h>
     </coordinates>
@@ -144,7 +145,7 @@ ITodoCollection
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>370</y>
+      <y>210</y>
       <w>100</w>
       <h>40</h>
     </coordinates>
@@ -156,7 +157,7 @@ ITodoCollection
     <id>UMLClass</id>
     <coordinates>
       <x>980</x>
-      <y>330</y>
+      <y>170</y>
       <w>230</w>
       <h>30</h>
     </coordinates>
@@ -167,7 +168,7 @@ ITodoCollection
     <id>Relation</id>
     <coordinates>
       <x>460</x>
-      <y>320</y>
+      <y>160</y>
       <w>540</w>
       <h>40</h>
     </coordinates>
@@ -179,7 +180,7 @@ ITodoCollection
     <id>Relation</id>
     <coordinates>
       <x>90</x>
-      <y>370</y>
+      <y>210</y>
       <w>190</w>
       <h>40</h>
     </coordinates>
@@ -191,7 +192,7 @@ ITodoCollection
     <id>UMLPackage</id>
     <coordinates>
       <x>230</x>
-      <y>220</y>
+      <y>60</y>
       <w>1050</w>
       <h>580</h>
     </coordinates>
@@ -205,7 +206,7 @@ fg=red</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>590</x>
-      <y>400</y>
+      <y>240</y>
       <w>50</w>
       <h>170</h>
     </coordinates>
@@ -218,7 +219,7 @@ m2=0..n</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>1100</x>
-      <y>350</y>
+      <y>190</y>
       <w>50</w>
       <h>360</h>
     </coordinates>
@@ -231,7 +232,7 @@ m2=0..n</panel_attributes>
     <id>UMLInterface</id>
     <coordinates>
       <x>280</x>
-      <y>250</y>
+      <y>90</y>
       <w>40</w>
       <h>70</h>
     </coordinates>
@@ -242,7 +243,7 @@ m2=0..n</panel_attributes>
     <id>Relation</id>
     <coordinates>
       <x>290</x>
-      <y>270</y>
+      <y>110</y>
       <w>30</w>
       <h>70</h>
     </coordinates>
@@ -252,35 +253,8 @@ m2=0..n</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>830</x>
-      <y>550</y>
-      <w>170</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>HabiticaTodoFactory
--
-
--
-create(title);</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
       <x>720</x>
-      <y>570</y>
-      <w>130</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=-
-&lt; creates</panel_attributes>
-    <additional_attributes>10.0;20.0;110.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>860</x>
-      <y>480</y>
+      <y>280</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -290,8 +264,8 @@ create(title);</panel_attributes>
   <element>
     <id>UMLClass</id>
     <coordinates>
-      <x>920</x>
-      <y>410</y>
+      <x>800</x>
+      <y>340</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -301,25 +275,25 @@ create(title);</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>890</x>
-      <y>500</y>
-      <w>90</w>
-      <h>70</h>
+      <x>710</x>
+      <y>240</y>
+      <w>80</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-
 uses &gt;</panel_attributes>
-    <additional_attributes>40.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>20.0;40.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>930</x>
-      <y>430</y>
-      <w>90</w>
-      <h>70</h>
+      <x>810</x>
+      <y>300</y>
+      <w>80</w>
+      <h>60</h>
     </coordinates>
     <panel_attributes>lt=-
 uses &gt;</panel_attributes>
-    <additional_attributes>40.0;10.0;10.0;50.0</additional_attributes>
+    <additional_attributes>20.0;40.0;10.0;10.0</additional_attributes>
   </element>
 </diagram>

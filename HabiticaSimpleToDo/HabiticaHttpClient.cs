@@ -32,7 +32,7 @@ namespace HabiticaSimpleToDo
             ser = new HabiticaSerializer();
         }
 
-        public async void createNewTodo(String Title, String Description)
+        public async void createNewTodo(string title, string notes)
         {
             Uri url = new Uri("tasks/user");
 
@@ -40,7 +40,7 @@ namespace HabiticaSimpleToDo
             StringBuilder jsonText = new StringBuilder();
             jsonText.Append("{");
             jsonText.Append("\"text\": \"");
-            jsonText.Append(Title);
+            jsonText.Append(title);
             jsonText.Append("\",");
             jsonText.Append("\"type\": ");
             jsonText.Append("\"todo\"");
