@@ -8,6 +8,7 @@ namespace HabiticaSimpleToDo
 {
     public interface ITodoCollection
     {
+        //Eventuell müssen manche dieser Methoden statt void Tasks zurückgeben?
         void create(String title);
         void create(String title, String notes);
 
