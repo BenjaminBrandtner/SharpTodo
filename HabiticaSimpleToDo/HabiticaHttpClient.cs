@@ -26,10 +26,27 @@ namespace HabiticaSimpleToDo
         private HabiticaHttpClient()
         {
             BaseAddress = new Uri("https://habitica.com/api/v3/");
-            DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
-            DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
 
             ser = new HabiticaSerializer();
+
+            setDefaultHeaders();
+        }
+
+        private void setDefaultHeaders()
+        {
+            //TODO: If UserID/apiKey aren't found, throw NotLoggedIn-Exception
+            DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
+            DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
+        }
+
+        public async Task login(string username, string password)
+        {
+            //Info: https://habitica.com/apidoc/#api-User-UserLoginLocal
+
+            //TODO: Retrieve userID and apiKey, save them to Properties.settings, then call setDefaultHeaders()
+            //TODO: For wrong username or password, throw WrongCredentials-Exception.
+
+            throw new NotImplementedException();
         }
 
         public async void createNewTodo(string title, string notes)

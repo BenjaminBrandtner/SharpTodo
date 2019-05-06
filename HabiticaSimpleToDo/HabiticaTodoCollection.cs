@@ -9,6 +9,9 @@ namespace HabiticaSimpleToDo
 {
     public class HabiticaTodoCollection : ITodoCollection
     {
+        //TODO: todoList von außen lesbar machen
+        //mit Property, IEnumerable oder IList?
+
         private HabiticaHttpClient client;
         private IList<HabiticaTodo> todoList;
 
@@ -32,13 +35,13 @@ namespace HabiticaSimpleToDo
         public void create(string title)
         {
             client.createNewTodo(title, "");
-            //add the result to todoList, once this method returns a result
+            //TODO: add the result to todoList, once this method returns a result
         }
 
         public void create(string title, string notes)
         {
             client.createNewTodo(title, notes);
-            //add the result to todoList, once this method returns a result
+            //TODO: add the result to todoList, once this method returns a result
         }
 
         public async void deserializeAllTodos()
