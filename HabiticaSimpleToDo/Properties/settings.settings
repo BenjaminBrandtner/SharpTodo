@@ -1,0 +1,12 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HabiticaSimpleToDo.Properties" GeneratedClassName="settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="userID" Type="System.String" Scope="User">
+      <Value Profile="(Default)">enter UserID</Value>
+    </Setting>
+    <Setting Name="apiToken" Type="System.String" Scope="User">
+      <Value Profile="(Default)">enter apiToken</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
