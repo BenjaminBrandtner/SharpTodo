@@ -38,10 +38,9 @@ namespace HabiticaSimpleToDo
             DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
             DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
         }
-
-        public async void createNewTodo(string title, string notes)
+        public async Task<HabiticaTodo> createNewTodo(string title, string notes)
         {
-            Uri url = new Uri("tasks/user");
+            string url = "tasks/user";
 
             //TODO: Stringbuilder ersetzen wenn json eingebunden ist
             StringBuilder jsonText = new StringBuilder();
@@ -56,10 +55,9 @@ namespace HabiticaSimpleToDo
 
             HttpResponseMessage response = await PostAsync(url,requestContent);
 
-            Stream stream = await response.Content.ReadAsStreamAsync();
+            string json = await response.Content.ReadAsStringAsync();
 
-            //TODO: parse Json and return result instead of writing to console
-            Console.WriteLine(new StreamReader(stream).ReadToEnd());
+            return ser.deserializeTodo(json);
         }
 
         public async Task<IList<HabiticaTodo>> getTodos()

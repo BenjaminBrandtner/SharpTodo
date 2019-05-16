@@ -10,8 +10,8 @@ namespace HabiticaSimpleToDo
         static void Main(string[] args)
         {
             todoCollection = new HabiticaTodoCollection();
-            Task t = todoCollection.deserializeAllTodos();
-            //todoCollection.create("Success!");
+            //Task t = todoCollection.deserializeAllTodos();
+            Task t = todoCollection.create("Success!");
 
             Console.WriteLine("Working...");
             t.Wait();

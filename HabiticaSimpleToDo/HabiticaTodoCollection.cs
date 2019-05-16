@@ -33,16 +33,13 @@ namespace HabiticaSimpleToDo
 
         public async Task create(string title)
         {
-            client.createNewTodo(title, "");
-            //TODO: add the result to todoList, once this method returns a result
+           todoList.Add(await client.createNewTodo(title, ""));
         }
 
         public async Task create(string title, string notes)
         {
-            client.createNewTodo(title, notes);
-            //TODO: add the result to todoList, once this method returns a result
+           todoList.Add(await client.createNewTodo(title, notes));
         }
-
         public async Task deserializeAllTodos()
         {
             todoList = await client.getTodos();
