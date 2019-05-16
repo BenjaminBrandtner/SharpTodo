@@ -1,0 +1,10 @@
+H:\C#\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.csprojResolveAssemblyReference.cache
+H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\ViewModel.dll
+H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\ViewModel.pdb
+H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe
+H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\Newtonsoft.Json.dll
+H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.pdb
+H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe.config
+H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\Newtonsoft.Json.xml
+H:\C#\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.dll
+H:\C#\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.pdb
