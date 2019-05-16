@@ -39,16 +39,6 @@ namespace HabiticaSimpleToDo
             DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
         }
 
-        public async Task login(string username, string password)
-        {
-            //Info: https://habitica.com/apidoc/#api-User-UserLoginLocal
-
-            //TODO: Retrieve userID and apiKey, save them to Properties.settings, then call setDefaultHeaders()
-            //TODO: For wrong username or password, throw WrongCredentials-Exception.
-
-            throw new NotImplementedException();
-        }
-
         public async void createNewTodo(string title, string notes)
         {
             Uri url = new Uri("tasks/user");

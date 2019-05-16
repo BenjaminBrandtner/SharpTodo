@@ -9,9 +9,6 @@ namespace HabiticaSimpleToDo
 {
     public class HabiticaTodoCollection : ITodoCollection
     {
-        //TODO: todoList von außen lesbar machen
-        //mit Property, IEnumerable oder IList?
-
         private HabiticaHttpClient client;
         private IList<HabiticaTodo> todoList;
 
@@ -21,55 +18,57 @@ namespace HabiticaSimpleToDo
             todoList = new List<HabiticaTodo>();
         }
 
+        public IList<HabiticaTodo> TodoList { get => todoList; }
+
         //Interface Methods
-        public void checkOffIndex(int index)
+        public async Task checkOffIndex(int index)
         {
             throw new NotImplementedException();
         }
 
-        public void checkOffTodo(Todo todo)
+        public async Task checkOffTodo(Todo todo)
         {
             throw new NotImplementedException();
         }
 
-        public void create(string title)
+        public async Task create(string title)
         {
             client.createNewTodo(title, "");
             //TODO: add the result to todoList, once this method returns a result
         }
 
-        public void create(string title, string notes)
+        public async Task create(string title, string notes)
         {
             client.createNewTodo(title, notes);
             //TODO: add the result to todoList, once this method returns a result
         }
 
-        public async void deserializeAllTodos()
+        public async Task deserializeAllTodos()
         {
             todoList = await client.getTodos();
         }
 
-        public void serializeAllTodos()
+        public async Task serializeAllTodos()
         {
             throw new NotImplementedException();
         }
 
-        public void serializeIndex(int index)
+        public async Task serializeIndex(int index)
         {
             throw new NotImplementedException();
         }
 
-        public void serializeTodo(Todo todo)
+        public async Task serializeTodo(Todo todo)
         {
             throw new NotImplementedException();
         }
 
-        public void uncheckIndex(int index)
+        public async Task uncheckIndex(int index)
         {
             throw new NotImplementedException();
         }
 
-        public void uncheckTodo(Todo todo)
+        public async Task uncheckTodo(Todo todo)
         {
             throw new NotImplementedException();
         }

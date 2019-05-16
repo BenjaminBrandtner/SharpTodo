@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace HabiticaSimpleToDo
 {
@@ -9,10 +10,12 @@ namespace HabiticaSimpleToDo
         static void Main(string[] args)
         {
             todoCollection = new HabiticaTodoCollection();
-            todoCollection.deserializeAllTodos();
+            Task t = todoCollection.deserializeAllTodos();
             //todoCollection.create("Success!");
 
             Console.WriteLine("Working...");
+            t.Wait();
+            Console.WriteLine("Done. Press anything to exit.");
             Console.ReadKey();
         }
     }

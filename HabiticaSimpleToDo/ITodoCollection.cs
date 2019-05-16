@@ -8,19 +8,18 @@ namespace HabiticaSimpleToDo
 {
     public interface ITodoCollection
     {
-        //Eventuell müssen manche dieser Methoden statt void Tasks zurückgeben?
-        void create(String title);
-        void create(String title, String notes);
+        Task create(String title);
+        Task create(String title, String notes);
 
-        void checkOffTodo(Todo todo);
-        void uncheckTodo(Todo todo);
-        void serializeTodo(Todo todo);
+        Task checkOffTodo(Todo todo);
+        Task uncheckTodo(Todo todo);
+        Task serializeTodo(Todo todo);
 
-        void checkOffIndex(int index);
-        void uncheckIndex(int index);
-        void serializeIndex(int index);
+        Task checkOffIndex(int index);
+        Task uncheckIndex(int index);
+        Task serializeIndex(int index);
 
-        void serializeAllTodos();
-        void deserializeAllTodos();
+        Task serializeAllTodos();
+        Task deserializeAllTodos();
     }
 }
