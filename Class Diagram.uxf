@@ -72,22 +72,6 @@ fontsize=14
     <additional_attributes>10.0;10.0;60.0;10.0</additional_attributes>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>1020</x>
-      <y>530</y>
-      <w>240</w>
-      <h>80</h>
-    </coordinates>
-    <panel_attributes>LocalTodo
--
-- checklist:List&lt;LocalChecklistItem&gt;
-- ...
--
-~ LocalTodo(title:String)</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>460</x>
@@ -110,83 +94,16 @@ fontsize=14
     <additional_attributes/>
   </element>
   <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>260</x>
-      <y>160</y>
-      <w>210</w>
-      <h>190</h>
-    </coordinates>
-    <panel_attributes>&lt;&lt;interface&gt;&gt;
-ITodoCollection
--
-
--
-+ checkOffTodo(todo:Todo)
-+ checkOffIndex(index:int)
-+ serializeTodo(todo:Todo)
-+ serializeIndex(index:int)
-+ sync()
-+ ...</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>540</x>
-      <y>220</y>
-      <w>230</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>HabiticaTodoCollection</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>460</x>
-      <y>210</y>
-      <w>100</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;..
-&lt;&lt;realize&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;80.0;20.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>980</x>
-      <y>170</y>
-      <w>230</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>LocalTodoCollection</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>460</x>
-      <y>160</y>
-      <w>540</w>
-      <h>40</h>
-    </coordinates>
-    <panel_attributes>lt=&lt;..
-&lt;&lt;realize&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;20.0;520.0;20.0</additional_attributes>
-  </element>
-  <element>
     <id>Relation</id>
     <coordinates>
       <x>90</x>
-      <y>210</y>
-      <w>190</w>
-      <h>40</h>
+      <y>220</y>
+      <w>240</w>
+      <h>50</h>
     </coordinates>
     <panel_attributes>lt=&lt;..
 &lt;&lt;use&gt;&gt;</panel_attributes>
-    <additional_attributes>170.0;20.0;10.0;20.0</additional_attributes>
+    <additional_attributes>220.0;30.0;10.0;10.0</additional_attributes>
   </element>
   <element>
     <id>UMLPackage</id>
@@ -203,69 +120,31 @@ fg=red</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
-    <id>Relation</id>
+    <id>UMLClass</id>
     <coordinates>
-      <x>590</x>
+      <x>310</x>
+      <y>160</y>
+      <w>330</w>
+      <h>150</h>
+    </coordinates>
+    <panel_attributes>HabiticaClient
+-
+
+-
++ CreateNewTodo(title, notes):HabiticaTodo
++ GetTodos:IList&lt;HabiticaTodo&gt;
++ LoadTodo(todo:HabiticaTodo):HabiticaTodo
++ SaveTodo(todo:HabiticaTodo):HabiticaTodo
++ CheckOffTodo(todo:HabiticaTodo):HabiticaTodo
++ UncheckTodo(todo:HabiticaTodo):HabiticaTodo
+</panel_attributes>
+    <additional_attributes/>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>740</x>
       <y>240</y>
-      <w>50</w>
-      <h>170</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=1
-m2=0..n</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;150.0</additional_attributes>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>1100</x>
-      <y>190</y>
-      <w>50</w>
-      <h>360</h>
-    </coordinates>
-    <panel_attributes>lt=-
-m1=1
-m2=0..n</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;340.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLInterface</id>
-    <coordinates>
-      <x>280</x>
-      <y>90</y>
-      <w>40</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>IList</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>Relation</id>
-    <coordinates>
-      <x>290</x>
-      <y>110</y>
-      <w>30</w>
-      <h>70</h>
-    </coordinates>
-    <panel_attributes>lt=..</panel_attributes>
-    <additional_attributes>10.0;10.0;10.0;50.0</additional_attributes>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>720</x>
-      <y>280</y>
-      <w>170</w>
-      <h>30</h>
-    </coordinates>
-    <panel_attributes>HabiticaHttpClient</panel_attributes>
-    <additional_attributes/>
-  </element>
-  <element>
-    <id>UMLClass</id>
-    <coordinates>
-      <x>800</x>
-      <y>340</y>
       <w>170</w>
       <h>30</h>
     </coordinates>
@@ -275,25 +154,41 @@ m2=0..n</panel_attributes>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>710</x>
-      <y>240</y>
-      <w>80</w>
-      <h>60</h>
+      <x>630</x>
+      <y>230</y>
+      <w>130</w>
+      <h>40</h>
     </coordinates>
     <panel_attributes>lt=-
 uses &gt;</panel_attributes>
-    <additional_attributes>20.0;40.0;10.0;10.0</additional_attributes>
+    <additional_attributes>110.0;20.0;10.0;20.0</additional_attributes>
   </element>
   <element>
     <id>Relation</id>
     <coordinates>
-      <x>810</x>
+      <x>610</x>
       <y>300</y>
-      <w>80</w>
-      <h>60</h>
+      <w>240</w>
+      <h>110</h>
     </coordinates>
     <panel_attributes>lt=-
-uses &gt;</panel_attributes>
-    <additional_attributes>20.0;40.0;10.0;10.0</additional_attributes>
+creates, checks off, syncronizes &gt;</panel_attributes>
+    <additional_attributes>10.0;10.0;10.0;90.0</additional_attributes>
+  </element>
+  <element>
+    <id>UMLClass</id>
+    <coordinates>
+      <x>1020</x>
+      <y>530</y>
+      <w>240</w>
+      <h>80</h>
+    </coordinates>
+    <panel_attributes>LocalTodo
+-
+- checklist:List&lt;LocalChecklistItem&gt;
+- ...
+-
+~ LocalTodo(title:String)</panel_attributes>
+    <additional_attributes/>
   </element>
 </diagram>
