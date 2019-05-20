@@ -8,7 +8,7 @@ using System.IO;
 
 namespace HabiticaSimpleToDo
 {
-    class HabiticaClient : HttpClient
+    public class HabiticaClient : HttpClient
     {
         private static HabiticaClient instance;
         private HabiticaSerializer serializer;
