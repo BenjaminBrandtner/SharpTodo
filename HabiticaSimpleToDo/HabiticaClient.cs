@@ -11,9 +11,9 @@ namespace HabiticaSimpleToDo
     class HabiticaClient : HttpClient
     {
         private static HabiticaClient instance;
-        private HabiticaSerializer ser;
+        private HabiticaSerializer serializer;
 
-        public static HabiticaClient getInstance()
+        public static HabiticaClient GetInstance()
         {
             if(instance == null)
             {
@@ -27,18 +27,19 @@ namespace HabiticaSimpleToDo
         {
             BaseAddress = new Uri("https://habitica.com/api/v3/");
 
-            ser = new HabiticaSerializer();
+            serializer = new HabiticaSerializer();
 
-            setDefaultHeaders();
+            SetDefaultHeaders();
         }
 
-        private void setDefaultHeaders()
+        private void SetDefaultHeaders()
         {
             //TODO: If UserID/apiKey aren't found, throw NotLoggedIn-Exception
             DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
             DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
         }
-        public async Task<HabiticaTodo> createNewTodo(string title, string notes)
+
+        public async Task<HabiticaTodo> CreateNewTodo(string title, string notes)
         {
             string url = "tasks/user";
 
@@ -57,10 +58,10 @@ namespace HabiticaSimpleToDo
 
             string json = await response.Content.ReadAsStringAsync();
 
-            return ser.deserializeTodo(json);
+            return serializer.DeserializeTodo(json);
         }
 
-        public async Task<IList<HabiticaTodo>> getTodos()
+        public async Task<IList<HabiticaTodo>> GetTodos()
         {
             string url = "tasks/user?type=todos";
             
@@ -68,9 +69,10 @@ namespace HabiticaSimpleToDo
             string json = await response.Content.ReadAsStringAsync();
             response.Dispose();
 
-            return ser.deserializeTodos(json);
+            return serializer.DeserializeTodos(json);
         }
-        public async Task<HabiticaTodo> loadTodo(HabiticaTodo todo)
+
+        public async Task<HabiticaTodo> LoadTodo(HabiticaTodo todo)
         {
             string url = "tasks/" + todo.Id;
             
@@ -78,14 +80,15 @@ namespace HabiticaSimpleToDo
             string json = await response.Content.ReadAsStringAsync();
             response.Dispose();
 
-            return ser.deserializeTodo(json);
+            return serializer.DeserializeTodo(json);
         }
-        public async Task<HabiticaTodo> saveTodo(HabiticaTodo todo)
+
+        public async Task<HabiticaTodo> SaveTodo(HabiticaTodo todo)
         {
             throw new NotImplementedException();
         }
 
-        public async Task checkOffTodo(HabiticaTodo todo)
+        public async Task CheckOffTodo(HabiticaTodo todo)
         {
             string url = "tasks/" + todo.Id + "/score/up";
 
@@ -93,9 +96,10 @@ namespace HabiticaSimpleToDo
             string json = await response.Content.ReadAsStringAsync();
             response.Dispose();
 
-            ser.parseResponseData(json);
+            serializer.ParseResponseData(json);
         }
-        public async Task uncheckTodo(HabiticaTodo todo)
+
+        public async Task UncheckTodo(HabiticaTodo todo)
         {
             string url = "tasks/" + todo.Id + "/score/down";
 
@@ -103,7 +107,7 @@ namespace HabiticaSimpleToDo
             string json = await response.Content.ReadAsStringAsync();
             response.Dispose();
 
-            ser.parseResponseData(json);
+            serializer.ParseResponseData(json);
         }
     }
 }

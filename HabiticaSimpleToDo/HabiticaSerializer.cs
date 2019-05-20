@@ -9,11 +9,11 @@ namespace HabiticaSimpleToDo
 {
     class HabiticaSerializer
     {
-        private readonly JsonSerializer ser;
+        private readonly JsonSerializer serializer;
 
         public HabiticaSerializer()
         {
-            ser = new JsonSerializer
+            serializer = new JsonSerializer
             {
                 //Clearing the DueDate of a todo on the website will set it to null, so we need to specify
                 NullValueHandling = NullValueHandling.Ignore
@@ -21,23 +21,23 @@ namespace HabiticaSimpleToDo
             };
         }
 
-        public HabiticaTodo deserializeTodo(string json)
+        public HabiticaTodo DeserializeTodo(string json)
         {
-            JToken data = parseResponseData(json);
+            JToken data = ParseResponseData(json);
 
-            HabiticaTodo habiticaTodo = data.ToObject<HabiticaTodo>(ser);
+            HabiticaTodo habiticaTodo = data.ToObject<HabiticaTodo>(serializer);
 
             return habiticaTodo;
         }
-        public IList<HabiticaTodo> deserializeTodos(string json)
+        public IList<HabiticaTodo> DeserializeTodos(string json)
         {
             IList<HabiticaTodo> habiticaTodoList = new List<HabiticaTodo>();
 
-            JToken data = parseResponseData(json);
+            JToken data = ParseResponseData(json);
 
             foreach(JToken todo in data)
             {
-                habiticaTodoList.Add(todo.ToObject<HabiticaTodo>(ser));
+                habiticaTodoList.Add(todo.ToObject<HabiticaTodo>(serializer));
             }
 
             return habiticaTodoList;
@@ -45,7 +45,7 @@ namespace HabiticaSimpleToDo
 
         //TODO: Write methods to parse response of Score Task and Score Checklist Item
 
-        public JToken parseResponseData(string json)
+        public JToken ParseResponseData(string json)
         {
             JObject habiticaResponse = JObject.Parse(json);
             bool success = (bool)habiticaResponse["success"];
