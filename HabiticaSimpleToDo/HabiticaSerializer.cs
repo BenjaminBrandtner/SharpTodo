@@ -2,8 +2,6 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace HabiticaSimpleToDo
 {
@@ -14,7 +12,7 @@ namespace HabiticaSimpleToDo
 
         public static HabiticaSerializer GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new HabiticaSerializer();
             }
@@ -40,13 +38,14 @@ namespace HabiticaSimpleToDo
 
             return habiticaTodo;
         }
+
         public IList<HabiticaTodo> DeserializeTodos(string json)
         {
             IList<HabiticaTodo> habiticaTodoList = new List<HabiticaTodo>();
 
             JToken data = ParseResponseData(json);
 
-            foreach(JToken todo in data)
+            foreach (JToken todo in data)
             {
                 habiticaTodoList.Add(todo.ToObject<HabiticaTodo>(serializer));
             }
@@ -58,13 +57,26 @@ namespace HabiticaSimpleToDo
 
         public JToken ParseResponseData(string json)
         {
+            /* The first key of the response is always "success".
+             * If the request was successful, the response will contain the key "data"
+             * If it was unsuccessful, the response will contain the keys "error" and "message"
+             */
+
             JObject habiticaResponse = JObject.Parse(json);
             bool success = (bool)habiticaResponse["success"];
 
-            if(!success)
+            if (!success)
             {
                 String message = habiticaResponse["message"].ToString();
-                throw new UnsuccessfulException("Habitica recieved the request, but operation was unsuccessful: " + message);
+
+                if (message.Equals("There is no account that uses those credentials."))
+                {
+                    throw new WrongCredentialsException(message);
+                }
+                else
+                {
+                    throw new UnsuccessfulException("Habitica recieved the request, but operation was unsuccessful: " + message);
+                }
             }
 
             return habiticaResponse["data"];
