@@ -27,7 +27,7 @@ namespace HabiticaSimpleToDo
         {
             BaseAddress = new Uri("https://habitica.com/api/v3/");
 
-            serializer = new HabiticaSerializer();
+            serializer = HabiticaSerializer.GetInstance();
 
             SetDefaultHeaders();
         }

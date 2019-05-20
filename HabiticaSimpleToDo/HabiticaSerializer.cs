@@ -9,9 +9,20 @@ namespace HabiticaSimpleToDo
 {
     class HabiticaSerializer
     {
+        private static HabiticaSerializer instance;
         private readonly JsonSerializer serializer;
 
-        public HabiticaSerializer()
+        public static HabiticaSerializer GetInstance()
+        {
+            if(instance == null)
+            {
+                instance = new HabiticaSerializer();
+            }
+
+            return instance;
+        }
+
+        private HabiticaSerializer()
         {
             serializer = new JsonSerializer
             {
