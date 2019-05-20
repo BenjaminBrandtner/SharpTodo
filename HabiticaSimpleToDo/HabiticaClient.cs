@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Net.Http;
+using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace HabiticaSimpleToDo
 {
@@ -15,7 +13,7 @@ namespace HabiticaSimpleToDo
 
         public static HabiticaClient GetInstance()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new HabiticaClient();
             }
@@ -54,7 +52,7 @@ namespace HabiticaSimpleToDo
             jsonText.Append("}");
             StringContent requestContent = new StringContent(jsonText.ToString(), Encoding.UTF8, "application/json");
 
-            HttpResponseMessage response = await PostAsync(url,requestContent);
+            HttpResponseMessage response = await PostAsync(url, requestContent);
 
             string json = await response.Content.ReadAsStringAsync();
 
@@ -64,7 +62,7 @@ namespace HabiticaSimpleToDo
         public async Task<IList<HabiticaTodo>> GetTodos()
         {
             string url = "tasks/user?type=todos";
-            
+
             HttpResponseMessage response = await GetAsync(url);
             string json = await response.Content.ReadAsStringAsync();
             response.Dispose();
@@ -75,7 +73,7 @@ namespace HabiticaSimpleToDo
         public async Task<HabiticaTodo> LoadTodo(HabiticaTodo todo)
         {
             string url = "tasks/" + todo.Id;
-            
+
             HttpResponseMessage response = await GetAsync(url);
             string json = await response.Content.ReadAsStringAsync();
             response.Dispose();

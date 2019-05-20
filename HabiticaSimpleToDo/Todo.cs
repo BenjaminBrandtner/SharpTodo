@@ -38,7 +38,7 @@ namespace HabiticaSimpleToDo
         {
             StringBuilder todoString = new StringBuilder();
 
-            if(completed)
+            if (completed)
             {
                 todoString.Append("[X] ");
             }
@@ -46,10 +46,10 @@ namespace HabiticaSimpleToDo
             {
                 todoString.Append("[ ] ");
             }
-                       
+
             todoString.Append(text);
 
-            if(!(string.IsNullOrWhiteSpace(notes)))
+            if (!(string.IsNullOrWhiteSpace(notes)))
             {
                 todoString.Append(" - ");
                 todoString.Append(notes);
