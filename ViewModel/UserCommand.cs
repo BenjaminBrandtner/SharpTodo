@@ -10,15 +10,24 @@ namespace ViewModel
     class UserCommand : ICommand
     {
         public event EventHandler CanExecuteChanged;
+        public Action<object> action;
+
+        public UserCommand(Action<object> action)
+        {
+            this.action = action;
+        }
 
         public bool CanExecute(object parameter)
         {
-            throw new NotImplementedException();
+            return true;
         }
 
         public void Execute(object parameter)
         {
-            throw new NotImplementedException();
+            //if(parameter != null)
+            //{
+                action(parameter);
+            //}
         }
     }
 }
