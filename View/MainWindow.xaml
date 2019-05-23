@@ -24,9 +24,9 @@
         <!--Elements-->
         <StackPanel Name="StackPanelButtons" Grid.Row="1">
             <Button Name="ButtonCreate">Create</Button>
-            <Button Name="ButtonFetch">Fetch</Button>
+            <Button Name="ButtonFetch" Command="{Binding FetchCommand}">Fetch</Button>
         </StackPanel>
-        <StackPanel Name="StackPanelTodos" Grid.Row="1">
-            <ListBox Name="ListBoxTodos" ItemsSource="{Binding TodoList}" > </ListBox>
+        <StackPanel Name="StackPanelTodos" Grid.Row="1" Grid.Column="1" >
+            <ListBox Name="ListBoxTodos" ItemsSource="{Binding TodoList}"  MinHeight="20"> </ListBox>
         </StackPanel>    </Grid>
 </Window>
