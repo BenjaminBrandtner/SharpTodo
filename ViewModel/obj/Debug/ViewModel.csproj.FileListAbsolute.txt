@@ -8,3 +8,15 @@ H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe.config
 H:\C#\HabiticaSimpleTodo\ViewModel\bin\Debug\Newtonsoft.Json.xml
 H:\C#\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.dll
 H:\C#\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.pdb
+D:\c#stuff\HabiticaTodo\ViewModel\bin\Debug\ViewModel.dll
+D:\c#stuff\HabiticaTodo\ViewModel\bin\Debug\ViewModel.pdb
+D:\c#stuff\HabiticaTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe
+D:\c#stuff\HabiticaTodo\ViewModel\bin\Debug\Newtonsoft.Json.dll
+D:\c#stuff\HabiticaTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.pdb
+D:\c#stuff\HabiticaTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe.config
+D:\c#stuff\HabiticaTodo\ViewModel\bin\Debug\Newtonsoft.Json.xml
+D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.csprojAssemblyReference.cache
+D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.csproj.CoreCompileInputs.cache
+D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.csproj.CopyComplete
+D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.dll
+D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.pdb
