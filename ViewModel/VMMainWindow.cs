@@ -16,18 +16,24 @@ namespace ViewModel
         private String password;
         private HabiticaTodoCollection todocollection;
         private ICommand fetchCommand;
-        private ICommand saveCommand;
+        private ICommand sendCommand;
         private ICommand createCommand;
         private ICommand deleteCommand;
         public VMMainWindow()
         {
-            //todoList = new ObservableCollection<VMHabiticaTodo>();
+            TodoList = new ObservableCollection<VMHabiticaTodo>();
             Username = "bla";
             Password = "test";
             FetchCommand = new UserCommand(new Action<object>(FetchTodos));
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
+            SendCommand = new UserCommand(new Action<object>(SendTodos));
             todocollection = new HabiticaTodoCollection();
+        }
+
+        private void SendTodos(object obj)
+        {
+            throw new NotImplementedException();
         }
 
         private void DeleteTodo(object obj)
@@ -40,11 +46,7 @@ namespace ViewModel
             throw new NotImplementedException();
         }
 
-        private void SetLoginDetails(object obj)
-        {
-            throw new NotImplementedException();
-        }
-
+        
         private async void FetchTodos(object o)
         {
             Console.WriteLine("test");
@@ -58,6 +60,6 @@ namespace ViewModel
 
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
         public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
-        public ICommand SaveCommand { get => saveCommand; set => saveCommand = value; }
+        public ICommand SendCommand { get => sendCommand; set => sendCommand = value; }
     }
 }

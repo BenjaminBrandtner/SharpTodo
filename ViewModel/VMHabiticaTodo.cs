@@ -11,6 +11,11 @@ namespace ViewModel
     {
         private HabiticaTodo todo;
 
+        public VMHabiticaTodo(HabiticaTodo todo)
+        {
+            this.todo = todo;
+        }
+
         public string Text { get => todo.Text; set => todo.Text = value; }
         public string Notes { get => todo.Notes; set => todo.Notes = value; }
 
