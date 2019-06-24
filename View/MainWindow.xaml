@@ -15,7 +15,7 @@
 
             <StackPanel Orientation = "Horizontal">
                 <CheckBox IsChecked="{Binding Path= Completed}"></CheckBox>
-                <TextBlock Text="{Binding Path= Title}"></TextBlock>
+                <TextBlock Text="{Binding Path= Text}"></TextBlock>
             </StackPanel>
 
         </DataTemplate>
@@ -29,23 +29,11 @@
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
-            
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
         <!--Elements-->
-        <StackPanel Name="StackPanelLogin" Margin="10">
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="10,0">Username:</TextBlock>
-                <TextBox Name="TextBoxUsername" Text="{Binding Username}" MinWidth="150"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock Margin="10,0">Password:</TextBlock>
-                <TextBox Name="PasswordBox" Text="{Binding Password}" MinWidth="150"></TextBox>
-            </StackPanel>
-
-        </StackPanel>
-
+        
         <StackPanel Name="StackPanelButtons" VerticalAlignment="Bottom" Margin="10">
             <Button Name="ButtonFetch" Command="{Binding FetchCommand}">Fetch Todo-List</Button>
             
@@ -67,7 +55,7 @@
                 <TextBlock Margin="10,0">Description:</TextBlock>
                 <TextBox Name="TextBoxDesc" MinWidth="200" MinLines="3" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}"></TextBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <!--<StackPanel Orientation="Horizontal" Margin="0,10,0,0">
 
                 <ComboBox Name="ComboBoxChecklist" ItemsSource="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Checklist}" Margin="10,0"></ComboBox>
                 
@@ -76,9 +64,10 @@
                 <CheckBox IsChecked="{Binding ElementName=ComboBoxChecklist, Path=SelectedItem.Completed}" Margin="10,0"></CheckBox>
                 <TextBox Name="TextBoxChecklistItem" MinWidth="200" Text="{Binding ElementName=ComboBoxChecklist, Path=SelectedItem.Text}"></TextBox>
             </StackPanel>
+            -->
             <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                 <TextBlock ToolTip="Format: DD.MM.YYYY" Margin="10,0">Due on: </TextBlock>
-                <TextBox Name="TextBoxDueDate" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Date}"></TextBox>
+                <TextBox Name="TextBoxDueDate" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate}"></TextBox>
             </StackPanel>
             <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Margin="10,0">Save Changes</Button>
         </StackPanel>

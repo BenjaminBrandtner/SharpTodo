@@ -43,12 +43,14 @@ namespace ViewModel
 
         private async void CreateNewTodo(object obj)
         {
-            HabiticaTodo temp = await client.CreateNewTodo("new Todo", "");
+            
+            TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo", "")));
         }
 
         
         private async void FetchTodos(object o)
         {
+            TodoList.Clear();
             Console.WriteLine("test");
             IList<HabiticaTodo> templist=await client.GetTodos();
             foreach(HabiticaTodo h in templist)

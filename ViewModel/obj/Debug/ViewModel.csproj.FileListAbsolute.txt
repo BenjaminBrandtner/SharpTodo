@@ -20,3 +20,15 @@ D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.csproj.CoreCompileInputs.c
 D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.csproj.CopyComplete
 D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.dll
 D:\c#stuff\HabiticaTodo\ViewModel\obj\Debug\ViewModel.pdb
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\bin\Debug\ViewModel.dll
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\bin\Debug\ViewModel.pdb
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\bin\Debug\Newtonsoft.Json.dll
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.pdb
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe.config
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\bin\Debug\Newtonsoft.Json.xml
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.csprojAssemblyReference.cache
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.csproj.CoreCompileInputs.cache
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.csproj.CopyComplete
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.dll
+C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.pdb
