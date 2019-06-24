@@ -2,6 +2,7 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace HabiticaSimpleToDo
 {
@@ -28,6 +29,23 @@ namespace HabiticaSimpleToDo
                 NullValueHandling = NullValueHandling.Ignore
                 //and pass the JsonSerializer to all ToObject() Methods.
             };
+        }
+
+        public String SerializeTodo(HabiticaTodo todo)
+        {
+            //Remove properties that can't be changed through UpdateTask of the API
+            JObject jTodo = JObject.FromObject(todo);
+            jTodo["Id"].Parent.Remove();
+            jTodo["Completed"].Parent.Remove();
+            jTodo["Checklist"].Parent.Remove();
+            jTodo["CreatedAt"].Parent.Remove();
+            jTodo["UpdatedAt"].Parent.Remove();
+
+            using (StringWriter stringWriter = new StringWriter())
+            {
+                serializer.Serialize(stringWriter, jTodo);
+                return stringWriter.ToString();
+            }
         }
 
         public HabiticaTodo DeserializeTodo(string json)

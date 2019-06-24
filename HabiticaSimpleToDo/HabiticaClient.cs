@@ -104,7 +104,16 @@ namespace HabiticaSimpleToDo
 
         public async Task<HabiticaTodo> SaveTodo(HabiticaTodo todo)
         {
-            throw new NotImplementedException();
+            string url = "tasks/" + todo.Id;
+
+            string jsonOut = serializer.SerializeTodo(todo);
+            StringContent requestContent = new StringContent(jsonOut, Encoding.UTF8, "application/json");
+
+            HttpResponseMessage response = await PutAsync(url, requestContent);
+            string jsonIn = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+
+            return serializer.DeserializeTodo(jsonIn);
         }
 
         public async Task CheckOffTodo(HabiticaTodo todo)
