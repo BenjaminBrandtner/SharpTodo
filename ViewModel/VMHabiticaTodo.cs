@@ -13,15 +13,16 @@ namespace ViewModel
 
         public VMHabiticaTodo(HabiticaTodo todo)
         {
-            this.todo = todo;
+            this.Todo = todo;
         }
 
-        public string Text { get => todo.Text; set => todo.Text = value; }
-        public string Notes { get => todo.Notes; set => todo.Notes = value; }
+        public string Text { get => Todo.Text; set => Todo.Text = value; }
+        public string Notes { get => Todo.Notes; set => Todo.Notes = value; }
+        public HabiticaTodo Todo { get => todo; set => todo = value; }
 
         public override string ToString()
         {
-            return todo.ToString();
+            return Todo.ToString();
         }
     }
 }

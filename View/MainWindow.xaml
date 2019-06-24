@@ -48,9 +48,11 @@
 
         <StackPanel Name="StackPanelButtons" VerticalAlignment="Bottom" Margin="10">
             <Button Name="ButtonFetch" Command="{Binding FetchCommand}">Fetch Todo-List</Button>
-            <Button Name="ButtonSave" Command="{Binding SendCommand}">Send Todo-List</Button>
+            
             <Button Name="ButtonCreate" Command="{Binding CreateCommand}">Create new Todo</Button>
+            <!--
             <Button Name="ButtonDelete" Command="{Binding DeleteCommand}">Delete selected Todo</Button>
+            -->
         </StackPanel>
 
 
@@ -74,10 +76,11 @@
                 <CheckBox IsChecked="{Binding ElementName=ComboBoxChecklist, Path=SelectedItem.Completed}" Margin="10,0"></CheckBox>
                 <TextBox Name="TextBoxChecklistItem" MinWidth="200" Text="{Binding ElementName=ComboBoxChecklist, Path=SelectedItem.Text}"></TextBox>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
                 <TextBlock ToolTip="Format: DD.MM.YYYY" Margin="10,0">Due on: </TextBlock>
                 <TextBox Name="TextBoxDueDate" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Date}"></TextBox>
             </StackPanel>
+            <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Margin="10,0">Save Changes</Button>
         </StackPanel>
         
     </Grid>

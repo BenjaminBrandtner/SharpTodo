@@ -14,11 +14,11 @@ namespace ViewModel
         private ObservableCollection<VMHabiticaTodo> todoList;
         private String username;
         private String password;
-        private HabiticaTodoCollection todocollection;
+        private HabiticaClient client;
         private ICommand fetchCommand;
         private ICommand sendCommand;
         private ICommand createCommand;
-        private ICommand deleteCommand;
+        //private ICommand deleteCommand;
         public VMMainWindow()
         {
             TodoList = new ObservableCollection<VMHabiticaTodo>();
@@ -26,32 +26,35 @@ namespace ViewModel
             Password = "test";
             FetchCommand = new UserCommand(new Action<object>(FetchTodos));
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
-            DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
+            //DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SendCommand = new UserCommand(new Action<object>(SendTodos));
-            todocollection = new HabiticaTodoCollection();
+            client = HabiticaClient.GetInstance();
         }
 
-        private void SendTodos(object obj)
+        private async void SendTodos(object obj)
         {
-            throw new NotImplementedException();
+            await client.SaveTodo(((VMHabiticaTodo)obj).Todo);
         }
 
-        private void DeleteTodo(object obj)
-        {
-            throw new NotImplementedException();
-        }
+        //private async void DeleteTodo(object obj)
+        //{
+        //    await client.deleteTodo(((VMHabiticaTodo)obj).Todo);
+        //}
 
-        private void CreateNewTodo(object obj)
+        private async void CreateNewTodo(object obj)
         {
-            throw new NotImplementedException();
+            HabiticaTodo temp = await client.CreateNewTodo("new Todo", "");
         }
 
         
         private async void FetchTodos(object o)
         {
             Console.WriteLine("test");
-            await todocollection.deserializeAllTodos();
-            //TodoList = new ObservableCollection<VMHabiticaTodo>(((List<HabiticaTodo>)todocollection.TodoList));
+            IList<HabiticaTodo> templist=await client.GetTodos();
+            foreach(HabiticaTodo h in templist)
+            {
+                todoList.Add(new VMHabiticaTodo(h));
+            }
         }
         public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
         public ICommand FetchCommand { get => fetchCommand; set => fetchCommand = value; }
@@ -59,7 +62,7 @@ namespace ViewModel
         public string Password { get => password; set => password = value; }
 
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
-        public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
+        //public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
         public ICommand SendCommand { get => sendCommand; set => sendCommand = value; }
     }
 }
