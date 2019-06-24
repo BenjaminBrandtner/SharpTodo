@@ -55,6 +55,7 @@ namespace HabiticaSimpleToDo
 
             DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
             DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
+            DefaultRequestHeaders.Add("x-client", Properties.settings.Default.xClient);
         }
 
         public async Task<HabiticaTodo> CreateNewTodo(string title, string notes)

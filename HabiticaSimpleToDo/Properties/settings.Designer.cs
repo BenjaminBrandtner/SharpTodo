@@ -46,5 +46,14 @@ namespace HabiticaSimpleToDo.Properties {
                 this["apiToken"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("cad55190-ea6a-42ba-a5df-bdb099117363-SharpTodo")]
+        public string xClient {
+            get {
+                return ((string)(this["xClient"]));
+            }
+        }
     }
 }

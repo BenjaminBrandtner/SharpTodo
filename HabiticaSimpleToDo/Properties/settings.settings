@@ -8,5 +8,8 @@
     <Setting Name="apiToken" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="xClient" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">cad55190-ea6a-42ba-a5df-bdb099117363-SharpTodo</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
