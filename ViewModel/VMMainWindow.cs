@@ -28,12 +28,32 @@ namespace ViewModel
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             //DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SendCommand = new UserCommand(new Action<object>(SendTodos));
-            client = HabiticaClient.GetInstance();
+            try
+            {
+                client = HabiticaClient.GetInstance();
+            }
+            catch (NoCredentialsException)
+            {
+                //TODO: Implement error message + window to enter User-ID and API-Key
+            }
         }
 
         private async void SendTodos(object obj)
         {
-            await client.SaveTodo(((VMHabiticaTodo)obj).Todo);
+            try
+            {
+                await client.SaveTodo(((VMHabiticaTodo)obj).Todo);
+            }
+            catch (WrongCredentialsException)
+            {
+
+                //TODO: Implement error message + window to enter User-ID and API-Key
+            }
+            catch (UnsuccessfulException)
+            {
+
+            }
+
         }
 
         //private async void DeleteTodo(object obj)
@@ -43,20 +63,46 @@ namespace ViewModel
 
         private async void CreateNewTodo(object obj)
         {
-            
-            TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo", "")));
+
+            try
+            {
+                TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo", "")));
+            }
+            catch (WrongCredentialsException)
+            {
+
+                //TODO: Implement error message + window to enter User-ID and API-Key
+            }
+            catch(UnsuccessfulException)
+            {
+
+            }
+
         }
 
         
         private async void FetchTodos(object o)
         {
+            
             TodoList.Clear();
-            Console.WriteLine("test");
-            IList<HabiticaTodo> templist=await client.GetTodos();
-            foreach(HabiticaTodo h in templist)
+            try
             {
-                todoList.Add(new VMHabiticaTodo(h));
+                IList<HabiticaTodo> templist = await client.GetTodos();
+                foreach (HabiticaTodo h in templist)
+                {
+                    todoList.Add(new VMHabiticaTodo(h));
+                }
             }
+            catch (WrongCredentialsException)
+            {
+
+                //TODO: Implement error message + window to enter User-ID and API-Key
+            }
+            catch (UnsuccessfulException)
+            {
+
+            }
+
         }
         public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
         public ICommand FetchCommand { get => fetchCommand; set => fetchCommand = value; }
