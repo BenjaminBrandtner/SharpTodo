@@ -65,3 +65,27 @@ C:\Users\lukas\source\repos\HabiticaSimpleTodo\View\obj\Debug\View.csproj.CoreCo
 C:\Users\lukas\source\repos\HabiticaSimpleTodo\View\obj\Debug\View.csproj.CopyComplete
 C:\Users\lukas\source\repos\HabiticaSimpleTodo\View\obj\Debug\View.exe
 C:\Users\lukas\source\repos\HabiticaSimpleTodo\View\obj\Debug\View.pdb
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\View.exe.config
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\View.exe
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\View.pdb
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\ViewModel.dll
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\HabiticaSimpleToDo.exe
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\Newtonsoft.Json.dll
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\ViewModel.pdb
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\HabiticaSimpleToDo.pdb
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\HabiticaSimpleToDo.exe.config
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\bin\Debug\Newtonsoft.Json.xml
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.csprojAssemblyReference.cache
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\MainWindow.g.cs
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\App.g.cs
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View_MarkupCompile.cache
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View_MarkupCompile.lref
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\App.baml
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\MainWindow.baml
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.g.resources
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.Properties.Resources.resources
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.csproj.GenerateResource.cache
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.csproj.CoreCompileInputs.cache
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.csproj.CopyComplete
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.exe
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\View\obj\Debug\View.pdb

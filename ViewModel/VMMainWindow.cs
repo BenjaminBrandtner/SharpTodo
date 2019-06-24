@@ -22,8 +22,6 @@ namespace ViewModel
         public VMMainWindow()
         {
             TodoList = new ObservableCollection<VMHabiticaTodo>();
-            Username = "bla";
-            Password = "test";
             FetchCommand = new UserCommand(new Action<object>(FetchTodos));
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             //DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
@@ -35,6 +33,7 @@ namespace ViewModel
             catch (NoCredentialsException)
             {
                 //TODO: Implement error message + window to enter User-ID and API-Key
+                throw;
             }
         }
 
@@ -46,12 +45,12 @@ namespace ViewModel
             }
             catch (WrongCredentialsException)
             {
-
                 //TODO: Implement error message + window to enter User-ID and API-Key
+                throw;
             }
             catch (UnsuccessfulException)
             {
-
+                throw;
             }
 
         }
@@ -70,12 +69,12 @@ namespace ViewModel
             }
             catch (WrongCredentialsException)
             {
-
                 //TODO: Implement error message + window to enter User-ID and API-Key
+                throw;
             }
             catch(UnsuccessfulException)
             {
-
+                throw;
             }
 
         }
@@ -95,12 +94,12 @@ namespace ViewModel
             }
             catch (WrongCredentialsException)
             {
-
                 //TODO: Implement error message + window to enter User-ID and API-Key
+                throw;
             }
             catch (UnsuccessfulException)
             {
-
+                throw;
             }
 
         }

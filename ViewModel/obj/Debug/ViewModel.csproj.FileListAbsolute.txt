@@ -32,3 +32,15 @@ C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.csp
 C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.csproj.CopyComplete
 C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.dll
 C:\Users\lukas\source\repos\HabiticaSimpleTodo\ViewModel\obj\Debug\ViewModel.pdb
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\bin\Debug\ViewModel.dll
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\bin\Debug\ViewModel.pdb
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\bin\Debug\Newtonsoft.Json.dll
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\bin\Debug\HabiticaSimpleToDo.pdb
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\bin\Debug\HabiticaSimpleToDo.exe.config
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\bin\Debug\Newtonsoft.Json.xml
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\obj\Debug\ViewModel.csprojAssemblyReference.cache
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\obj\Debug\ViewModel.csproj.CoreCompileInputs.cache
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\obj\Debug\ViewModel.csproj.CopyComplete
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\obj\Debug\ViewModel.dll
+D:\Benny\C-Scharf Programme\eigenes\HabiticaSimpleToDo\ViewModel\obj\Debug\ViewModel.pdb
