@@ -25,9 +25,6 @@ namespace HabiticaSimpleToDo
         {
             serializer = new JsonSerializer
             {
-                //Clearing the DueDate of a todo on the website will set it to null, so we need to specify
-                NullValueHandling = NullValueHandling.Ignore
-                //and pass the JsonSerializer to all ToObject() Methods.
             };
         }
 

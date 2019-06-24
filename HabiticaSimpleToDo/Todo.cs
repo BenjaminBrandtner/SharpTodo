@@ -13,7 +13,7 @@ namespace HabiticaSimpleToDo
         private float value;
         private bool completed;
         private float priority;
-        private DateTime date;
+        private DateTime? date;
 
         private List<ChecklistItem> checklist;
         private bool collapseChecklist;
@@ -32,7 +32,7 @@ namespace HabiticaSimpleToDo
         [JsonProperty("priority")]
         public float Priority { get => priority; set => priority = value; }
         [JsonProperty("date")]
-        public DateTime DueDate { get => date; set => date = value; }
+        public DateTime? DueDate { get => date; set => date = value; }
         [JsonProperty("collapseChecklist")]
         public bool CollapseChecklist { get => collapseChecklist; set => collapseChecklist = value; }
         public DateTime CreatedAt { get => createdAt; set => createdAt = value; }
