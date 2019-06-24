@@ -4,6 +4,18 @@
              xmlns:local="clr-namespace:View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <Style x:Key="UITextBlock" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+        </Style>
+        <Style x:Key="UIButton" TargetType="Button">
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
+        </Style>
+        <Style x:Key="UITextBox" TargetType="TextBox">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+        </Style>
+       
     </Application.Resources>
 </Application>

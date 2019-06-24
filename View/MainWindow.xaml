@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="566.447" Width="616.638">
+        Title="MainWindow" Height="449.447" Width="616.638">
     <Window.DataContext>
         <vm:VMMainWindow/>
     </Window.DataContext>
@@ -23,7 +23,7 @@
     <Grid>
         <Grid.RowDefinitions>
             
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition></RowDefinition>
 
         </Grid.RowDefinitions>
@@ -35,9 +35,9 @@
         <!--Elements-->
         
         <StackPanel Name="StackPanelButtons" VerticalAlignment="Bottom" Margin="10">
-            <Button Name="ButtonFetch" Command="{Binding FetchCommand}">Fetch Todo-List</Button>
-            
-            <Button Name="ButtonCreate" Command="{Binding CreateCommand}">Create new Todo</Button>
+            <Button Name="ButtonFetch" Command="{Binding FetchCommand}"  Style="{StaticResource UIButton}">Fetch Todo-List</Button>
+
+            <Button Name="ButtonCreate" Command="{Binding CreateCommand}"  Style="{StaticResource UIButton}">Create new Todo</Button>
             <!--
             <Button Name="ButtonDelete" Command="{Binding DeleteCommand}">Delete selected Todo</Button>
             -->
@@ -46,15 +46,12 @@
 
         <ListBox Name="ListBoxTodos" ItemsSource="{Binding TodoList}" ItemTemplate="{StaticResource todoTemplate}" VerticalAlignment="Stretch" Grid.Row="1" Margin="10"  ></ListBox>
 
-        <StackPanel Name="StackPanelTodoDetails" Grid.Column="1" Grid.RowSpan="2" Margin="10">
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBlock Margin="10,0">Title: </TextBlock>
-                <TextBox Name="TextBoxTitle" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Text}"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
-                <TextBlock Margin="10,0">Description:</TextBlock>
-                <TextBox Name="TextBoxDesc" MinWidth="200" MinLines="3" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}"></TextBox>
-            </StackPanel>
+        <StackPanel Name="StackPanelTodoDetails" Grid.Column="1" Grid.Row="1" Margin="10">
+            <TextBlock Style="{StaticResource UITextBlock}">Title: </TextBlock>
+            <TextBox Name="TextBoxTitle" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Text}" Style="{StaticResource UITextBox}"></TextBox>
+            <TextBlock Style="{StaticResource UITextBlock}">Description:</TextBlock>
+            <TextBox Name="TextBoxDesc" MinWidth="200" MinLines="3" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}" Style="{StaticResource UITextBox}"></TextBox>
+            
             <!--<StackPanel Orientation="Horizontal" Margin="0,10,0,0">
 
                 <ComboBox Name="ComboBoxChecklist" ItemsSource="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Checklist}" Margin="10,0"></ComboBox>
@@ -65,11 +62,11 @@
                 <TextBox Name="TextBoxChecklistItem" MinWidth="200" Text="{Binding ElementName=ComboBoxChecklist, Path=SelectedItem.Text}"></TextBox>
             </StackPanel>
             -->
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,10">
-                <TextBlock ToolTip="Format: DD.MM.YYYY" Margin="10,0">Due on: </TextBlock>
-                <TextBox Name="TextBoxDueDate" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate}"></TextBox>
-            </StackPanel>
-            <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Margin="10,0">Save Changes</Button>
+
+            <TextBlock ToolTip="Format: DD.MM.YYYY" Margin="10,0" Style="{StaticResource UITextBlock}">Due on: </TextBlock>
+            <TextBox Name="TextBoxDueDate" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate}" Style="{StaticResource UITextBox}"></TextBox>
+            
+            <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}">Save Changes</Button>
         </StackPanel>
         
     </Grid>
