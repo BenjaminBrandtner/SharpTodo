@@ -17,7 +17,7 @@ namespace ViewModel
             this.Todo = todo;
         }
 
-        public string Text { get => Todo.Text; set => Todo.Text = value; }
+        public string Text { get => Todo.Title; set => Todo.Title = value; }
         public string Notes { get => Todo.Notes; set => Todo.Notes = value; }
 
         public  Boolean Completed { get => Todo.Completed; set
@@ -41,7 +41,7 @@ namespace ViewModel
             }
         }
 
-        public DateTime DueDate { get => Todo.Date; set => Todo.Date = value; }
+        public DateTime DueDate { get => Todo.DueDate; set => Todo.DueDate = value; }
         public HabiticaTodo Todo { get => todo; set => todo = value; }
 
         public event PropertyChangedEventHandler PropertyChanged;
