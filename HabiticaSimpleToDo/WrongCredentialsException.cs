@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace HabiticaSimpleToDo
 {
     [Serializable]
-    internal class WrongCredentialsException : UnsuccessfulException
+    public class WrongCredentialsException : UnsuccessfulException
     {
         public WrongCredentialsException()
         {

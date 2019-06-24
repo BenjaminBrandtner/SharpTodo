@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace HabiticaSimpleToDo
 {
     [Serializable]
-    internal class UnsuccessfulException : Exception
+    public class UnsuccessfulException : Exception
     {
         public UnsuccessfulException()
         {

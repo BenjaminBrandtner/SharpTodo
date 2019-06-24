@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 namespace HabiticaSimpleToDo
 {
     [Serializable]
-    internal class NoCredentialsException : Exception
+    public class NoCredentialsException : Exception
     {
         public NoCredentialsException()
         {
