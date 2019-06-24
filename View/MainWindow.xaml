@@ -15,11 +15,7 @@
 
             <StackPanel Orientation = "Horizontal">
                 <CheckBox IsChecked="{Binding Path= Completed}"></CheckBox>
-                <StackPanel Orientation ="Vertical">
-                    <TextBlock Text="{Binding Path= Title}"></TextBlock>
-                    <TextBlock Text="{Binding Path= Notes}"></TextBlock>
-
-                </StackPanel>
+                <TextBlock Text="{Binding Path= Title}"></TextBlock>
             </StackPanel>
 
         </DataTemplate>
@@ -67,7 +63,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
                 <TextBlock Margin="10,0">Description:</TextBlock>
-                <TextBox Name="TextBoxDesc" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}"></TextBox>
+                <TextBox Name="TextBoxDesc" MinWidth="200" MinLines="3" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
 
