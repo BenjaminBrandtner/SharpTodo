@@ -25,7 +25,7 @@ namespace HabiticaSimpleToDo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("enter UserID")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string userID {
             get {
                 return ((string)(this["userID"]));
@@ -37,7 +37,7 @@ namespace HabiticaSimpleToDo.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("enter apiToken")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string apiToken {
             get {
                 return ((string)(this["apiToken"]));

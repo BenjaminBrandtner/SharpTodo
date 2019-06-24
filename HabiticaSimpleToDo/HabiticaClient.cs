@@ -28,11 +28,31 @@ namespace HabiticaSimpleToDo
             serializer = HabiticaSerializer.GetInstance();
 
             SetDefaultHeaders();
+            TestConnection();
+        }
+
+        private async void TestConnection()
+        {
+            string url = "status";
+
+            HttpResponseMessage response = await GetAsync(url);
+
+            //Todo: Create a method that checks every response for potential server unavailability
+            if(response.StatusCode != System.Net.HttpStatusCode.OK)
+            {
+                throw new Exception("Couldn't connect to Habitica Server.");
+            }
+            response.Dispose();
         }
 
         private void SetDefaultHeaders()
         {
-            //TODO: If UserID/apiKey aren't found, throw NotLoggedIn-Exception
+            if (String.IsNullOrEmpty(Properties.settings.Default.userID)
+                || String.IsNullOrEmpty(Properties.settings.Default.apiToken))
+            {
+                throw new NoCredentialsException();
+            }
+
             DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
             DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
         }

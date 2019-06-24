@@ -3,10 +3,10 @@
   <Profiles />
   <Settings>
     <Setting Name="userID" Type="System.String" Scope="User">
-      <Value Profile="(Default)">enter UserID</Value>
+      <Value Profile="(Default)" />
     </Setting>
     <Setting Name="apiToken" Type="System.String" Scope="User">
-      <Value Profile="(Default)">enter apiToken</Value>
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
