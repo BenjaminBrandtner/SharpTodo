@@ -15,7 +15,7 @@ namespace Backend.Properties {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
     public sealed partial class settings : global::System.Configuration.ApplicationSettingsBase {
         
-        public static settings defaultInstance = ((settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new settings())));
+        private static settings defaultInstance = ((settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new settings())));
         
         public static settings Default {
             get {
@@ -25,7 +25,7 @@ namespace Backend.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("4abb5368-4ba8-47df-91f9-99ffd2104e29")]
         public string userID {
             get {
                 return ((string)(this["userID"]));
@@ -37,7 +37,7 @@ namespace Backend.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("878b6d6d-817d-4bd9-9847-4a19c2115743")]
         public string apiToken {
             get {
                 return ((string)(this["apiToken"]));
