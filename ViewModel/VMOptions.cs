@@ -26,15 +26,16 @@ namespace ViewModel
 
             Backend.Properties.settings.Default.userID = UserID;
             Backend.Properties.settings.Default.apiToken = ApiKey;
+            Backend.Properties.settings.Default.Save();
             try
             {
                
                 client = HabiticaClient.GetInstance();
                 IList<HabiticaTodo> temp = await client.GetTodos();
-                if(temp.Count>=1)
-                {
-                    ErrorMsg = "Credentials validated successfully";
-                }
+                //if(temp.Count>=1)
+                //{
+                //    ErrorMsg = "Credentials validated successfully";
+                //}
                 
             }
             catch (NoCredentialsException e)
