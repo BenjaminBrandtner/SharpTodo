@@ -1,4 +1,4 @@
-﻿namespace HabiticaSimpleToDo
+﻿namespace Backend
 {
     public abstract class ChecklistItem
     {

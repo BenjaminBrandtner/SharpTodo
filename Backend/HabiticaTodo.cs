@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace HabiticaSimpleToDo
+namespace Backend
 {
     public class HabiticaTodo : Todo
     {

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace HabiticaSimpleToDo
+namespace Backend
 {
     public abstract class Todo
     {

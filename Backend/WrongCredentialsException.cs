@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 
-namespace HabiticaSimpleToDo
+namespace Backend
 {
     [Serializable]
     public class WrongCredentialsException : UnsuccessfulException

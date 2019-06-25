@@ -47,9 +47,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HabiticaSimpleToDo\HabiticaSimpleToDo.csproj">
+    <ProjectReference Include="..\Backend\Backend.csproj">
       <Project>{eb590933-e11c-479a-8ff3-5f0380dfdd57}</Project>
-      <Name>HabiticaSimpleToDo</Name>
+      <Name>Backend</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
