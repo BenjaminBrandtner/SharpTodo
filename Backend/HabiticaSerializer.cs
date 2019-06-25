@@ -6,12 +6,12 @@ using System.IO;
 
 namespace Backend
 {
-    class HabiticaSerializer
+    internal class HabiticaSerializer
     {
         private static HabiticaSerializer instance;
         private readonly JsonSerializer serializer;
 
-        public static HabiticaSerializer GetInstance()
+        internal static HabiticaSerializer GetInstance()
         {
             if (instance == null)
             {
@@ -28,7 +28,7 @@ namespace Backend
             };
         }
 
-        public String SerializeTodo(HabiticaTodo todo)
+        internal string SerializeTodo(HabiticaTodo todo)
         {
             //Remove properties that can't be changed through UpdateTask of the API
             JObject jTodo = JObject.FromObject(todo);
@@ -45,7 +45,7 @@ namespace Backend
             }
         }
 
-        public HabiticaTodo DeserializeTodo(string json)
+        internal HabiticaTodo DeserializeTodo(string json)
         {
             JToken data = ParseResponseData(json);
 
@@ -54,7 +54,7 @@ namespace Backend
             return habiticaTodo;
         }
 
-        public IList<HabiticaTodo> DeserializeTodos(string json)
+        internal IList<HabiticaTodo> DeserializeTodos(string json)
         {
             IList<HabiticaTodo> habiticaTodoList = new List<HabiticaTodo>();
 
@@ -68,7 +68,7 @@ namespace Backend
             return habiticaTodoList;
         }
 
-        public string createBasicTodo(string title)
+        internal string createBasicTodo(string title)
         {
             JObject todo = new JObject();
             todo.Add("text", JToken.FromObject(title));
@@ -77,9 +77,7 @@ namespace Backend
             return todo.ToString();
         }
 
-        //TODO: Write methods to parse response of Score Task and Score Checklist Item
-
-        public JToken ParseResponseData(string json)
+        internal JToken ParseResponseData(string json)
         {
             /* The first key of the response is always "success".
              * If the request was successful, the response will contain the key "data"
