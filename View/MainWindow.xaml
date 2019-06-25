@@ -64,10 +64,11 @@
             -->
 
             <TextBlock ToolTip="Format: DD.MM.YYYY" Margin="10,0" Style="{StaticResource UITextBlock}">Due on: </TextBlock>
-            <TextBox Name="TextBoxDueDate" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate}" Style="{StaticResource UITextBox}"></TextBox>
-            
+
+            <DatePicker Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate}"/>
             <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}">Save Changes</Button>
+            
         </StackPanel>
-        
+
     </Grid>
 </Window>
