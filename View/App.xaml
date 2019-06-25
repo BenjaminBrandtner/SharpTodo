@@ -16,6 +16,12 @@
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
         </Style>
-       
+
+        <Style x:Key="UIErrorTextBlock" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="Foreground" Value="Red"></Setter>
+        </Style>
     </Application.Resources>
 </Application>
