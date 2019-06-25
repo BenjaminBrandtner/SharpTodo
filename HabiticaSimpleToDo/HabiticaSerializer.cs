@@ -68,6 +68,15 @@ namespace HabiticaSimpleToDo
             return habiticaTodoList;
         }
 
+        public string createBasicTodo(string title)
+        {
+            JObject todo = new JObject();
+            todo.Add("text", JToken.FromObject(title));
+            todo.Add("type", JToken.FromObject("todo"));
+
+            return todo.ToString();
+        }
+
         //TODO: Write methods to parse response of Score Task and Score Checklist Item
 
         public JToken ParseResponseData(string json)

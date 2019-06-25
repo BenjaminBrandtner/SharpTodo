@@ -65,7 +65,7 @@ namespace ViewModel
 
             try
             {
-                TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo", "")));
+                TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
             }
             catch (WrongCredentialsException)
             {

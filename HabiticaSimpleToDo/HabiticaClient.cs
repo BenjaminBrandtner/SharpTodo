@@ -58,26 +58,18 @@ namespace HabiticaSimpleToDo
             DefaultRequestHeaders.Add("x-client", Properties.settings.Default.xClient);
         }
 
-        public async Task<HabiticaTodo> CreateNewTodo(string title, string notes)
+        public async Task<HabiticaTodo> CreateNewTodo(string title)
         {
             string url = "tasks/user";
 
-            //TODO: Stringbuilder ersetzen wenn json eingebunden ist
-            StringBuilder jsonText = new StringBuilder();
-            jsonText.Append("{");
-            jsonText.Append("\"text\": \"");
-            jsonText.Append(title);
-            jsonText.Append("\",");
-            jsonText.Append("\"type\": ");
-            jsonText.Append("\"todo\"");
-            jsonText.Append("}");
-            StringContent requestContent = new StringContent(jsonText.ToString(), Encoding.UTF8, "application/json");
+            string jsonOut = serializer.createBasicTodo(title);
+            StringContent requestContent = new StringContent(jsonOut, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await PostAsync(url, requestContent);
 
-            string json = await response.Content.ReadAsStringAsync();
+            string jsonIn = await response.Content.ReadAsStringAsync();
 
-            return serializer.DeserializeTodo(json);
+            return serializer.DeserializeTodo(jsonIn);
         }
 
         public async Task<IList<HabiticaTodo>> GetTodos()
