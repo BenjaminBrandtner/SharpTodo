@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:View"
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
-        Title="MainWindow" Height="449.447" Width="616.638">
+        Title="SharpTodo" Height="449.447" Width="616.638">
     <Window.DataContext>
         <vm:VMMainWindow/>
     </Window.DataContext>
@@ -33,7 +33,9 @@
         </Grid.ColumnDefinitions>
 
         <!--Elements-->
-        
+        <Menu Width="auto" Height="25" Grid.ColumnSpan="2" VerticalAlignment="Top">
+            <MenuItem Header="Options" Click="MenuItem_Click"></MenuItem>
+        </Menu>
         <StackPanel Name="StackPanelButtons" VerticalAlignment="Bottom" Margin="10">
             <Button Name="ButtonFetch" Command="{Binding FetchCommand}"  Style="{StaticResource UIButton}">Fetch Todo-List</Button>
 
@@ -69,6 +71,7 @@
             <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}">Save Changes</Button>
             
         </StackPanel>
+        <TextBlock Name="TextBlockError" Grid.Column="1" Padding="0,20,0,0" Style="{StaticResource UIErrorTextBlock}"  Text="{Binding ErrorMsg}" />
 
     </Grid>
 </Window>

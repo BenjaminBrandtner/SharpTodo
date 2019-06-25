@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="UserCommand.cs" />
+    <Compile Include="VMOptions.cs" />
     <Compile Include="VMMainWindow.cs" />
     <Compile Include="VMHabiticaTodo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,13 +7,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
+
 namespace ViewModel
 {
     public class VMMainWindow
     {
         private ObservableCollection<VMHabiticaTodo> todoList;
-        private String username;
-        private String password;
+        
+        private String errorMsg;
         private HabiticaClient client;
         private ICommand fetchCommand;
         private ICommand sendCommand;
@@ -26,55 +27,61 @@ namespace ViewModel
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SendCommand = new UserCommand(new Action<object>(SendTodos));
+            GetHabiticaClientInstance();
+        }
+
+        private void GetHabiticaClientInstance()
+        {
             try
             {
                 client = HabiticaClient.GetInstance();
+                ErrorMsg = "";
             }
-            catch (NoCredentialsException)
+            catch (NoCredentialsException e)
             {
-                //TODO: Implement error message + window to enter User-ID and API-Key
-                throw;
+                ErrorMsg = "No User Credentials found. Please use the Options menu to input your credentials";
             }
         }
 
         private async void SendTodos(object obj)
         {
+            GetHabiticaClientInstance();
             try
             {
                 await client.SaveTodo(((VMHabiticaTodo)obj).Todo);
             }
-            catch (WrongCredentialsException)
+            catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
             {
-                //TODO: Implement error message + window to enter User-ID and API-Key
-                throw;
+                ErrorMsg = e.Message;
             }
-            catch (UnsuccessfulException)
-            {
-                throw;
-            }
+            
 
         }
 
         private async void DeleteTodo(object obj)
         {
-            await client.DeleteTodo(((VMHabiticaTodo)obj).Todo);
+            GetHabiticaClientInstance();
+            try
+            {
+                await client.DeleteTodo(((VMHabiticaTodo)obj).Todo);
+            }
+            catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
+            {
+                ErrorMsg = e.Message;
+            }
+
         }
 
         private async void CreateNewTodo(object obj)
         {
-
+            GetHabiticaClientInstance();
             try
             {
                 TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
             }
-            catch (WrongCredentialsException)
+            catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
             {
-                //TODO: Implement error message + window to enter User-ID and API-Key
-                throw;
-            }
-            catch(UnsuccessfulException)
-            {
-                throw;
+                ErrorMsg = e.Message;
             }
 
         }
@@ -82,7 +89,7 @@ namespace ViewModel
         
         private async void FetchTodos(object o)
         {
-            
+            GetHabiticaClientInstance();
             TodoList.Clear();
             try
             {
@@ -92,24 +99,19 @@ namespace ViewModel
                     todoList.Add(new VMHabiticaTodo(h));
                 }
             }
-            catch (WrongCredentialsException)
+            catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
             {
-                //TODO: Implement error message + window to enter User-ID and API-Key
-                throw;
-            }
-            catch (UnsuccessfulException)
-            {
-                throw;
+                ErrorMsg = e.Message;
             }
 
         }
         public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
         public ICommand FetchCommand { get => fetchCommand; set => fetchCommand = value; }
-        public string Username { get => username; set => username = value; }
-        public string Password { get => password; set => password = value; }
+       
 
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
         public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
         public ICommand SendCommand { get => sendCommand; set => sendCommand = value; }
+        public string ErrorMsg { get => errorMsg; set => errorMsg = value; }
     }
 }
