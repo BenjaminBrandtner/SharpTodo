@@ -67,7 +67,7 @@
 
             <TextBlock ToolTip="Format: DD.MM.YYYY" Margin="10,0" Style="{StaticResource UITextBlock}">Due on: </TextBlock>
 
-            <DatePicker Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate}"/>
+            <DatePicker SelectedDate="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate, Mode=TwoWay}" />
             <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}">Save Changes</Button>
             
         </StackPanel>

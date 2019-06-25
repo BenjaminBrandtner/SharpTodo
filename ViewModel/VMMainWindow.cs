@@ -32,10 +32,11 @@ namespace ViewModel
 
         private void GetHabiticaClientInstance()
         {
+            ErrorMsg = "";
             try
             {
                 client = HabiticaClient.GetInstance();
-                ErrorMsg = "";
+                
             }
             catch (NoCredentialsException e)
             {
