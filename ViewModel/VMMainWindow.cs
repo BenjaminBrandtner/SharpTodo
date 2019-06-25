@@ -18,13 +18,13 @@ namespace ViewModel
         private ICommand fetchCommand;
         private ICommand sendCommand;
         private ICommand createCommand;
-        //private ICommand deleteCommand;
+        private ICommand deleteCommand;
         public VMMainWindow()
         {
             TodoList = new ObservableCollection<VMHabiticaTodo>();
             FetchCommand = new UserCommand(new Action<object>(FetchTodos));
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
-            //DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
+            DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SendCommand = new UserCommand(new Action<object>(SendTodos));
             try
             {
@@ -55,10 +55,10 @@ namespace ViewModel
 
         }
 
-        //private async void DeleteTodo(object obj)
-        //{
-        //    await client.deleteTodo(((VMHabiticaTodo)obj).Todo);
-        //}
+        private async void DeleteTodo(object obj)
+        {
+            await client.DeleteTodo(((VMHabiticaTodo)obj).Todo);
+        }
 
         private async void CreateNewTodo(object obj)
         {
@@ -109,7 +109,7 @@ namespace ViewModel
         public string Password { get => password; set => password = value; }
 
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
-        //public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
+        public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
         public ICommand SendCommand { get => sendCommand; set => sendCommand = value; }
     }
 }

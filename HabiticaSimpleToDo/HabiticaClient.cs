@@ -38,7 +38,7 @@ namespace HabiticaSimpleToDo
             HttpResponseMessage response = await GetAsync(url);
 
             //Todo: Create a method that checks every response for potential server unavailability
-            if(response.StatusCode != System.Net.HttpStatusCode.OK)
+            if (response.StatusCode != System.Net.HttpStatusCode.OK)
             {
                 throw new Exception("Couldn't connect to Habitica Server.");
             }
@@ -114,6 +114,17 @@ namespace HabiticaSimpleToDo
             response.Dispose();
 
             return serializer.DeserializeTodo(jsonIn);
+        }
+
+        public async Task DeleteTodo(HabiticaTodo todo)
+        {
+            string url = "tasks/" + todo.Id;
+
+            HttpResponseMessage response = await DeleteAsync(url);
+            string json = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+
+            serializer.ParseResponseData(json);
         }
 
         public async Task CheckOffTodo(HabiticaTodo todo)

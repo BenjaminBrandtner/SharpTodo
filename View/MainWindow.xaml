@@ -38,9 +38,9 @@
             <Button Name="ButtonFetch" Command="{Binding FetchCommand}"  Style="{StaticResource UIButton}">Fetch Todo-List</Button>
 
             <Button Name="ButtonCreate" Command="{Binding CreateCommand}"  Style="{StaticResource UIButton}">Create new Todo</Button>
-            <!--
-            <Button Name="ButtonDelete" Command="{Binding DeleteCommand}">Delete selected Todo</Button>
-            -->
+            
+            <Button Name="ButtonDelete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}">Delete selected Todo</Button>
+            
         </StackPanel>
 
 
