@@ -8,7 +8,7 @@ using Backend;
 
 namespace ViewModel
 {
-    public class VMHabiticaTodo :INotifyPropertyChanged
+    public class VMHabiticaTodo
     {
         private HabiticaTodo todo;
 
@@ -43,8 +43,6 @@ namespace ViewModel
 
         public DateTime? DueDate { get => Todo.DueDate; set => Todo.DueDate = value; }
         public HabiticaTodo Todo { get => todo; set => todo = value; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public override string ToString()
         {
