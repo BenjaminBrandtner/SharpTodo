@@ -48,7 +48,7 @@ namespace ViewModel
                 client = HabiticaClient.GetInstance();
 
             }
-            catch (NoCredentialsException e)
+            catch (NoCredentialsException)
             {
                 ErrorMsg = "No User Credentials found. Please use the Options menu to input your credentials";
             }

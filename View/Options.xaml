@@ -26,7 +26,7 @@
                 <TextBox Name="TextBoxUserID" Style="{StaticResource UITextBox}" Text="{Binding UserID}"></TextBox>
             <TextBlock Style="{StaticResource UITextBlock}">API-Key:</TextBlock>
             <TextBox Name="TextBoxApiKey" Style="{StaticResource UITextBox}" Text="{Binding ApiKey}"></TextBox>
-            <Button Name="ButtonVaidate" HorizontalAlignment="Center" Padding="10,0" Style="{StaticResource UIButton}" Command="{Binding ValidateCommand}">Validate Credentials</Button>
+            <Button Name="ButtonValidate" HorizontalAlignment="Center" Padding="10,0" Style="{StaticResource UIButton}" Command="{Binding ValidateCommand}">Validate Credentials</Button>
                 <TextBlock Name="TextBlockError" Style="{StaticResource UIErrorTextBlock}"  Text="{Binding ErrorMsg}"></TextBlock>
             </StackPanel>
         </GroupBox>

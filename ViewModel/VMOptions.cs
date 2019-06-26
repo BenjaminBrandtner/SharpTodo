@@ -44,7 +44,7 @@ namespace ViewModel
 
 
             }
-            catch (NoCredentialsException e)
+            catch (NoCredentialsException)
             {
                 ErrorMsg = "One of the required Fields is empty";
             }
