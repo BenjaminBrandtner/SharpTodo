@@ -23,11 +23,8 @@ namespace ViewModel
         }
 
         public void Execute(object parameter)
-        {
-            //if(parameter != null)
-            //{
+        {          
                 action(parameter);
-            //}
         }
     }
 }
