@@ -48,7 +48,15 @@ namespace ViewModel
             {
                 ErrorMsg = "One of the required Fields is empty";
             }
-            catch(Exception  e) when(e is UnsuccessfulException || e is WrongCredentialsException)
+            catch(WrongCredentialsException e)
+            {
+                ErrorMsg = e.Message;
+                // if the Credentials are wrong, resets the User-ID and API-Token in Storage
+                Backend.Properties.settings.Default.userID = "";
+                Backend.Properties.settings.Default.apiToken = "";
+                Backend.Properties.settings.Default.Save();
+            }
+            catch(UnsuccessfulException e)
             {
                 ErrorMsg = e.Message;
             }
