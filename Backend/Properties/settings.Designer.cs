@@ -25,7 +25,7 @@ namespace Backend.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("4abb5368-4ba8-47df-91f9-99ffd2104e29")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string userID {
             get {
                 return ((string)(this["userID"]));
@@ -37,7 +37,7 @@ namespace Backend.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("878b6d6d-817d-4bd9-9847-4a19c2115743")]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
         public string apiToken {
             get {
                 return ((string)(this["apiToken"]));
