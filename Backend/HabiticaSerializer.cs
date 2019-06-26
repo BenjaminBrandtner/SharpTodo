@@ -8,20 +8,9 @@ namespace Backend
 {
     internal class HabiticaSerializer
     {
-        private static HabiticaSerializer instance;
         private readonly JsonSerializer serializer;
 
-        internal static HabiticaSerializer GetInstance()
-        {
-            if (instance == null)
-            {
-                instance = new HabiticaSerializer();
-            }
-
-            return instance;
-        }
-
-        private HabiticaSerializer()
+        public HabiticaSerializer()
         {
             serializer = new JsonSerializer
             {

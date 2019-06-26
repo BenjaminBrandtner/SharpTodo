@@ -9,7 +9,7 @@ namespace Backend
     public class HabiticaClient : HttpClient
     {
         private static HabiticaClient instance;
-        private HabiticaSerializer serializer;
+        private readonly HabiticaSerializer serializer;
 
         public static HabiticaClient GetInstance()
         {
@@ -24,8 +24,9 @@ namespace Backend
         private HabiticaClient()
         {
             BaseAddress = new Uri("https://habitica.com/api/v3/");
+            Timeout = TimeSpan.FromSeconds(10);
 
-            serializer = HabiticaSerializer.GetInstance();
+            serializer = new HabiticaSerializer();
 
             SetDefaultHeaders();
             TestConnection();
