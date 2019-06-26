@@ -20,8 +20,11 @@ namespace ViewModel
         public event PropertyChangedEventHandler PropertyChanged;
 
         public VMOptions()
-        {            
-            ValidateCommand = new UserCommand(new Action<object>(ValidateCredentials));
+        {
+            UserID = Backend.Properties.settings.Default.userID;
+            ApiKey = Backend.Properties.settings.Default.apiToken;
+
+             ValidateCommand = new UserCommand(new Action<object>(ValidateCredentials));
         }
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
