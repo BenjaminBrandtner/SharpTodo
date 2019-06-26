@@ -68,6 +68,7 @@
   <ItemGroup>
     <Compile Include="ChecklistItem.cs" />
     <Compile Include="HabiticaChecklistItem.cs" />
+    <Compile Include="ConfigManager.cs" />
     <Compile Include="HabiticaSerializer.cs" />
     <Compile Include="HabiticaClient.cs" />
     <Compile Include="NoCredentialsException.cs" />

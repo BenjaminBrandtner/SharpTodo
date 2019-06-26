@@ -10,22 +10,37 @@ namespace Backend
     {
         private static HabiticaClient instance;
         private readonly HabiticaSerializer serializer;
+        private readonly dynamic config;
+
+        public dynamic Config { get => config; }
 
         public static HabiticaClient GetInstance()
         {
             if (instance == null)
             {
-                instance = new HabiticaClient();
+                instance = new HabiticaClient(new ConfigManager().Read());
             }
 
             return instance;
         }
 
-        private HabiticaClient()
+        /// <summary>
+        /// Creates and returns a new instance with the given config.
+        /// </summary>
+        /// <param name="config"></param>
+        /// <returns></returns>
+        public static HabiticaClient GetInstance(dynamic config)
+        {
+            instance = new HabiticaClient(config);
+
+            return instance;
+        }
+
+        private HabiticaClient(dynamic config)
         {
             BaseAddress = new Uri("https://habitica.com/api/v3/");
             Timeout = TimeSpan.FromSeconds(10);
-
+            this.config = config;
             serializer = new HabiticaSerializer();
 
             SetDefaultHeaders();
@@ -48,14 +63,15 @@ namespace Backend
 
         private void SetDefaultHeaders()
         {
-            if (String.IsNullOrEmpty(Properties.settings.Default.userID)
-                || String.IsNullOrEmpty(Properties.settings.Default.apiToken))
+
+            if (String.IsNullOrEmpty(config.UserID)
+                || String.IsNullOrEmpty(config.ApiToken))
             {
                 throw new NoCredentialsException();
             }
 
-            DefaultRequestHeaders.Add("x-api-user", Properties.settings.Default.userID);
-            DefaultRequestHeaders.Add("x-api-key", Properties.settings.Default.apiToken);
+            DefaultRequestHeaders.Add("x-api-user", config.UserID);
+            DefaultRequestHeaders.Add("x-api-key", config.ApiToken);
             DefaultRequestHeaders.Add("x-client", Properties.settings.Default.xClient);
         }
 

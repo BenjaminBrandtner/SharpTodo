@@ -22,10 +22,17 @@
         <!-- UI Elements-->
         <GroupBox Header="User Credentials">
             <StackPanel Orientation="Vertical">
-            <TextBlock Style="{StaticResource UITextBlock}" >User_ID </TextBlock>
+                <TextBlock
+                    Style="{StaticResource UITextBlock}"><Run
+                        Text="User" /><Run
+                        Text=" " /><Run
+                        Text="ID" /></TextBlock>
                 <TextBox Name="TextBoxUserID" Style="{StaticResource UITextBox}" Text="{Binding UserID}"></TextBox>
-            <TextBlock Style="{StaticResource UITextBlock}">API-Key:</TextBlock>
-            <TextBox Name="TextBoxApiKey" Style="{StaticResource UITextBox}" Text="{Binding ApiKey}"></TextBox>
+                <TextBlock
+                    Style="{StaticResource UITextBlock}"><Run
+                        Text="API" /><Run
+                        Text=" Token" /></TextBlock>
+                <TextBox Name="TextBoxApiKey" Style="{StaticResource UITextBox}" Text="{Binding ApiToken}"></TextBox>
             <Button Name="ButtonValidate" HorizontalAlignment="Center" Padding="10,0" Style="{StaticResource UIButton}" Command="{Binding ValidateCommand}">Validate Credentials</Button>
                 <TextBlock Name="TextBlockError" Style="{StaticResource UIErrorTextBlock}"  Text="{Binding ErrorMsg}"></TextBlock>
             </StackPanel>
