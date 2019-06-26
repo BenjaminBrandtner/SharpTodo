@@ -42,7 +42,7 @@ namespace ViewModel
 
         private void GetHabiticaClientInstance()
         {
-            
+            ErrorMsg = "";
             try
             {
                 client = HabiticaClient.GetInstance();
@@ -56,6 +56,8 @@ namespace ViewModel
 
         private async void SendTodos(object obj)
         {
+
+            
             GetHabiticaClientInstance();
             if (client != null)
             {
@@ -73,6 +75,7 @@ namespace ViewModel
 
         private async void DeleteTodo(object obj)
         {
+           
             GetHabiticaClientInstance();
             if (client != null)
             {
@@ -89,6 +92,7 @@ namespace ViewModel
 
         private async void CreateNewTodo(object obj)
         {
+            
             GetHabiticaClientInstance();
             if (client != null)
             {
@@ -106,6 +110,7 @@ namespace ViewModel
 
         private async void FetchTodos(object o)
         {
+          
             GetHabiticaClientInstance();
             TodoList.Clear();
             if(client!=null)
