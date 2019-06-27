@@ -15,7 +15,8 @@ namespace ViewModel
     {
         private ObservableCollection<VMHabiticaTodo> todoList;
 
-        private String errorMsg;
+        private String errorMessage;
+        private String successMessage;
         private HabiticaClient client;
         private ICommand fetchCommand;
         private ICommand sendCommand;
@@ -30,7 +31,7 @@ namespace ViewModel
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SendCommand = new UserCommand(new Action<object>(SendTodos));
-            ErrorMsg = "";
+            ErrorMessage = "";
             GetHabiticaClientInstance();
         }
         public void OnPropertyChanged(PropertyChangedEventArgs e)
@@ -42,7 +43,7 @@ namespace ViewModel
 
         private void GetHabiticaClientInstance()
         {
-            ErrorMsg = "";
+            ErrorMessage = "";
             try
             {
                 client = HabiticaClient.GetInstance();
@@ -50,14 +51,14 @@ namespace ViewModel
             }
             catch (NoCredentialsException)
             {
-                ErrorMsg = "No User Credentials found. Please use the Options menu to input your credentials";
+                ErrorMessage = "No User Credentials found. Please use the Options menu to input your credentials";
             }
         }
 
         private async void SendTodos(object obj)
         {
 
-            
+
             GetHabiticaClientInstance();
             if (client != null)
             {
@@ -67,7 +68,7 @@ namespace ViewModel
                 }
                 catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
                 {
-                    ErrorMsg = e.Message;
+                    ErrorMessage = e.Message;
                 }
             }
 
@@ -75,7 +76,7 @@ namespace ViewModel
 
         private async void DeleteTodo(object obj)
         {
-           
+
             GetHabiticaClientInstance();
             if (client != null)
             {
@@ -85,14 +86,14 @@ namespace ViewModel
                 }
                 catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
                 {
-                    ErrorMsg = e.Message;
+                    ErrorMessage = e.Message;
                 }
             }
         }
 
         private async void CreateNewTodo(object obj)
         {
-            
+
             GetHabiticaClientInstance();
             if (client != null)
             {
@@ -102,7 +103,7 @@ namespace ViewModel
                 }
                 catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
                 {
-                    ErrorMsg = e.Message;
+                    ErrorMessage = e.Message;
                 }
             }
         }
@@ -110,11 +111,11 @@ namespace ViewModel
 
         private async void FetchTodos(object o)
         {
-          
+
             GetHabiticaClientInstance();
             TodoList.Clear();
-            if(client!=null)
-            {                
+            if (client != null)
+            {
                 try
                 {
                     IList<HabiticaTodo> templist = await client.GetTodos();
@@ -125,7 +126,7 @@ namespace ViewModel
                 }
                 catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException)
                 {
-                    ErrorMsg = e.Message;
+                    ErrorMessage = e.Message;
                 }
             }
 
@@ -137,13 +138,23 @@ namespace ViewModel
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
         public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
         public ICommand SendCommand { get => sendCommand; set => sendCommand = value; }
-        public string ErrorMsg
+        public string ErrorMessage
         {
-            get => errorMsg;
+            get => errorMessage;
             set
             {
-                errorMsg = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ErrorMsg"));
+                errorMessage = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("ErrorMessage"));
+            }
+        }
+
+        public string SuccessMessage
+        {
+            get => successMessage;
+            set
+            {
+                successMessage = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("SuccessMessage"));
             }
         }
     }

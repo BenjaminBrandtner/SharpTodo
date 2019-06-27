@@ -11,7 +11,8 @@ namespace ViewModel
         private ConfigManager configManager;
         private dynamic config;
 
-        private string errorMsg;
+        private string errorMessage;
+        private string successMessage;
         private ICommand validateCommand;
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -29,40 +30,52 @@ namespace ViewModel
         }
         private async void ValidateCredentials(object obj)
         {
+            ErrorMessage = "";
+            SuccessMessage = "";
+
             try
             {
                 HabiticaClient client = HabiticaClient.GetInstance(config);
                 await client.GetTodos(); //TODO: replace with Method TestCredentials()
 
-                ErrorMsg = "Credentials validated successfully";
+                SuccessMessage = "Credentials validated successfully";
 
                 configManager.Write(config);
             }
             catch (NoCredentialsException)
             {
-                ErrorMsg = "One of the required Fields is empty";
+                ErrorMessage = "One of the required Fields is empty";
             }
             catch (WrongCredentialsException e)
             {
-                ErrorMsg = e.Message;
+                ErrorMessage = e.Message;
             }
             catch (UnsuccessfulException e)
             {
-                ErrorMsg = e.Message;
+                ErrorMessage = e.Message;
             }
         }
 
         public ICommand ValidateCommand { get => validateCommand; set => validateCommand = value; }
-        public string ErrorMsg
+        public string ErrorMessage
         {
-            get => errorMsg;
+            get => errorMessage;
             set
             {
-                errorMsg = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ErrorMsg"));
+                errorMessage = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("ErrorMessage"));
             }
         }
         public string UserID { get => config.UserID; set => config.UserID = value; }
         public string ApiToken { get => config.ApiToken; set => config.ApiToken = value; }
+        public string SuccessMessage
+        {
+            get => successMessage; set
+            {
+                successMessage = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("SuccessMessage"));
+            }
+        }
+
     }
 }
