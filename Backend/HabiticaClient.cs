@@ -38,32 +38,18 @@ namespace Backend
 
         private HabiticaClient(dynamic config)
         {
-            BaseAddress = new Uri("https://habitica.com/api/v3/");
-            Timeout = TimeSpan.FromSeconds(10);
             this.config = config;
             serializer = new HabiticaSerializer();
+
+            BaseAddress = new Uri("https://habitica.com/api/v3/");
+            Timeout = TimeSpan.FromSeconds(10);
 
             SetDefaultHeaders();
             TestConnection();
         }
 
-        private async void TestConnection()
-        {
-            string url = "status";
-
-            HttpResponseMessage response = await GetAsync(url);
-
-            //Todo: Create a method that checks every response for potential server unavailability
-            if (response.StatusCode != System.Net.HttpStatusCode.OK)
-            {
-                throw new Exception("Couldn't connect to Habitica Server.");
-            }
-            response.Dispose();
-        }
-
         private void SetDefaultHeaders()
         {
-
             if (String.IsNullOrEmpty(config.UserID)
                 || String.IsNullOrEmpty(config.ApiToken))
             {
@@ -75,6 +61,21 @@ namespace Backend
             DefaultRequestHeaders.Add("x-client", Properties.settings.Default.xClient);
         }
 
+        /// <summary>
+        /// Test if this client can connect and use the Habitica-API.
+        /// Might throw NoCredentialsException, WrongCredentialsException or WebException
+        /// </summary>
+        private async Task TestConnection()
+        {
+            string url = "tasks/user?type=todos";
+
+            HttpResponseMessage response = await GetAsync(url);
+            string json = await response.Content.ReadAsStringAsync();
+            response.Dispose();
+
+            serializer.ParseResponseData(json);
+        }
+
         public async Task<HabiticaTodo> CreateNewTodo(string title)
         {
             string url = "tasks/user";
@@ -83,8 +84,8 @@ namespace Backend
             StringContent requestContent = new StringContent(jsonOut, Encoding.UTF8, "application/json");
 
             HttpResponseMessage response = await PostAsync(url, requestContent);
-
             string jsonIn = await response.Content.ReadAsStringAsync();
+            response.Dispose();
 
             return serializer.DeserializeTodo(jsonIn);
         }

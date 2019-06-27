@@ -17,6 +17,11 @@ namespace Backend
             };
         }
 
+        /// <summary>
+        /// Generate the API-conforming JSON of the given Todo.
+        /// </summary>
+        /// <param name="todo"></param>
+        /// <returns></returns>
         internal string SerializeTodo(HabiticaTodo todo)
         {
             //Remove properties that can't be changed through UpdateTask of the API
@@ -57,6 +62,11 @@ namespace Backend
             return habiticaTodoList;
         }
 
+        /// <summary>
+        /// Generate conforming JSON for the CreateUserTasks API Route
+        /// </summary>
+        /// <param name="title"></param>
+        /// <returns></returns>
         internal string createBasicTodo(string title)
         {
             JObject todo = new JObject();
@@ -66,6 +76,11 @@ namespace Backend
             return todo.ToString();
         }
 
+        /// <summary>
+        /// Analyze the response for success and return any data. Throw Exceptions, if request wasn't successful.
+        /// </summary>
+        /// <param name="json"></param>
+        /// <returns></returns>
         internal JToken ParseResponseData(string json)
         {
             /* The first key of the response is always "success".

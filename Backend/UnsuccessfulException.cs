@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Backend
 {
+    /// <summary>
+    /// Thrown when Habitica recieved the request but the operation was unsuccessful.
+    /// </summary>
     [Serializable]
     public class UnsuccessfulException : Exception
     {

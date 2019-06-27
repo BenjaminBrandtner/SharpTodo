@@ -5,8 +5,10 @@ namespace Backend
     public class HabiticaTodo : Todo
     {
         private List<HabiticaChecklistItem> checklist;
+
         private HabiticaTodo()
         {
+            //Private, as this class should only be instanzialized by deserializing JSON recieved from Habitica
 
         }
 

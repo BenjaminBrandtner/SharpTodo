@@ -15,6 +15,10 @@ namespace Backend
             serializer.Formatting = Formatting.Indented;
         }
 
+        /// <summary>
+        /// Reads config.ini. If no such file exists, returns a config object with empty Properties.
+        /// </summary>
+        /// <returns></returns>
         public dynamic Read()
         {
             try
@@ -34,6 +38,10 @@ namespace Backend
             }
         }
 
+        /// <summary>
+        /// Writes the config object to config.ini.
+        /// </summary>
+        /// <param name="config"></param>
         public void Write(dynamic config)
         {
             using (StreamWriter streamWriter = new StreamWriter("config.ini", false, System.Text.Encoding.UTF8))
