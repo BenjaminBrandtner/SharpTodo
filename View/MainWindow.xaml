@@ -67,7 +67,7 @@
             <DatePicker DockPanel.Dock="Top" Margin="5" SelectedDate="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate, Mode=TwoWay}" />
 
             <StackPanel DockPanel.Dock="Top" Name="TodoButtons" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top">
-                <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}" MaxHeight="24">Save Changes</Button>
+                <Button Name="ButtonSave" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}" MaxHeight="24">Save Changes</Button>
                 <Button x:Name="ButtonDelete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListBoxTodos}" Style="{StaticResource UIButton}" Content="Delete" MaxHeight="24" />
             </StackPanel>
         </DockPanel>
