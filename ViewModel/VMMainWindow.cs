@@ -3,10 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 
@@ -18,6 +15,7 @@ namespace ViewModel
 
         private String errorMessage;
         private String successMessage;
+        private String message;
         private HabiticaClient client;
         private ICommand fetchCommand;
         private ICommand saveCommand;
@@ -147,5 +145,15 @@ namespace ViewModel
                 OnPropertyChanged(new PropertyChangedEventArgs("SuccessMessage"));
             }
         }
+        public string Message
+        {
+            get => message;
+            set
+            {
+                message = value;
+                OnPropertyChanged(new PropertyChangedEventArgs("Message"));
+            }
+        }
+
     }
 }

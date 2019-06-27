@@ -35,8 +35,9 @@
         </StackPanel>
 
         <Grid Name="Messages" Margin="10" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1">
-            <TextBlock Name="TextBlockMessage" Grid.Column="1" Padding="0" Style="{StaticResource UITextBlock}" Text="{Binding Message}" />
             <TextBlock Name="TextBlockError" Grid.Column="1" Padding="0" Style="{StaticResource UIErrorTextBlock}" Text="{Binding ErrorMessage}" />
+            <TextBlock Name="TextBlockMessage" Grid.Column="1" Padding="0" Style="{StaticResource UITextBlock}" Text="{Binding Message}" />
+            <TextBlock Name="TextBlockSuccessMessage" Grid.Column="1" Padding="0" Style="{StaticResource UISuccessTextBlock}" Text="{Binding SuccessMessage}" />
         </Grid>
 
         <DockPanel Name="TodoList" Grid.Row="2" >
@@ -67,8 +68,10 @@
             <DatePicker DockPanel.Dock="Top" Margin="5" SelectedDate="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate, Mode=TwoWay}" />
 
             <StackPanel DockPanel.Dock="Top" Name="TodoButtons" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top">
-                <Button Name="ButtonSave" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}" MaxHeight="24">Save Changes</Button>
-                <Button x:Name="ButtonDelete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListBoxTodos}" Style="{StaticResource UIButton}" Content="Delete" MaxHeight="24" />
+                <Button Name="ButtonSave" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}" MaxHeight="24"
+                    IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos, Mode=OneWay}">Save Changes</Button>
+                <Button x:Name="ButtonDelete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListBoxTodos}" Style="{StaticResource UIButton}" Content="Delete" MaxHeight="24"
+                    IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos, Mode=OneWay}" />
             </StackPanel>
         </DockPanel>
     </Grid>

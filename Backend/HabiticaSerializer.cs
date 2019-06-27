@@ -86,7 +86,7 @@ namespace Backend
                 }
                 else
                 {
-                    throw new UnsuccessfulException("Habitica recieved the request, but operation was unsuccessful: " + message);
+                    throw new UnsuccessfulException(message);
                 }
             }
 
