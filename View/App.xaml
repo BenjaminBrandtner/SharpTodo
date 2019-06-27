@@ -7,6 +7,7 @@
         <Style x:Key="UITextBlock" TargetType="TextBlock">
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
         </Style>
         <Style x:Key="UIButton" TargetType="Button">
             <Setter Property="FontSize" Value="15"></Setter>
@@ -17,6 +18,12 @@
             <Setter Property="FontSize" Value="15"></Setter>
         </Style>
 
+        <Style x:Key="UISuccessTextBlock" TargetType="TextBlock">
+            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="FontSize" Value="15"></Setter>
+            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+            <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        </Style>
         <Style x:Key="UIErrorTextBlock" TargetType="TextBlock">
             <Setter Property="Margin" Value="5"></Setter>
             <Setter Property="FontSize" Value="15"></Setter>

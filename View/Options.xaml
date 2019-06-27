@@ -1,14 +1,6 @@
-﻿<Window x:Class="View.Options"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-        xmlns:local="clr-namespace:View"
-        mc:Ignorable="d"
-        Title="Options" Height="340" Width="800">
+﻿<Window x:Class="View.Options" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel" xmlns:local="clr-namespace:View" mc:Ignorable="d" Title="Options" Height="340" Width="800">
     <Window.DataContext>
-        <vm:VMOptions/>
+        <vm:VMOptions />
     </Window.DataContext>
     <Grid>
         <Grid.RowDefinitions>
@@ -18,27 +10,21 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        
+
         <!-- UI Elements-->
         <GroupBox Header="User Credentials">
             <StackPanel Orientation="Vertical">
-                <TextBlock
-                    Style="{StaticResource UITextBlock}"><Run
-                        Text="User" /><Run
-                        Text=" " /><Run
-                        Text="ID" /></TextBlock>
+                <TextBlock Style="{StaticResource UITextBlock}"><Run Text="User" /><Run Text=" " /><Run Text="ID" /></TextBlock>
                 <TextBox Name="TextBoxUserID" Style="{StaticResource UITextBox}" Text="{Binding UserID}"></TextBox>
-                <TextBlock
-                    Style="{StaticResource UITextBlock}"><Run
-                        Text="API" /><Run
-                        Text=" Token" /></TextBlock>
+                <TextBlock Style="{StaticResource UITextBlock}"><Run Text="API" /><Run Text=" Token" /></TextBlock>
                 <TextBox Name="TextBoxApiKey" Style="{StaticResource UITextBox}" Text="{Binding ApiToken}"></TextBox>
-            <Button Name="ButtonValidate" HorizontalAlignment="Center" Padding="10,0" Style="{StaticResource UIButton}" Command="{Binding ValidateCommand}">Validate Credentials</Button>
-                <TextBlock Name="TextBlockError" Style="{StaticResource UIErrorTextBlock}"  Text="{Binding ErrorMsg}"></TextBlock>
+                <Button Name="ButtonValidate" HorizontalAlignment="Center" Padding="10,0" Style="{StaticResource UIButton}" Command="{Binding ValidateCommand}">Validate Credentials</Button>
+                <Grid Name="Messages">
+                    <TextBlock Name="TextBlockError" Style="{StaticResource UIErrorTextBlock}" Text="{Binding ErrorMessage}"></TextBlock>
+                    <TextBlock Name="TextBlockSuccess" Style="{StaticResource UISuccessTextBlock}" Text="{Binding SuccessMessage}"></TextBlock>
+                </Grid>
             </StackPanel>
         </GroupBox>
-
-
 
     </Grid>
 </Window>

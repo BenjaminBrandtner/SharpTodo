@@ -1,19 +1,11 @@
-﻿<Window x:Class="View.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:View"
-        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-        mc:Ignorable="d"
-        Title="SharpTodo" Height="449.447" Width="616.638">
+﻿<Window x:Class="View.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:View" xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel" mc:Ignorable="d" Title="SharpTodo" Height="469.447" Width="700.638">
     <Window.DataContext>
-        <vm:VMMainWindow/>
+        <vm:VMMainWindow />
     </Window.DataContext>
     <Window.Resources>
-        <DataTemplate x:Key = "todoTemplate">
+        <DataTemplate x:Key="todoTemplate">
 
-            <StackPanel Orientation = "Horizontal">
+            <StackPanel Orientation="Horizontal">
                 <CheckBox IsChecked="{Binding Path= Completed}"></CheckBox>
                 <TextBlock Text="{Binding Path= Text}"></TextBlock>
             </StackPanel>
@@ -22,9 +14,10 @@
     </Window.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            
-            <RowDefinition Height="0.5*"></RowDefinition>
-            <RowDefinition></RowDefinition>
+
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
 
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -36,24 +29,28 @@
         <Menu Width="auto" Height="25" Grid.ColumnSpan="2" VerticalAlignment="Top">
             <MenuItem Header="Options" Click="MenuItem_Click"></MenuItem>
         </Menu>
-        <StackPanel Name="StackPanelButtons" VerticalAlignment="Bottom" Margin="10">
-            <Button Name="ButtonFetch" Command="{Binding FetchCommand}"  Style="{StaticResource UIButton}">Fetch Todo-List</Button>
 
-            <Button Name="ButtonCreate" Command="{Binding CreateCommand}"  Style="{StaticResource UIButton}">Create new Todo</Button>
-            
-            <Button Name="ButtonDelete" Command="{Binding DeleteCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}">Delete selected Todo</Button>
-            
+        <StackPanel Name="Logo" Grid.Column="0" Grid.Row="1">
+            <Image Source="/images/SharpTodoLogo.png" Margin="0,5" />
         </StackPanel>
 
+        <Grid Name="Messages" Margin="10" Grid.Row="1" VerticalAlignment="Center" Grid.Column="1">
+            <TextBlock Name="TextBlockMessage" Grid.Column="1" Padding="0" Style="{StaticResource UITextBlock}" Text="{Binding Message}" />
+            <TextBlock Name="TextBlockError" Grid.Column="1" Padding="0" Style="{StaticResource UIErrorTextBlock}" Text="{Binding ErrorMessage}" />
+        </Grid>
 
-        <ListBox Name="ListBoxTodos" ItemsSource="{Binding TodoList}" ItemTemplate="{StaticResource todoTemplate}" VerticalAlignment="Stretch" Grid.Row="1" Margin="10"  ></ListBox>
+        <DockPanel Name="TodoList" Grid.Row="2" >
+            <Button DockPanel.Dock="Top"  Name="ButtonFetch" Command="{Binding FetchCommand}" Style="{StaticResource UIButton}">Fetch Todo-List</Button>
+            <Button DockPanel.Dock="Top" Name="ButtonCreate" Command="{Binding CreateCommand}" Style="{StaticResource UIButton}">Create new Todo</Button>
+            <ListBox Name="ListBoxTodos" ItemsSource="{Binding TodoList}" ItemTemplate="{StaticResource todoTemplate}" VerticalAlignment="Stretch" Margin="10" VerticalContentAlignment="Stretch"></ListBox>
+        </DockPanel>
 
-        <StackPanel Name="StackPanelTodoDetails" Grid.Column="1" Grid.Row="1" Margin="10">
-            <TextBlock Style="{StaticResource UITextBlock}">Title: </TextBlock>
-            <TextBox Name="TextBoxTitle" MinWidth="200" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Text}" Style="{StaticResource UITextBox}"></TextBox>
-            <TextBlock Style="{StaticResource UITextBlock}">Description:</TextBlock>
-            <TextBox Name="TextBoxDesc" MinWidth="200" MinLines="3" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}" Style="{StaticResource UITextBox}"></TextBox>
-            
+        <DockPanel Name="StackPanelTodoDetails" Grid.Column="1" Grid.Row="2" Margin="10" VerticalAlignment="Bottom">
+            <TextBlock DockPanel.Dock="Top" Style="{StaticResource UITextBlock}" Text="Title" />
+            <TextBox DockPanel.Dock="Top" Name="TextBoxTitle" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Text}" Style="{StaticResource UITextBox}"></TextBox>
+            <TextBlock DockPanel.Dock="Top" Style="{StaticResource UITextBlock}" Text="Description" />
+            <TextBox DockPanel.Dock="Top" Name="TextBoxDesc" MaxLines="5" MinLines="5" TextWrapping="Wrap" Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}" Style="{StaticResource UITextBox}" VerticalContentAlignment="Stretch" Height="102" />
+
             <!--<StackPanel Orientation="Horizontal" Margin="0,10,0,0">
 
                 <ComboBox Name="ComboBoxChecklist" ItemsSource="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Checklist}" Margin="10,0"></ComboBox>
@@ -65,13 +62,14 @@
             </StackPanel>
             -->
 
-            <TextBlock ToolTip="Format: DD.MM.YYYY" Margin="10,0" Style="{StaticResource UITextBlock}">Due on: </TextBlock>
+            <TextBlock DockPanel.Dock="Top" Margin="5" Style="{StaticResource UITextBlock}" Text="Due on" />
 
-            <DatePicker SelectedDate="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate, Mode=TwoWay}" />
-            <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}">Save Changes</Button>
-            
-        </StackPanel>
-        <TextBlock Name="TextBlockError" Grid.Column="1" Padding="0,20,0,0" Style="{StaticResource UIErrorTextBlock}"  Text="{Binding ErrorMsg}" />
+            <DatePicker DockPanel.Dock="Top" Margin="5" SelectedDate="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate, Mode=TwoWay}" />
 
+            <StackPanel DockPanel.Dock="Top" Name="TodoButtons" Orientation="Horizontal" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Top">
+                <Button Name="ButtonSave" Command="{Binding SendCommand}" CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}" Style="{StaticResource UIButton}" MaxHeight="24">Save Changes</Button>
+                <Button x:Name="ButtonDelete" Command="{Binding DeleteCommand}" CommandParameter="{Binding SelectedItem, ElementName=ListBoxTodos}" Style="{StaticResource UIButton}" Content="Delete" MaxHeight="24" />
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>
