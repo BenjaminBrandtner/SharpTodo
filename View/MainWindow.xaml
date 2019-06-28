@@ -1,4 +1,4 @@
-﻿<Window x:Class="View.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:View" xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel" mc:Ignorable="d" Title="SharpTodo" Height="469.447" Width="700.638">
+﻿<Window x:Class="View.MainWindow" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:local="clr-namespace:View" xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel" mc:Ignorable="d" Title="SharpTodo" Height="469.447" Width="700.638" x:Name="rootWindow">
     <Window.DataContext>
         <vm:VMMainWindow />
     </Window.DataContext>
@@ -6,7 +6,7 @@
         <DataTemplate x:Key="todoTemplate">
 
             <StackPanel Orientation="Horizontal">
-                <CheckBox IsChecked="{Binding Path= Completed}"></CheckBox>
+                <CheckBox Command="{Binding ElementName=rootWindow, Path=DataContext.CheckOffCommand}" CommandParameter="{Binding}"  IsChecked="{Binding Mode=OneWay, Path=Completed}"></CheckBox>
                 <TextBlock Text="{Binding Path= Text}"></TextBlock>
             </StackPanel>
 

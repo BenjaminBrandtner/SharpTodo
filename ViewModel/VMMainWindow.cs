@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Net;
 using System.Windows.Input;
 
 
@@ -21,6 +20,7 @@ namespace ViewModel
         private ICommand saveCommand;
         private ICommand createCommand;
         private ICommand deleteCommand;
+        private ICommand checkOffCommand;
         public event PropertyChangedEventHandler PropertyChanged;
 
         public VMMainWindow()
@@ -30,95 +30,102 @@ namespace ViewModel
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SaveCommand = new UserCommand(new Action<object>(SaveTodos));
-            ErrorMessage = "";
-            GetHabiticaClientInstance();
+            CheckOffCommand = new UserCommand(new Action<object>(CheckOffTodo));
         }
+
+        private async void CheckOffTodo(object obj)
+        {
+            VMHabiticaTodo todo = (VMHabiticaTodo)obj;
+            try
+            {
+                HabiticaClient client = HabiticaClient.GetInstance();
+
+                if (!todo.Completed)
+                {
+                    await client.CheckOffTodo(todo.Todo);
+                    todo.Completed = true;
+                }
+                else
+                {
+                    await client.UncheckTodo(todo.Todo);
+                    todo.Completed = false;
+                }
+            }
+            catch (Exception e)
+            {
+                handleException(e);
+            }
+        }
+
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, e);
         }
 
-        private void GetHabiticaClientInstance()
-        {
-            ErrorMessage = "";
-            try
-            {
-                client = HabiticaClient.GetInstance();
-            }
-            catch (NoCredentialsException)
-            {
-                ErrorMessage = "No User Credentials found. Please use the Options menu to input your credentials";
-            }
-        }
-
         private async void SaveTodos(object obj)
         {
-            GetHabiticaClientInstance();
-            if (client != null)
+            HabiticaClient client = HabiticaClient.GetInstance();
+            try
             {
-                try
-                {
-                    await client.SaveTodo(((VMHabiticaTodo)obj).Todo);
-                }
-                catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException || e is WebException)
-                {
-                    ErrorMessage = e.Message;
-                }
+                await client.SaveTodo(((VMHabiticaTodo)obj).Todo);
+            }
+            catch (Exception e)
+            {
+                handleException(e);
             }
         }
 
         private async void DeleteTodo(object obj)
         {
-            GetHabiticaClientInstance();
-            if (client != null)
+            HabiticaClient client = HabiticaClient.GetInstance();
+            try
             {
-                try
-                {
-                    await client.DeleteTodo(((VMHabiticaTodo)obj).Todo);
-                }
-                catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException || e is WebException)
-                {
-                    ErrorMessage = e.Message;
-                }
+                await client.DeleteTodo(((VMHabiticaTodo)obj).Todo);
+            }
+            catch (Exception e)
+            {
+                handleException(e);
             }
         }
 
         private async void CreateNewTodo(object obj)
         {
-            GetHabiticaClientInstance();
-            if (client != null)
+            HabiticaClient client = HabiticaClient.GetInstance();
+            try
             {
-                try
-                {
-                    TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
-                }
-                catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException || e is WebException)
-                {
-                    ErrorMessage = e.Message;
-                }
+                TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
+            }
+            catch (Exception e)
+            {
+                handleException(e);
             }
         }
 
         private async void FetchTodos(object o)
         {
-            GetHabiticaClientInstance();
-            TodoList.Clear();
-            if (client != null)
+            try
             {
-                try
+                HabiticaClient client = HabiticaClient.GetInstance();
+
+                IList<HabiticaTodo> templist = await client.GetTodos();
+
+                TodoList.Clear();
+
+                foreach (HabiticaTodo h in templist)
                 {
-                    IList<HabiticaTodo> templist = await client.GetTodos();
-                    foreach (HabiticaTodo h in templist)
-                    {
-                        todoList.Add(new VMHabiticaTodo(h));
-                    }
-                }
-                catch (Exception e) when (e is WrongCredentialsException || e is UnsuccessfulException || e is WebException)
-                {
-                    ErrorMessage = e.Message;
+                    todoList.Add(new VMHabiticaTodo(h));
                 }
             }
+            catch (Exception e)
+            {
+                handleException(e);
+            }
+        }
+
+        private void handleException(Exception e)
+        {
+            ErrorMessage = e.Message;
         }
 
         public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
@@ -126,6 +133,7 @@ namespace ViewModel
         public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
         public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
         public ICommand SaveCommand { get => saveCommand; set => saveCommand = value; }
+        public ICommand CheckOffCommand { get => checkOffCommand; set => checkOffCommand = value; }
         public string ErrorMessage
         {
             get => errorMessage;

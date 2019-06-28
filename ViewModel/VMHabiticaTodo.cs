@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Backend;
+﻿using Backend;
+using System;
 
 namespace ViewModel
 {
@@ -20,26 +15,7 @@ namespace ViewModel
         public string Text { get => Todo.Title; set => Todo.Title = value; }
         public string Notes { get => Todo.Notes; set => Todo.Notes = value; }
 
-        public  Boolean Completed { get => Todo.Completed; set
-            {
-                Todo.Completed = value;
-                
-                ChangeCompletionStatus(value);
-            }
-        }
-
-        private async void ChangeCompletionStatus(bool value)
-        {
-            HabiticaClient client = HabiticaClient.GetInstance();
-            if (value == true)
-            {
-                await client.CheckOffTodo(this.Todo);
-            }
-            else
-            {
-                await client.UncheckTodo(this.Todo);
-            }
-        }
+        public Boolean Completed { get => Todo.Completed; set => Todo.Completed = value }
 
         public DateTime? DueDate { get => Todo.DueDate; set => Todo.DueDate = value; }
         public HabiticaTodo Todo { get => todo; set => todo = value; }
