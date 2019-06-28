@@ -12,16 +12,17 @@ namespace ViewModel
     {
         private ObservableCollection<VMHabiticaTodo> todoList;
 
+        public event PropertyChangedEventHandler PropertyChanged;
+
         private String errorMessage;
         private String successMessage;
         private String message;
-        private HabiticaClient client;
+
         private ICommand fetchCommand;
         private ICommand saveCommand;
         private ICommand createCommand;
         private ICommand deleteCommand;
         private ICommand checkOffCommand;
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public VMMainWindow()
         {
@@ -30,10 +31,33 @@ namespace ViewModel
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SaveCommand = new UserCommand(new Action<object>(SaveTodos));
-            CheckOffCommand = new UserCommand(new Action<object>(CheckOffTodo));
+            CheckOffCommand = new UserCommand(new Action<object>(ChangeTodoCompletionStatus));
         }
 
-        private async void CheckOffTodo(object obj)
+        public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
+        public void OnPropertyChanged(PropertyChangedEventArgs e) { PropertyChanged?.Invoke(this, e); }
+        public string ErrorMessage
+        {
+            get => errorMessage;
+            set { errorMessage = value; OnPropertyChanged(new PropertyChangedEventArgs("ErrorMessage")); }
+        }
+        public string SuccessMessage
+        {
+            get => successMessage;
+            set { successMessage = value; OnPropertyChanged(new PropertyChangedEventArgs("SuccessMessage")); }
+        }
+        public string Message
+        {
+            get => message;
+            set { message = value; OnPropertyChanged(new PropertyChangedEventArgs("Message")); }
+        }
+        public ICommand FetchCommand { get => fetchCommand; set => fetchCommand = value; }
+        public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
+        public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
+        public ICommand SaveCommand { get => saveCommand; set => saveCommand = value; }
+        public ICommand CheckOffCommand { get => checkOffCommand; set => checkOffCommand = value; }
+
+        private async void ChangeTodoCompletionStatus(object obj)
         {
             VMHabiticaTodo todo = (VMHabiticaTodo)obj;
             try
@@ -55,12 +79,6 @@ namespace ViewModel
             {
                 handleException(e);
             }
-        }
-
-        public void OnPropertyChanged(PropertyChangedEventArgs e)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
         }
 
         private async void SaveTodos(object obj)
@@ -127,41 +145,5 @@ namespace ViewModel
         {
             ErrorMessage = e.Message;
         }
-
-        public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
-        public ICommand FetchCommand { get => fetchCommand; set => fetchCommand = value; }
-        public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
-        public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
-        public ICommand SaveCommand { get => saveCommand; set => saveCommand = value; }
-        public ICommand CheckOffCommand { get => checkOffCommand; set => checkOffCommand = value; }
-        public string ErrorMessage
-        {
-            get => errorMessage;
-            set
-            {
-                errorMessage = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ErrorMessage"));
-            }
-        }
-
-        public string SuccessMessage
-        {
-            get => successMessage;
-            set
-            {
-                successMessage = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("SuccessMessage"));
-            }
-        }
-        public string Message
-        {
-            get => message;
-            set
-            {
-                message = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("Message"));
-            }
-        }
-
     }
 }
