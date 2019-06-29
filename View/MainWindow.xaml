@@ -8,20 +8,74 @@
         mc:Ignorable="d"
         Title="SharpTodo"
         Height="470"
-        Width="700"
-        x:Name="rootWindow">
+        Width="700">
 
     <Window.DataContext>
-        <vm:VMMainWindow />
+        <vm:VMMainWindow x:Name="MainWindowDataContext" />
     </Window.DataContext>
+
     <Window.Resources>
         <DataTemplate x:Key="TodoTemplate">
             <StackPanel Orientation="Horizontal">
-                <CheckBox Command="{Binding ElementName=rootWindow, Path=DataContext.CheckOffCommand}"
+                <CheckBox Command="{Binding CheckOffCommand, ElementName=MainWindowDataContext}"
                           CommandParameter="{Binding}"
-                          IsChecked="{Binding Mode=OneWay, Path=Completed}" />
-                <TextBlock Text="{Binding Path=Title}" />
+                          IsChecked="{Binding Completed, Mode=OneWay}" />
+                <TextBlock Text="{Binding Title}" />
             </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TodoDetailsTemplate">
+            <DockPanel
+                       Grid.Column="1"
+                       Grid.Row="2"
+                       Margin="10"
+                       VerticalAlignment="Bottom">
+                <TextBlock x:Name="LabelTitle"
+                           DockPanel.Dock="Top"
+                           Style="{StaticResource UITextBlock}">Title</TextBlock>
+                <TextBox x:Name="TextBoxTitle"
+                         DockPanel.Dock="Top"
+                         Text="{Binding Title}"
+                         Style="{StaticResource UITextBox}" />
+                <TextBlock x:Name="LabelDescription"
+                           DockPanel.Dock="Top"
+                           Style="{StaticResource UITextBlock}">Description</TextBlock>
+                <TextBox x:Name="TextBoxDescription"
+                         DockPanel.Dock="Top"
+                         MaxLines="5"
+                         MinLines="5"
+                         TextWrapping="Wrap"
+                         Text="{Binding Notes}"
+                         Style="{StaticResource UITextBox}"
+                         Height="102"
+                         AcceptsReturn="True"
+                         AcceptsTab="True" />
+                <TextBlock x:Name="LabelDueOn"
+                           DockPanel.Dock="Top"
+                           Margin="5"
+                           Style="{StaticResource UITextBlock}">Due On</TextBlock>
+                <DatePicker DockPanel.Dock="Top"
+                            Margin="5"
+                            SelectedDate="{Binding DueDate}" />
+
+                <StackPanel x:Name="TodoDetailButtons"
+                            DockPanel.Dock="Top"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0"
+                            VerticalAlignment="Top">
+                    <Button x:Name="ButtonSave"
+                            Command="{Binding SaveCommand, ElementName=MainWindowDataContext}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource UIButton}"
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Save Changes</Button>
+                    <Button x:Name="ButtonDelete"
+                            Command="{Binding DeleteCommand, ElementName=MainWindowDataContext}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource UIButton}"
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Delete</Button>
+                </StackPanel>
+            </DockPanel>
         </DataTemplate>
     </Window.Resources>
 
@@ -93,64 +147,10 @@
         </DockPanel>
 
         <!--TodoDetails-->
-        <DockPanel x:Name="TodoDetails"
-                   Grid.Column="1"
-                   Grid.Row="2"
-                   Margin="10"
-                   VerticalAlignment="Bottom">
-            <TextBlock x:Name="LabelTitle"
-                       DockPanel.Dock="Top"
-                       Style="{StaticResource UITextBlock}"
-                       Text="Title" />
-            <TextBox x:Name="TextBoxTitle"
-                     DockPanel.Dock="Top"
-                     Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Title}"
-                     Style="{StaticResource UITextBox}" />
-            <TextBlock x:Name="LabelDescription"
-                       DockPanel.Dock="Top"
-                       Style="{StaticResource UITextBlock}"
-                       Text="Description" />
-            <TextBox x:Name="TextBoxDescription"
-                     DockPanel.Dock="Top"
-                     MaxLines="5"
-                     MinLines="5"
-                     TextWrapping="Wrap"
-                     Text="{Binding ElementName=ListBoxTodos, Path=SelectedItem.Notes}"
-                     Style="{StaticResource UITextBox}"
-                     Height="102"
-                     AcceptsReturn="True"
-                     AcceptsTab="True" />
-
-            <TextBlock x:Name="LabelDueOn"
-                       DockPanel.Dock="Top"
-                       Margin="5"
-                       Style="{StaticResource UITextBlock}"
-                       Text="Due on" />
-
-            <DatePicker DockPanel.Dock="Top"
-                        Margin="5"
-                        SelectedDate="{Binding ElementName=ListBoxTodos, Path=SelectedItem.DueDate, Mode=TwoWay}" />
-
-            <StackPanel x:Name="TodoDetailButtons"
-                        DockPanel.Dock="Top"
-                        Orientation="Horizontal"
-                        HorizontalAlignment="Center"
-                        Margin="0"
-                        VerticalAlignment="Top">
-                <Button x:Name="ButtonSave"
-                        Command="{Binding SaveCommand}"
-                        CommandParameter="{Binding ElementName=ListBoxTodos, Path=SelectedItem}"
-                        Style="{StaticResource UIButton}"
-                        MaxHeight="24"
-                        IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos, Mode=OneWay}">Save Changes</Button>
-                <Button x:Name="ButtonDelete"
-                        Command="{Binding DeleteCommand}"
-                        CommandParameter="{Binding SelectedItem, ElementName=ListBoxTodos}"
-                        Style="{StaticResource UIButton}"
-                        Content="Delete"
-                        MaxHeight="24"
-                        IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos, Mode=OneWay}" />
-            </StackPanel>
-        </DockPanel>
+        <ContentPresenter x:Name="TodoDetails"
+                          Grid.Row="2"
+                          Grid.Column="1"
+                          Content="{Binding SelectedItem, ElementName=ListBoxTodos}"
+                          ContentTemplate="{StaticResource TodoDetailsTemplate}" />
     </Grid>
 </Window>
