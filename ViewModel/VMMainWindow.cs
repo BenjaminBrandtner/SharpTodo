@@ -85,10 +85,12 @@ namespace ViewModel
 
         private async void SaveTodos(object obj)
         {
-            HabiticaClient client = HabiticaClient.GetInstance();
+            VMHabiticaTodo vmTodo = (VMHabiticaTodo)obj;
+
             try
             {
-                await client.SaveTodo(((VMHabiticaTodo)obj).Todo);
+                HabiticaClient client = HabiticaClient.GetInstance();
+                await client.SaveTodo(vmTodo.Todo);
             }
             catch (Exception e)
             {
@@ -98,10 +100,14 @@ namespace ViewModel
 
         private async void DeleteTodo(object obj)
         {
-            HabiticaClient client = HabiticaClient.GetInstance();
+            VMHabiticaTodo vmTodo = (VMHabiticaTodo)obj;
+
             try
             {
-                await client.DeleteTodo(((VMHabiticaTodo)obj).Todo);
+                HabiticaClient client = HabiticaClient.GetInstance();
+                await client.DeleteTodo(vmTodo.Todo);
+
+                TodoList.Remove(vmTodo);
             }
             catch (Exception e)
             {
@@ -111,10 +117,10 @@ namespace ViewModel
 
         private async void CreateNewTodo(object obj)
         {
-            HabiticaClient client = HabiticaClient.GetInstance();
             try
             {
-                TodoList.Add(new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
+                HabiticaClient client = HabiticaClient.GetInstance();
+                TodoList.Insert(0,new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
             }
             catch (Exception e)
             {
