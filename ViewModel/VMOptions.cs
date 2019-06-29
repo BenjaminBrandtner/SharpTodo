@@ -1,6 +1,5 @@
 ﻿using Backend;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Input;
 
@@ -23,11 +22,26 @@ namespace ViewModel
 
             ValidateCommand = new UserCommand(new Action<object>(ValidateCredentials));
         }
+
+        public ICommand ValidateCommand { get => validateCommand; set => validateCommand = value; }
+        public string UserID { get => config.UserID; set => config.UserID = value; }
+        public string ApiToken { get => config.ApiToken; set => config.ApiToken = value; }
+        public string ErrorMessage
+        {
+            get => errorMessage;
+            set { errorMessage = value; OnPropertyChanged(new PropertyChangedEventArgs("ErrorMessage")); }
+        }
+        public string SuccessMessage
+        {
+            get => successMessage; set
+            { successMessage = value; OnPropertyChanged(new PropertyChangedEventArgs("SuccessMessage")); }
+        }
+
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
+            PropertyChanged?.Invoke(this, e);
         }
+
         private async void ValidateCredentials(object obj)
         {
             ErrorMessage = "";
@@ -55,27 +69,5 @@ namespace ViewModel
                 ErrorMessage = e.Message;
             }
         }
-
-        public ICommand ValidateCommand { get => validateCommand; set => validateCommand = value; }
-        public string ErrorMessage
-        {
-            get => errorMessage;
-            set
-            {
-                errorMessage = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("ErrorMessage"));
-            }
-        }
-        public string UserID { get => config.UserID; set => config.UserID = value; }
-        public string ApiToken { get => config.ApiToken; set => config.ApiToken = value; }
-        public string SuccessMessage
-        {
-            get => successMessage; set
-            {
-                successMessage = value;
-                OnPropertyChanged(new PropertyChangedEventArgs("SuccessMessage"));
-            }
-        }
-
     }
 }

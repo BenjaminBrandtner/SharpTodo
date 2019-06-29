@@ -1,30 +1,63 @@
-﻿<Window x:Class="View.Options" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel" xmlns:local="clr-namespace:View" mc:Ignorable="d" Title="Options" Height="340" Width="800">
+﻿<Window x:Class="View.Options"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+        xmlns:local="clr-namespace:View"
+        mc:Ignorable="d"
+        Title="Options"
+        Width="800"
+        Height="260">
+
     <Window.DataContext>
         <vm:VMOptions />
     </Window.DataContext>
+
+    <!--Main Grid-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition></ColumnDefinition>
         </Grid.ColumnDefinitions>
 
-        <!-- UI Elements-->
+        <!--User Credentials -->
         <GroupBox Header="User Credentials">
             <StackPanel Orientation="Vertical">
-                <TextBlock Style="{StaticResource UITextBlock}"><Run Text="User" /><Run Text=" " /><Run Text="ID" /></TextBlock>
-                <TextBox Name="TextBoxUserID" Style="{StaticResource UITextBox}" Text="{Binding UserID}"></TextBox>
-                <TextBlock Style="{StaticResource UITextBlock}"><Run Text="API" /><Run Text=" Token" /></TextBlock>
-                <TextBox Name="TextBoxApiKey" Style="{StaticResource UITextBox}" Text="{Binding ApiToken}"></TextBox>
-                <Button x:Name="ButtonValidate" HorizontalAlignment="Center" Padding="10,0" Style="{StaticResource UIButton}" Command="{Binding ValidateCommand}" Content="Validate and Save" />
-                <Grid Name="Messages">
-                    <TextBlock Name="TextBlockError" Style="{StaticResource UIErrorTextBlock}" Text="{Binding ErrorMessage}"></TextBlock>
-                    <TextBlock Name="TextBlockSuccess" Style="{StaticResource UISuccessTextBlock}" Text="{Binding SuccessMessage}"></TextBlock>
-                </Grid>
+                <TextBlock x:Name="LabelUserID"
+                           Style="{StaticResource UITextBlock}">User ID</TextBlock>
+                <TextBox x:Name="TextBoxUserID"
+                         Style="{StaticResource UITextBox}"
+                         Text="{Binding UserID}" />
+                <TextBlock x:Name="LabelApiToken"
+                           Style="{StaticResource UITextBlock}">API Token</TextBlock>
+                <TextBox x:Name="TextBoxApiKey"
+                         Style="{StaticResource UITextBox}"
+                         Text="{Binding ApiToken}" />
+                <Button x:Name="ButtonValidate"
+                        HorizontalAlignment="Center"
+                        Padding="10,0"
+                        Style="{StaticResource UIButton}"
+                        Command="{Binding ValidateCommand}">Validate and Save</Button>
             </StackPanel>
         </GroupBox>
+
+        <!--Messages-->
+        <Grid x:Name="Messages"
+              Grid.Row="1">
+            <TextBlock x:Name="TextBlockSuccessMessage"
+                       Style="{StaticResource UISuccessTextBlock}"
+                       Text="{Binding SuccessMessage}" />
+            <TextBlock x:Name="TextBlockMessage"
+                       Style="{StaticResource UITextBlock}"
+                       Text="{Binding Message}" />
+            <TextBlock x:Name="TextBlockErrorMessage"
+                       Style="{StaticResource UIErrorTextBlock}"
+                       Text="{Binding ErrorMessage}" />
+        </Grid>
 
     </Grid>
 </Window>
