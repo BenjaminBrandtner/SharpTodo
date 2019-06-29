@@ -50,7 +50,7 @@ namespace ViewModel
             try
             {
                 HabiticaClient client = HabiticaClient.GetInstance(config);
-                await client.GetTodos(); //TODO: replace with Method TestCredentials()
+                await client.TestConnection();
 
                 SuccessMessage = "Credentials validated successfully";
 
@@ -58,7 +58,7 @@ namespace ViewModel
             }
             catch (NoCredentialsException)
             {
-                ErrorMessage = "One of the required Fields is empty";
+                ErrorMessage = "One of the required fields is empty";
             }
             catch (WrongCredentialsException e)
             {

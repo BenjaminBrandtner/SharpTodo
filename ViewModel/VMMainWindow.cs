@@ -32,6 +32,8 @@ namespace ViewModel
             DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SaveCommand = new UserCommand(new Action<object>(SaveTodos));
             CheckOffCommand = new UserCommand(new Action<object>(ChangeTodoCompletionStatus));
+
+            FetchTodos(null);
         }
 
         public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }

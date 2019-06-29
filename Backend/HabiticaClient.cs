@@ -45,7 +45,6 @@ namespace Backend
             Timeout = TimeSpan.FromSeconds(10);
 
             SetDefaultHeaders();
-            TestConnection();
         }
 
         private void SetDefaultHeaders()
@@ -65,7 +64,7 @@ namespace Backend
         /// Test if this client can connect and use the Habitica-API.
         /// Might throw NoCredentialsException, WrongCredentialsException or WebException
         /// </summary>
-        private async Task TestConnection()
+        public async Task TestConnection()
         {
             string url = "tasks/user?type=todos";
 
