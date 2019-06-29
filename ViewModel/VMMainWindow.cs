@@ -20,6 +20,7 @@ namespace ViewModel
 
         private ICommand fetchCommand;
         private ICommand saveCommand;
+        private ICommand loadCommand;
         private ICommand createCommand;
         private ICommand deleteCommand;
         private ICommand checkOffCommand;
@@ -31,6 +32,7 @@ namespace ViewModel
             CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
             DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
             SaveCommand = new UserCommand(new Action<object>(SaveTodos));
+            LoadCommand = new UserCommand(new Action<object>(LoadTodos));
             CheckOffCommand = new UserCommand(new Action<object>(ChangeTodoCompletionStatus));
 
             FetchTodos(null);
@@ -58,6 +60,7 @@ namespace ViewModel
         public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
         public ICommand SaveCommand { get => saveCommand; set => saveCommand = value; }
         public ICommand CheckOffCommand { get => checkOffCommand; set => checkOffCommand = value; }
+        public ICommand LoadCommand { get => loadCommand; set => loadCommand = value; }
 
         private async void ChangeTodoCompletionStatus(object obj)
         {
@@ -91,6 +94,24 @@ namespace ViewModel
             {
                 HabiticaClient client = HabiticaClient.GetInstance();
                 await client.SaveTodo(vmTodo.Todo);
+            }
+            catch (Exception e)
+            {
+                handleException(e);
+            }
+        }
+
+        private async void LoadTodos(object obj)
+        {
+            VMHabiticaTodo oldVmTodo = (VMHabiticaTodo)obj;
+            int index = TodoList.IndexOf(oldVmTodo);
+
+            try
+            {
+                HabiticaClient client = HabiticaClient.GetInstance();
+                TodoList.Insert(index, new VMHabiticaTodo(await client.LoadTodo(oldVmTodo.Todo)));
+
+                TodoList.Remove(oldVmTodo);
             }
             catch (Exception e)
             {

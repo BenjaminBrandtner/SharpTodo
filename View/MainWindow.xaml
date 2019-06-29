@@ -69,6 +69,11 @@
                             CommandParameter="{Binding}"
                             Style="{StaticResource UIButton}"
                             IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Save Changes</Button>
+                    <Button x:Name="ButtonDiscard"
+                            Command="{Binding LoadCommand, ElementName=MainWindowDataContext}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource UIButton}"
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Discard Changes</Button>
                     <Button x:Name="ButtonDelete"
                             Command="{Binding DeleteCommand, ElementName=MainWindowDataContext}"
                             CommandParameter="{Binding}"
