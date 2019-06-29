@@ -4,30 +4,77 @@
              xmlns:local="clr-namespace:View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-        <Style x:Key="UITextBlock" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="FontSize" Value="15"></Setter>
-            <Setter Property="TextWrapping" Value="Wrap"></Setter>
+        <Style x:Key="UITextBlock"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
+            <Setter Property="TextWrapping"
+                    Value="Wrap"></Setter>
         </Style>
-        <Style x:Key="UIButton" TargetType="Button">
-            <Setter Property="FontSize" Value="15"></Setter>
-            <Setter Property="Margin" Value="5"></Setter>
+        <Style x:Key="UIButton"
+               TargetType="Button">
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
+            <Setter Property="Margin"
+                    Value="5"></Setter>
         </Style>
-        <Style x:Key="UITextBox" TargetType="TextBox">
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="FontSize" Value="15"></Setter>
+        <Style x:Key="UITextBox"
+               TargetType="TextBox">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
         </Style>
-        <Style x:Key="UISuccessTextBlock" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="FontSize" Value="15"></Setter>
-            <Setter Property="TextWrapping" Value="Wrap"></Setter>
-            <Setter Property="Foreground" Value="LimeGreen"></Setter>
+        <Style x:Key="UISuccessTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
+            <Setter Property="TextWrapping"
+                    Value="Wrap"></Setter>
+            <Setter Property="Foreground"
+                    Value="LimeGreen"></Setter>
         </Style>
-        <Style x:Key="UIErrorTextBlock" TargetType="TextBlock">
-            <Setter Property="Margin" Value="5"></Setter>
-            <Setter Property="FontSize" Value="15"></Setter>
-            <Setter Property="TextWrapping" Value="Wrap"></Setter>
-            <Setter Property="Foreground" Value="Red"></Setter>
+        <Style x:Key="UIErrorTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
+            <Setter Property="TextWrapping"
+                    Value="Wrap"></Setter>
+            <Setter Property="Foreground"
+                    Value="Red"></Setter>
         </Style>
+
+        <ControlTemplate x:Key="WasteBasketButton">
+            <Label Content="🗑"
+                   Margin="0">
+                <Label.Foreground>
+                    <SolidColorBrush x:Name="ForegroundBrush"
+                                     Color="Black" />
+                </Label.Foreground>
+
+                <VisualStateManager.VisualStateGroups>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="MouseOver">
+                            <Storyboard>
+                                <ColorAnimationUsingKeyFrames Storyboard.TargetName="ForegroundBrush"
+                                                              Storyboard.TargetProperty="Color"
+                                                              FillBehavior="HoldEnd">
+                                    <LinearColorKeyFrame Value="Red"
+                                                         KeyTime="0:0:0.1" />
+
+                                </ColorAnimationUsingKeyFrames>
+                            </Storyboard>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateManager.VisualStateGroups>
+            </Label>
+        </ControlTemplate>
     </Application.Resources>
 </Application>

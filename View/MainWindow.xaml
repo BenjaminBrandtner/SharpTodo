@@ -15,31 +15,51 @@
     </Window.DataContext>
 
     <Window.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
         <DataTemplate x:Key="TodoTemplate">
-            <StackPanel Orientation="Horizontal">
-                <CheckBox Command="{Binding CheckOffCommand, ElementName=MainWindowDataContext}"
-                          CommandParameter="{Binding}"
-                          IsChecked="{Binding Completed, Mode=OneWay}" />
-                <TextBlock Text="{Binding Title}" />
-            </StackPanel>
+            <Border Margin="2"
+                    BorderBrush="Black"
+                    BorderThickness="0.4,0.5,0.5,0.5"
+                    CornerRadius="5"
+                    Background="#FFFFFAF1">
+                <DockPanel>
+                    <CheckBox Command="{Binding CheckOffCommand, ElementName=MainWindowDataContext}"
+                              CommandParameter="{Binding}"
+                              IsChecked="{Binding Completed, Mode=OneWay}" />
+                    <TextBlock Text="{Binding Title}"
+                               FontSize="16"
+                               Padding="5"
+                               DockPanel.Dock="Left"
+                               TextAlignment="Left" />
+                    <Button x:Name="ButtonDelete"
+                            Template="{StaticResource WasteBasketButton}"
+                            Command="{Binding DeleteCommand, ElementName=MainWindowDataContext}"
+                            CommandParameter="{Binding}"
+                            HorizontalAlignment="Right"
+                            Visibility="{Binding IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
+                            FontSize="16">
+                    </Button>
+                </DockPanel>
+
+            </Border>
         </DataTemplate>
 
         <DataTemplate x:Key="TodoDetailsTemplate">
-            <DockPanel
-                       Grid.Column="1"
+            <DockPanel Grid.Column="1"
                        Grid.Row="2"
                        Margin="10"
                        VerticalAlignment="Bottom">
                 <TextBlock x:Name="LabelTitle"
                            DockPanel.Dock="Top"
-                           Style="{StaticResource UITextBlock}">Title</TextBlock>
+                           Style="{StaticResource UITextBlock}"><Run Text="Title" /></TextBlock>
                 <TextBox x:Name="TextBoxTitle"
                          DockPanel.Dock="Top"
                          Text="{Binding Title}"
                          Style="{StaticResource UITextBox}" />
                 <TextBlock x:Name="LabelDescription"
                            DockPanel.Dock="Top"
-                           Style="{StaticResource UITextBlock}">Description</TextBlock>
+                           Style="{StaticResource UITextBlock}"><Run Text="Description" /></TextBlock>
                 <TextBox x:Name="TextBoxDescription"
                          DockPanel.Dock="Top"
                          MaxLines="5"
@@ -53,7 +73,7 @@
                 <TextBlock x:Name="LabelDueOn"
                            DockPanel.Dock="Top"
                            Margin="5"
-                           Style="{StaticResource UITextBlock}">Due On</TextBlock>
+                           Style="{StaticResource UITextBlock}"><Run Text="Due On" /></TextBlock>
                 <DatePicker DockPanel.Dock="Top"
                             Margin="5"
                             SelectedDate="{Binding DueDate}" />
@@ -68,17 +88,14 @@
                             Command="{Binding SaveCommand, ElementName=MainWindowDataContext}"
                             CommandParameter="{Binding}"
                             Style="{StaticResource UIButton}"
-                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Save Changes</Button>
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}"
+                            Content="Save Changes" />
                     <Button x:Name="ButtonDiscard"
                             Command="{Binding LoadCommand, ElementName=MainWindowDataContext}"
                             CommandParameter="{Binding}"
                             Style="{StaticResource UIButton}"
-                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Discard Changes</Button>
-                    <Button x:Name="ButtonDelete"
-                            Command="{Binding DeleteCommand, ElementName=MainWindowDataContext}"
-                            CommandParameter="{Binding}"
-                            Style="{StaticResource UIButton}"
-                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Delete</Button>
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}"
+                            Content="Discard Changes" />
                 </StackPanel>
             </DockPanel>
         </DataTemplate>
@@ -148,7 +165,8 @@
                      ItemsSource="{Binding TodoList}"
                      ItemTemplate="{StaticResource TodoTemplate}"
                      VerticalAlignment="Stretch"
-                     Margin="10" />
+                     Margin="10"
+                     HorizontalContentAlignment="Stretch" />
         </DockPanel>
 
         <!--TodoDetails-->
