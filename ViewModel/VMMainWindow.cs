@@ -17,6 +17,7 @@ namespace ViewModel
         private String errorMessage;
         private String successMessage;
         private String message;
+        private bool busy;
 
         private ICommand fetchCommand;
         private ICommand saveCommand;
@@ -35,11 +36,18 @@ namespace ViewModel
             LoadCommand = new UserCommand(new Action<object>(LoadTodos));
             CheckOffCommand = new UserCommand(new Action<object>(ChangeTodoCompletionStatus));
 
+            Busy = false;
+
             FetchTodos(null);
         }
 
         public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
         public void OnPropertyChanged(PropertyChangedEventArgs e) { PropertyChanged?.Invoke(this, e); }
+        public bool Busy
+        {
+            get => busy;
+            set { busy = value; OnPropertyChanged(new PropertyChangedEventArgs("Busy")); }
+        }
         public string ErrorMessage
         {
             get => errorMessage;
@@ -64,6 +72,8 @@ namespace ViewModel
 
         private async void ChangeTodoCompletionStatus(object obj)
         {
+            Busy = true;
+
             VMHabiticaTodo todo = (VMHabiticaTodo)obj;
             try
             {
@@ -84,10 +94,16 @@ namespace ViewModel
             {
                 handleException(e);
             }
+            finally
+            {
+                Busy = false;
+            }
         }
 
         private async void SaveTodos(object obj)
         {
+            Busy = true;
+
             VMHabiticaTodo vmTodo = (VMHabiticaTodo)obj;
 
             try
@@ -99,10 +115,16 @@ namespace ViewModel
             {
                 handleException(e);
             }
+            finally
+            {
+                Busy = false;
+            }
         }
 
         private async void LoadTodos(object obj)
         {
+            Busy = true;
+
             VMHabiticaTodo oldVmTodo = (VMHabiticaTodo)obj;
             int index = TodoList.IndexOf(oldVmTodo);
 
@@ -117,10 +139,16 @@ namespace ViewModel
             {
                 handleException(e);
             }
+            finally
+            {
+                Busy = false;
+            }
         }
 
         private async void DeleteTodo(object obj)
         {
+            Busy = true;
+
             VMHabiticaTodo vmTodo = (VMHabiticaTodo)obj;
 
             try
@@ -134,23 +162,35 @@ namespace ViewModel
             {
                 handleException(e);
             }
+            finally
+            {
+                Busy = false;
+            }
         }
 
         private async void CreateNewTodo(object obj)
         {
+            Busy = true;
+
             try
             {
                 HabiticaClient client = HabiticaClient.GetInstance();
-                TodoList.Insert(0,new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
+                TodoList.Insert(0, new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
             }
             catch (Exception e)
             {
                 handleException(e);
             }
+            finally
+            {
+                Busy = false;
+            }
         }
 
         private async void FetchTodos(object o)
         {
+            Busy = true;
+
             try
             {
                 HabiticaClient client = HabiticaClient.GetInstance();
@@ -168,11 +208,22 @@ namespace ViewModel
             {
                 handleException(e);
             }
+            finally
+            {
+                Busy = false;
+            }
         }
 
         private void handleException(Exception e)
         {
-            ErrorMessage = e.Message;
+            if(e is NoCredentialsException)
+            {
+                ErrorMessage = "No Credentials found. Please input your User ID and API Token in the options menu.";
+            }
+            else
+            {
+                ErrorMessage = e.Message;
+            }
         }
     }
 }

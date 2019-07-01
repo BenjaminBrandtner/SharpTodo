@@ -7,6 +7,7 @@
         xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
         mc:Ignorable="d"
         Title="SharpTodo"
+        xmlns:gif="http://wpfanimatedgif.codeplex.com"
         Height="470"
         Width="700">
 
@@ -127,28 +128,34 @@
                     Grid.Column="0"
                     Grid.Row="1">
             <Image Source="/images/SharpTodoLogo.png"
-                   Margin="0,5" />
+                   Margin="5" />
         </StackPanel>
 
-        <!--Messages-->
-        <Grid x:Name="Messages"
-              Margin="10"
-              Grid.Row="1"
-              VerticalAlignment="Center"
-              Grid.Column="1">
-            <TextBlock x:Name="TextBlockSuccessMessage"
-                       Grid.Column="1"
-                       Style="{StaticResource UISuccessTextBlock}"
-                       Text="{Binding SuccessMessage}" />
-            <TextBlock x:Name="TextBlockMessage"
-                       Grid.Column="1"
-                       Style="{StaticResource UITextBlock}"
-                       Text="{Binding Message}" />
-            <TextBlock x:Name="TextBlockErrorMessage"
-                       Style="{StaticResource UIErrorTextBlock}"
-                       Text="{Binding ErrorMessage}"
-                       Margin="5" />
-        </Grid>
+        <!--Messages And Loading-->
+        <DockPanel x:Name="MessagesAndLoadingDockPanel"
+                   Grid.Row="1"
+                   Grid.Column="1"
+                   Margin="5">
+            <Grid x:Name="Messages">
+                <TextBlock x:Name="TextBlockSuccessMessage"
+                           Style="{StaticResource UISuccessTextBlock}"
+                           Text="{Binding SuccessMessage}" />
+                <TextBlock x:Name="TextBlockMessage"
+                           Style="{StaticResource UITextBlock}"
+                           Text="{Binding Message}" />
+                <TextBlock x:Name="TextBlockErrorMessage"
+                           Style="{StaticResource UIErrorTextBlock}"
+                           Text="{Binding ErrorMessage}" />
+            </Grid>
+
+            <Image x:Name="LoadingImage"
+                   Visibility="{Binding Busy, Converter={StaticResource BooleanToVisibilityConverter}}"
+                   gif:ImageBehavior.AnimatedSource="/images/loading.gif"
+                   Width="24"
+                   Height="24"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Top" />
+        </DockPanel>
 
         <!--TodoList-->
         <DockPanel x:Name="TodoList"
