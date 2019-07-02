@@ -25,9 +25,16 @@
                     CornerRadius="5"
                     Background="#FFFFFAF1">
                 <DockPanel>
-                    <CheckBox Command="{Binding CheckOffCommand, ElementName=MainWindowDataContext}"
-                              CommandParameter="{Binding}"
-                              IsChecked="{Binding Completed, Mode=OneWay}" />
+                    <StackPanel x:Name="CheckBoxContainer"
+                                Height="25"
+                                Orientation="Horizontal"
+                                Margin="5,5,0,5">
+                        <Viewbox Height="{Binding Path=ActualHeight, ElementName=CheckBoxContainer}">
+                            <CheckBox Command="{Binding CheckOffCommand, ElementName=MainWindowDataContext}"
+                                      CommandParameter="{Binding}"
+                                      IsChecked="{Binding Completed, Mode=OneWay}" />
+                        </Viewbox>
+                    </StackPanel>
                     <TextBlock Text="{Binding Title}"
                                FontSize="16"
                                Padding="5"
