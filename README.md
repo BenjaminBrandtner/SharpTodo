@@ -7,4 +7,4 @@ Currently in development.
 
 ## Authors
 This project was started by [Benjamin Brandter](https://github.com/BenjaminBrandtner).  
-It was developed further as a school project in collaboration with [Lukas Dürer](https://github.com/LukasDuerer), who was a big help.
+It was developed further as a school project in collaboration with [Lukas Dürer](https://github.com/LukasDuerer), who was a big help and created the intial UI.
