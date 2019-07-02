@@ -4,6 +4,22 @@
              xmlns:local="clr-namespace:View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <Style x:Key="ListBoxNoHighlighting"
+               TargetType="{x:Type ListBox}">
+            <Style.Resources>
+                <!-- Background of selected item when focused -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" />
+                <!-- Background of selected item when not focused -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" />
+                <!-- Foreground of selected item when focused -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey }"
+                                 Color="Black" />
+                <!-- Foreground of selected item when not focused -->
+                <SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
+                                 Color="Black" />
+            </Style.Resources>
+        </Style>
+
         <Style x:Key="UITextBlock"
                TargetType="TextBlock">
             <Setter Property="Margin"

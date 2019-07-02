@@ -42,7 +42,6 @@
                             FontSize="16">
                     </Button>
                 </DockPanel>
-
             </Border>
         </DataTemplate>
 
@@ -53,14 +52,14 @@
                        VerticalAlignment="Bottom">
                 <TextBlock x:Name="LabelTitle"
                            DockPanel.Dock="Top"
-                           Style="{StaticResource UITextBlock}"><Run Text="Title" /></TextBlock>
+                           Style="{StaticResource UITextBlock}">Title</TextBlock>
                 <TextBox x:Name="TextBoxTitle"
                          DockPanel.Dock="Top"
                          Text="{Binding Title}"
                          Style="{StaticResource UITextBox}" />
                 <TextBlock x:Name="LabelDescription"
                            DockPanel.Dock="Top"
-                           Style="{StaticResource UITextBlock}"><Run Text="Description" /></TextBlock>
+                           Style="{StaticResource UITextBlock}">Description</TextBlock>
                 <TextBox x:Name="TextBoxDescription"
                          DockPanel.Dock="Top"
                          MaxLines="5"
@@ -74,7 +73,7 @@
                 <TextBlock x:Name="LabelDueOn"
                            DockPanel.Dock="Top"
                            Margin="5"
-                           Style="{StaticResource UITextBlock}"><Run Text="Due On" /></TextBlock>
+                           Style="{StaticResource UITextBlock}">Due on</TextBlock>
                 <DatePicker DockPanel.Dock="Top"
                             Margin="5"
                             SelectedDate="{Binding DueDate}" />
@@ -89,14 +88,12 @@
                             Command="{Binding SaveCommand, ElementName=MainWindowDataContext}"
                             CommandParameter="{Binding}"
                             Style="{StaticResource UIButton}"
-                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}"
-                            Content="Save Changes" />
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Save Changes</Button>
                     <Button x:Name="ButtonDiscard"
                             Command="{Binding LoadCommand, ElementName=MainWindowDataContext}"
                             CommandParameter="{Binding}"
                             Style="{StaticResource UIButton}"
-                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}"
-                            Content="Discard Changes" />
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Discard Changes</Button>
                 </StackPanel>
             </DockPanel>
         </DataTemplate>
@@ -171,6 +168,7 @@
             <ListBox x:Name="ListBoxTodos"
                      ItemsSource="{Binding TodoList}"
                      ItemTemplate="{StaticResource TodoTemplate}"
+                     Style="{StaticResource ListBoxNoHighlighting}"
                      VerticalAlignment="Stretch"
                      Margin="10"
                      HorizontalContentAlignment="Stretch" />
