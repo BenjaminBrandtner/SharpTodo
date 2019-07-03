@@ -4,6 +4,9 @@
              xmlns:local="clr-namespace:View"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+
+        <!--Styles-->
         <Style x:Key="ListBoxNoHighlighting"
                TargetType="{x:Type ListBox}">
             <Style.Resources>
@@ -19,16 +22,6 @@
                                  Color="Black" />
             </Style.Resources>
         </Style>
-
-        <Style x:Key="UITextBlock"
-               TargetType="TextBlock">
-            <Setter Property="Margin"
-                    Value="5"></Setter>
-            <Setter Property="FontSize"
-                    Value="15"></Setter>
-            <Setter Property="TextWrapping"
-                    Value="Wrap"></Setter>
-        </Style>
         <Style x:Key="UIButton"
                TargetType="Button">
             <Setter Property="FontSize"
@@ -43,29 +36,8 @@
             <Setter Property="FontSize"
                     Value="15"></Setter>
         </Style>
-        <Style x:Key="UISuccessTextBlock"
-               TargetType="TextBlock">
-            <Setter Property="Margin"
-                    Value="5"></Setter>
-            <Setter Property="FontSize"
-                    Value="15"></Setter>
-            <Setter Property="TextWrapping"
-                    Value="Wrap"></Setter>
-            <Setter Property="Foreground"
-                    Value="LimeGreen"></Setter>
-        </Style>
-        <Style x:Key="UIErrorTextBlock"
-               TargetType="TextBlock">
-            <Setter Property="Margin"
-                    Value="5"></Setter>
-            <Setter Property="FontSize"
-                    Value="15"></Setter>
-            <Setter Property="TextWrapping"
-                    Value="Wrap"></Setter>
-            <Setter Property="Foreground"
-                    Value="Red"></Setter>
-        </Style>
 
+        <!--Control Templates-->
         <ControlTemplate x:Key="WasteBasketButton">
             <Label Content="🗑"
                    Margin="0">
@@ -92,5 +64,126 @@
                 </VisualStateManager.VisualStateGroups>
             </Label>
         </ControlTemplate>
+
+        <!--Messages-->
+        <Style x:Key="UITextBlock"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
+            <Setter Property="TextWrapping"
+                    Value="Wrap"></Setter>
+        </Style>
+        <Style x:Key="UISuccessTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
+            <Setter Property="TextWrapping"
+                    Value="Wrap"></Setter>
+            <Setter Property="Foreground"
+                    Value="LimeGreen"></Setter>
+        </Style>
+        <Style x:Key="UIErrorTextBlock"
+               TargetType="TextBlock">
+            <Setter Property="Margin"
+                    Value="5"></Setter>
+            <Setter Property="FontSize"
+                    Value="15"></Setter>
+            <Setter Property="TextWrapping"
+                    Value="Wrap"></Setter>
+            <Setter Property="Foreground"
+                    Value="Red"></Setter>
+        </Style>
+
+        <!--Data Templates-->
+        <DataTemplate x:Key="TodoTemplate">
+            <Border Margin="2"
+                    BorderBrush="Black"
+                    BorderThickness="0.4,0.5,0.5,0.5"
+                    CornerRadius="5"
+                    Background="#FFFFFAF1">
+                <DockPanel>
+                    <StackPanel x:Name="CheckBoxContainer"
+                                Height="25"
+                                Orientation="Horizontal"
+                                Margin="5,5,0,5">
+                        <Viewbox Height="{Binding Path=ActualHeight, ElementName=CheckBoxContainer}">
+                            <CheckBox Command="{Binding CheckOffCommand, ElementName=MainWindowDataContext}"
+                                      CommandParameter="{Binding}"
+                                      IsChecked="{Binding Completed, Mode=OneWay}" />
+                        </Viewbox>
+                    </StackPanel>
+                    <TextBlock Text="{Binding Title}"
+                               FontSize="16"
+                               Padding="5"
+                               DockPanel.Dock="Left"
+                               TextAlignment="Left" />
+                    <Button x:Name="ButtonDelete"
+                            Template="{StaticResource WasteBasketButton}"
+                            Command="{Binding DeleteCommand, ElementName=MainWindowDataContext}"
+                            CommandParameter="{Binding}"
+                            HorizontalAlignment="Right"
+                            Visibility="{Binding IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
+                            FontSize="16">
+                    </Button>
+                </DockPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TodoDetailsTemplate">
+            <DockPanel Grid.Column="1"
+                       Grid.Row="2"
+                       Margin="10"
+                       VerticalAlignment="Bottom">
+                <TextBlock x:Name="LabelTitle"
+                           DockPanel.Dock="Top"
+                           Style="{StaticResource UITextBlock}">Title</TextBlock>
+                <TextBox x:Name="TextBoxTitle"
+                         DockPanel.Dock="Top"
+                         Text="{Binding Title}"
+                         Style="{StaticResource UITextBox}" />
+                <TextBlock x:Name="LabelDescription"
+                           DockPanel.Dock="Top"
+                           Style="{StaticResource UITextBlock}">Description</TextBlock>
+                <TextBox x:Name="TextBoxDescription"
+                         DockPanel.Dock="Top"
+                         MaxLines="5"
+                         MinLines="5"
+                         TextWrapping="Wrap"
+                         Text="{Binding Notes}"
+                         Style="{StaticResource UITextBox}"
+                         Height="102"
+                         AcceptsReturn="True"
+                         AcceptsTab="True" />
+                <TextBlock x:Name="LabelDueOn"
+                           DockPanel.Dock="Top"
+                           Margin="5"
+                           Style="{StaticResource UITextBlock}">Due on</TextBlock>
+                <DatePicker DockPanel.Dock="Top"
+                            Margin="5"
+                            SelectedDate="{Binding DueDate}" />
+
+                <StackPanel x:Name="TodoDetailButtons"
+                            DockPanel.Dock="Top"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            Margin="0"
+                            VerticalAlignment="Top">
+                    <Button x:Name="ButtonSave"
+                            Command="{Binding SaveCommand, ElementName=MainWindowDataContext}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource UIButton}"
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Save Changes</Button>
+                    <Button x:Name="ButtonDiscard"
+                            Command="{Binding LoadCommand, ElementName=MainWindowDataContext}"
+                            CommandParameter="{Binding}"
+                            Style="{StaticResource UIButton}"
+                            IsEnabled="{Binding SelectedItems.Count, ElementName=ListBoxTodos}">Discard Changes</Button>
+                </StackPanel>
+            </DockPanel>
+        </DataTemplate>
     </Application.Resources>
 </Application>
