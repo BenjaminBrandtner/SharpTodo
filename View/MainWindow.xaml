@@ -73,20 +73,34 @@
         <!--TodoList-->
         <DockPanel x:Name="TodoList"
                    Grid.Row="2">
-            <Button DockPanel.Dock="Top"
-                    x:Name="ButtonFetch"
-                    Command="{Binding FetchCommand}"
-                    Style="{StaticResource UIButton}">Fetch Todo-List</Button>
-            <Button DockPanel.Dock="Top"
-                    x:Name="ButtonCreate"
-                    Command="{Binding CreateCommand}"
-                    Style="{StaticResource UIButton}">Create new Todo</Button>
+            <DockPanel x:Name="TodoListButtons"
+                       DockPanel.Dock="Top"
+                       Margin="10,0">
+                <Button x:Name="ButtonFetch"
+                        Command="{Binding FetchCommand}"
+                        Style="{StaticResource UIButton}"
+                        Margin="0"
+                        FontFamily="Consolas"
+                        Width="28"
+                        FontSize="18"
+                        Height="28"
+                        ToolTip="Reload all Todos from Habitica">⟳</Button>
+                <Button x:Name="ButtonCreate"
+                        Command="{Binding CreateCommand}"
+                        Style="{StaticResource UIButton}"
+                        Margin="0"
+                        FontFamily="Consolas"
+                        Width="28"
+                        Height="28"
+                        HorizontalAlignment="Left"
+                        FontSize="18">+</Button>
+            </DockPanel>
             <ListBox x:Name="ListBoxTodos"
                      ItemsSource="{Binding TodoList}"
                      ItemTemplate="{StaticResource TodoTemplate}"
                      Style="{StaticResource ListBoxNoHighlighting}"
                      VerticalAlignment="Stretch"
-                     Margin="10"
+                     Margin="10,0,10,10"
                      HorizontalContentAlignment="Stretch" />
         </DockPanel>
 
