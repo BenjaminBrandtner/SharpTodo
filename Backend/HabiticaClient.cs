@@ -39,19 +39,20 @@ namespace Backend
         private HabiticaClient(dynamic config)
         {
             this.config = config;
-            serializer = new HabiticaSerializer();
 
+            SetDefaultHeaders();
             BaseAddress = new Uri("https://habitica.com/api/v3/");
             Timeout = TimeSpan.FromSeconds(10);
 
-            SetDefaultHeaders();
+            serializer = new HabiticaSerializer();
         }
 
         private void SetDefaultHeaders()
         {
-            if (String.IsNullOrEmpty(config.UserID)
-                || String.IsNullOrEmpty(config.ApiToken))
+            if (String.IsNullOrWhiteSpace(config.UserID)
+                || String.IsNullOrWhiteSpace(config.ApiToken))
             {
+                instance = null;
                 throw new NoCredentialsException();
             }
 
