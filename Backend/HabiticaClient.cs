@@ -42,7 +42,7 @@ namespace Backend
 
             SetDefaultHeaders();
             BaseAddress = new Uri("https://habitica.com/api/v3/");
-            Timeout = TimeSpan.FromSeconds(10);
+            Timeout = TimeSpan.FromSeconds(20);
 
             serializer = new HabiticaSerializer();
         }
