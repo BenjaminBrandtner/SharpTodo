@@ -96,6 +96,9 @@ namespace ViewModel
 				case UnsuccessfulException _:
 					ErrorMessage = "Habitica recieved the request, but something went wrong: \n" + e.Message;
 					break;
+				case InvalidTodoException _:
+					ErrorMessage = e.Message;
+					break;
 				case WebException _:
 					ErrorMessage = e.Message;
 					break;

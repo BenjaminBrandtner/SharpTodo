@@ -114,6 +114,11 @@ namespace Backend
 
         public async Task<HabiticaTodo> SaveTodo(HabiticaTodo todo)
         {
+			if (string.IsNullOrWhiteSpace(todo.Title))
+			{
+				throw new InvalidTodoException("Title can't be empty");
+			}
+
             string url = "tasks/" + todo.Id;
 
             string jsonOut = serializer.SerializeTodo(todo);
