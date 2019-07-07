@@ -67,7 +67,7 @@ namespace Backend
         /// </summary>
         public async Task TestConnection()
         {
-            string url = "tasks/user?type=todos";
+            string url = "inbox/messages"; //API call that requires User Id and API Token, that probably doesn't retrieve a lot of data.
 
             HttpResponseMessage response = await GetAsync(url);
             string json = await response.Content.ReadAsStringAsync();
