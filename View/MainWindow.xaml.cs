@@ -24,11 +24,5 @@ namespace View
         {
             InitializeComponent();
         }
-            
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            Options options = new Options();
-            options.Show();
-        }
     }
 }

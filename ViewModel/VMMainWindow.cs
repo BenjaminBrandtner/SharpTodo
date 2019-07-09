@@ -21,13 +21,6 @@ namespace ViewModel
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
-		private ICommand fetchCommand;
-		private ICommand saveCommand;
-		private ICommand loadCommand;
-		private ICommand createCommand;
-		private ICommand deleteCommand;
-		private ICommand checkOffCommand;
-
 		public VMMainWindow()
 		{
 			TodoList = new ObservableCollection<VMHabiticaTodo>();
@@ -37,6 +30,8 @@ namespace ViewModel
 			SaveCommand = new UserCommand(new Action<object>(SaveTodo));
 			LoadCommand = new UserCommand(new Action<object>(LoadTodo));
 			CheckOffCommand = new UserCommand(new Action<object>(ChangeTodoCompletionStatus));
+			ShowOptionsCommand = new UserCommand(new Action<object>(ShowOptions));
+			ShowTodoListCommand = new UserCommand(new Action<object>(ShowTodoList));
 
 			Busy = false;
 
@@ -68,12 +63,14 @@ namespace ViewModel
 		//Events
 		public void OnPropertyChanged(PropertyChangedEventArgs e) { PropertyChanged?.Invoke(this, e); }
 		//Commands
-		public ICommand FetchCommand { get => fetchCommand; set => fetchCommand = value; }
-		public ICommand CreateCommand { get => createCommand; set => createCommand = value; }
-		public ICommand DeleteCommand { get => deleteCommand; set => deleteCommand = value; }
-		public ICommand SaveCommand { get => saveCommand; set => saveCommand = value; }
-		public ICommand CheckOffCommand { get => checkOffCommand; set => checkOffCommand = value; }
-		public ICommand LoadCommand { get => loadCommand; set => loadCommand = value; }
+		public ICommand FetchCommand { get; set; }
+		public ICommand CreateCommand { get; set; }
+		public ICommand DeleteCommand { get; set; }
+		public ICommand SaveCommand { get; set; }
+		public ICommand CheckOffCommand { get; set; }
+		public ICommand LoadCommand { get; set; }
+		public ICommand ShowOptionsCommand { get; set; }
+		public ICommand ShowTodoListCommand { get; set; }
 
 		//UI Methods
 		private void ClearMessages()
@@ -81,6 +78,16 @@ namespace ViewModel
 			ErrorMessage = "";
 			SuccessMessage = "";
 			Message = "";
+		}
+
+		private void ShowTodoList(object obj)
+		{
+			throw new NotImplementedException();
+		}
+
+		private void ShowOptions(object obj)
+		{
+			throw new NotImplementedException();
 		}
 
 		private void handleException(Exception e)

@@ -45,8 +45,10 @@
 			  Height="25"
 			  Grid.ColumnSpan="2"
 			  VerticalAlignment="Top">
+			<MenuItem Header="_Todolist"
+					  Command="{Binding ShowTodoListCommand}" />
 			<MenuItem Header="_Options"
-					  Click="MenuItem_Click" />
+					  Command="{Binding ShowOptionsCommand}" />
 		</Menu>
 
 		<!--Logo-->
