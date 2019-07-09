@@ -1,114 +1,144 @@
 ﻿<Window x:Class="View.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:View"
-        xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
-        mc:Ignorable="d"
-        Title="SharpTodo"
-        xmlns:gif="http://wpfanimatedgif.codeplex.com"
-        Height="470"
-        Width="700">
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:View"
+		xmlns:vm="clr-namespace:ViewModel;assembly=ViewModel"
+		mc:Ignorable="d"
+		Title="SharpTodo"
+		xmlns:gif="http://wpfanimatedgif.codeplex.com"
+		Height="470"
+		Width="700">
 
-    <Window.DataContext>
-        <vm:VMMainWindow x:Name="MainWindowDataContext" />
-    </Window.DataContext>
+	<Window.DataContext>
+		<vm:VMMainWindow x:Name="MainWindowDataContext" />
+	</Window.DataContext>
 
-    <!--Main Grid-->
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="Auto" />
-            <RowDefinition Height="1*" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition />
-            <ColumnDefinition />
-        </Grid.ColumnDefinitions>
+	<Window.InputBindings>
+		<KeyBinding Key="R"
+					Modifiers="Ctrl"
+					Command="{Binding FetchCommand}" />
+		<KeyBinding Key="N"
+					Modifiers="Ctrl"
+					Command="{Binding CreateCommand}" />
+		<KeyBinding Key="S"
+					Modifiers="Ctrl"
+					CommandParameter="{Binding SelectedItem, ElementName=ListBoxTodos}"
+					Command="{Binding SaveCommand}" />
+	</Window.InputBindings>
 
-        <!--Menu-->
-        <Menu Width="auto"
-              Height="25"
-              Grid.ColumnSpan="2"
-              VerticalAlignment="Top">
-            <MenuItem Header="Options"
-                      Click="MenuItem_Click" />
-        </Menu>
+	<!--Main Grid-->
+	<Grid>
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="Auto" />
+			<RowDefinition Height="1*" />
+		</Grid.RowDefinitions>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition />
+			<ColumnDefinition />
+		</Grid.ColumnDefinitions>
 
-        <!--Logo-->
-        <StackPanel x:Name="Logo"
-                    Grid.Column="0"
-                    Grid.Row="1">
-            <Image Source="/images/SharpTodoLogo.png"
-                   Margin="5" />
-        </StackPanel>
+		<!--Menu-->
+		<Menu Width="auto"
+			  Height="25"
+			  Grid.ColumnSpan="2"
+			  VerticalAlignment="Top">
+			<MenuItem Header="_Options"
+					  Click="MenuItem_Click" />
+		</Menu>
 
-        <!--Messages And Loading-->
-        <DockPanel x:Name="MessagesAndLoadingDockPanel"
-                   Grid.Row="1"
-                   Grid.Column="1"
-                   Margin="5">
-            <Grid x:Name="Messages">
-                <TextBlock x:Name="TextBlockSuccessMessage"
-                           Style="{StaticResource UISuccessTextBlock}"
-                           Text="{Binding SuccessMessage}" />
-                <TextBlock x:Name="TextBlockMessage"
-                           Style="{StaticResource UITextBlock}"
-                           Text="{Binding Message}" />
-                <TextBlock x:Name="TextBlockErrorMessage"
-                           Style="{StaticResource UIErrorTextBlock}"
-                           Text="{Binding ErrorMessage}" />
-            </Grid>
+		<!--Logo-->
+		<StackPanel x:Name="Logo"
+					Grid.Column="0"
+					Grid.Row="1">
+			<Image Source="/images/SharpTodoLogo.png"
+				   Margin="5" />
+		</StackPanel>
 
-            <Image x:Name="LoadingImage"
-                   Visibility="{Binding Busy, Converter={StaticResource BooleanToVisibilityConverter}}"
-                   gif:ImageBehavior.AnimatedSource="/images/loading.gif"
-                   Width="24"
-                   Height="24"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top" />
-        </DockPanel>
+		<!--Messages And Loading-->
+		<DockPanel x:Name="MessagesAndLoadingDockPanel"
+				   Grid.Row="1"
+				   Grid.Column="1"
+				   Margin="5">
+			<Grid x:Name="Messages">
+				<TextBlock x:Name="TextBlockSuccessMessage"
+						   Style="{StaticResource UISuccessTextBlock}"
+						   Text="{Binding SuccessMessage}" />
+				<TextBlock x:Name="TextBlockMessage"
+						   Style="{StaticResource UITextBlock}"
+						   Text="{Binding Message}" />
+				<TextBlock x:Name="TextBlockErrorMessage"
+						   Style="{StaticResource UIErrorTextBlock}"
+						   Text="{Binding ErrorMessage}" />
+			</Grid>
 
-        <!--TodoList-->
-        <DockPanel x:Name="TodoList"
-                   Grid.Row="2">
-            <DockPanel x:Name="TodoListButtons"
-                       DockPanel.Dock="Top"
-                       Margin="10,0">
-                <Button x:Name="ButtonFetch"
-                        Command="{Binding FetchCommand}"
-                        Style="{StaticResource UIButton}"
-                        Margin="0"
-                        FontFamily="Consolas"
-                        Width="28"
-                        FontSize="18"
-                        Height="28"
-                        ToolTip="Reload all Todos from Habitica">⟳</Button>
-                <Button x:Name="ButtonCreate"
-                        Command="{Binding CreateCommand}"
-                        Style="{StaticResource UIButton}"
-                        Margin="0"
-                        FontFamily="Consolas"
-                        Width="28"
-                        Height="28"
-                        HorizontalAlignment="Left"
-                        FontSize="18">+</Button>
-            </DockPanel>
-            <ListBox x:Name="ListBoxTodos"
-                     ItemsSource="{Binding TodoList}"
-                     ItemTemplate="{StaticResource TodoTemplate}"
-                     Style="{StaticResource ListBoxNoHighlighting}"
-                     VerticalAlignment="Stretch"
-                     Margin="10,0,10,10"
-                     HorizontalContentAlignment="Stretch" />
-        </DockPanel>
+			<Image x:Name="LoadingImage"
+				   Visibility="{Binding Busy, Converter={StaticResource BooleanToVisibilityConverter}}"
+				   gif:ImageBehavior.AnimatedSource="/images/loading.gif"
+				   Width="24"
+				   Height="24"
+				   HorizontalAlignment="Right"
+				   VerticalAlignment="Top" />
+		</DockPanel>
 
-        <!--TodoDetails-->
-        <ContentPresenter x:Name="TodoDetails"
-                          Grid.Row="2"
-                          Grid.Column="1"
-                          Content="{Binding SelectedItem, ElementName=ListBoxTodos}"
-                          ContentTemplate="{StaticResource TodoDetailsTemplate}" />
-    </Grid>
+		<!--TodoList-->
+		<DockPanel x:Name="TodoList"
+				   Grid.Row="2">
+			<DockPanel x:Name="TodoListButtons"
+					   DockPanel.Dock="Top"
+					   Margin="10,0">
+				<Button x:Name="ButtonFetch"
+						Command="{Binding FetchCommand}"
+						Style="{StaticResource UIButton}"
+						Margin="0"
+						FontFamily="Consolas"
+						Width="28"
+						FontSize="18"
+						Height="28">
+					<Button.ToolTip>
+						<TextBlock>
+							Reload all Todos from Habitica
+							<LineBreak />
+							Shortcut: <Run FontWeight="Bold">CTRL-R</Run>
+						</TextBlock>
+					</Button.ToolTip>
+					⟳
+				</Button>
+				<Button x:Name="ButtonCreate"
+						Command="{Binding CreateCommand}"
+						Style="{StaticResource UIButton}"
+						Margin="0"
+						FontFamily="Consolas"
+						Width="28"
+						Height="28"
+						HorizontalAlignment="Left"
+						FontSize="18">
+					<Button.ToolTip>
+						<TextBlock>
+							Create a new Todo
+							<LineBreak />
+							Shortcut: <Run FontWeight="Bold">CTRL-N</Run>
+						</TextBlock>
+					</Button.ToolTip>
+					
+					+</Button>
+			</DockPanel>
+			<ListBox x:Name="ListBoxTodos"
+					 ItemsSource="{Binding TodoList}"
+					 ItemTemplate="{StaticResource TodoTemplate}"
+					 Style="{StaticResource ListBoxNoHighlighting}"
+					 VerticalAlignment="Stretch"
+					 Margin="10,0,10,10"
+					 HorizontalContentAlignment="Stretch" />
+		</DockPanel>
+
+		<!--TodoDetails-->
+		<ContentPresenter x:Name="TodoDetails"
+						  Grid.Row="2"
+						  Grid.Column="1"
+						  Content="{Binding SelectedItem, ElementName=ListBoxTodos}"
+						  ContentTemplate="{StaticResource TodoDetailsTemplate}" />
+	</Grid>
 </Window>

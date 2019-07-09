@@ -39,21 +39,32 @@
 					   Margin="0,0,0,-24" />
 				<StackPanel Orientation="Vertical"
 							DockPanel.Dock="Top">
-					<TextBlock x:Name="LabelUserID"
-							   Style="{StaticResource UITextBlock}">User ID</TextBlock>
+					<Label x:Name="LabelUserID"
+							   Target="{Binding ElementName=TextBoxUserID}"
+							   Style="{StaticResource UILabel}">_User ID</Label>
 					<TextBox x:Name="TextBoxUserID"
 							 Style="{StaticResource UITextBox}"
 							 Text="{Binding UserID}" />
-					<TextBlock x:Name="LabelApiToken"
-							   Style="{StaticResource UITextBlock}">API Token</TextBlock>
+					<Label x:Name="LabelApiToken"
+							   Target="{Binding ElementName=TextBoxApiKey}"
+							   Style="{StaticResource UILabel}">_API Token</Label>
 					<TextBox x:Name="TextBoxApiKey"
 							 Style="{StaticResource UITextBox}"
 							 Text="{Binding ApiToken}" />
-					<Button x:Name="ButtonValidate"
-							HorizontalAlignment="Center"
-							Padding="10,0"
-							Style="{StaticResource UIButton}"
-							Command="{Binding ValidateCommand}">Validate and Save</Button>
+					<StackPanel Orientation="Horizontal"
+								HorizontalAlignment="Center">
+						<Button x:Name="ButtonValidate"
+								HorizontalAlignment="Center"
+								Padding="10,0"
+								Style="{StaticResource UIButton}"
+								Command="{Binding ValidateCommand}">_Validate and Save</Button>
+						<Button x:Name="ButtonClose"
+								HorizontalAlignment="Center"
+								Padding="10,0"
+								Style="{StaticResource UIButton}"
+								Command="">_Close</Button>
+
+					</StackPanel>
 				</StackPanel>
 			</DockPanel>
 		</GroupBox>
