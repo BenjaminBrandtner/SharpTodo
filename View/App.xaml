@@ -70,14 +70,22 @@
 		<!--<Style x:Key="ListBoxNoHighlighting"
 			   TargetType="{x:Type ListBox}">
 			<Style.Resources>
-				--><!-- Background of selected item when focused --><!--
+				-->
+		<!-- Background of selected item when focused -->
+		<!--
 				<SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" />
-				--><!-- Background of selected item when not focused --><!--
+				-->
+		<!-- Background of selected item when not focused -->
+		<!--
 				<SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" />
-				--><!-- Foreground of selected item when focused --><!--
+				-->
+		<!-- Foreground of selected item when focused -->
+		<!--
 				<SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey }"
 								 Color="Black" />
-				--><!-- Foreground of selected item when not focused --><!--
+				-->
+		<!-- Foreground of selected item when not focused -->
+		<!--
 				<SolidColorBrush x:Key="{x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}"
 								 Color="Black" />
 			</Style.Resources>
@@ -102,35 +110,6 @@
 			<Setter Property="FontSize"
 					Value="15"></Setter>
 		</Style>
-
-		<!--Control Templates-->
-		<ControlTemplate x:Key="WasteBasketButton">
-			<Label Content="🗑"
-				   Margin="0"
-				   FontFamily="Arial">
-				<Label.Foreground>
-					<SolidColorBrush x:Name="ForegroundBrush"
-									 Color="Black" />
-				</Label.Foreground>
-
-				<VisualStateManager.VisualStateGroups>
-					<VisualStateGroup x:Name="CommonStates">
-						<VisualState x:Name="Normal" />
-						<VisualState x:Name="MouseOver">
-							<Storyboard>
-								<ColorAnimationUsingKeyFrames Storyboard.TargetName="ForegroundBrush"
-															  Storyboard.TargetProperty="Color"
-															  FillBehavior="HoldEnd">
-									<LinearColorKeyFrame Value="Red"
-														 KeyTime="0:0:0.1" />
-
-								</ColorAnimationUsingKeyFrames>
-							</Storyboard>
-						</VisualState>
-					</VisualStateGroup>
-				</VisualStateManager.VisualStateGroups>
-			</Label>
-		</ControlTemplate>
 
 		<!--Messages-->
 		<Style x:Key="UITextBlock"
@@ -165,6 +144,32 @@
 					Value="Red"></Setter>
 		</Style>
 
+		<!--Control Templates-->
+		<ControlTemplate x:Key="WasteBasketButton"
+						 TargetType="Button">
+			<ContentPresenter Margin="0"
+				   Height="{Binding ActualHeight, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
+				   >
+				<ContentPresenter.Content>
+					<Image>
+						<Image.Style>
+							<Style TargetType="{x:Type Image}">
+								<Setter Property="Source"
+										Value="images/wasteBasket.png" />
+								<Style.Triggers>
+									<Trigger Property="IsMouseOver"
+											 Value="True">
+										<Setter Property="Source"
+												Value="images/wasteBasketRed.png" />
+									</Trigger>
+								</Style.Triggers>
+							</Style>
+						</Image.Style>
+					</Image>
+				</ContentPresenter.Content>
+			</ContentPresenter>
+		</ControlTemplate>
+
 		<!--Data Templates-->
 		<DataTemplate x:Key="TodoTemplate">
 			<Border Margin="2"
@@ -193,8 +198,7 @@
 							Command="{Binding DeleteCommand, ElementName=MainWindowDataContext}"
 							CommandParameter="{Binding}"
 							HorizontalAlignment="Right"
-							Visibility="{Binding IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}"
-							FontSize="18">
+							Visibility="{Binding IsMouseOver, Converter={StaticResource BooleanToVisibilityConverter}, Mode=OneWay, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}}">
 					</Button>
 				</DockPanel>
 			</Border>
