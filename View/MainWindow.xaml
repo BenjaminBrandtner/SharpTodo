@@ -128,7 +128,7 @@
 			<ListBox x:Name="ListBoxTodos"
 					 ItemsSource="{Binding TodoList}"
 					 ItemTemplate="{StaticResource TodoTemplate}"
-					 Style="{StaticResource ListBoxNoHighlighting}"
+					 ItemContainerStyle="{StaticResource ListBoxItemNoHighlighting}"
 					 VerticalAlignment="Stretch"
 					 Margin="10,0,10,10"
 					 HorizontalContentAlignment="Stretch" />
