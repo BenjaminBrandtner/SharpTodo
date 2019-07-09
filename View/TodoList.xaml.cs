@@ -10,18 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace View
 {
-    /// <summary>
-    /// Interaktionslogik für Options.xaml
-    /// </summary>
-    public partial class Options : UserControl
-    {
-        public Options()
-        {
-            InitializeComponent();
-        }
-    }
+	/// <summary>
+	/// Interaction logic for TodoList.xaml
+	/// </summary>
+	public partial class TodoList : UserControl
+	{
+		public TodoList()
+		{
+			InitializeComponent();
+		}
+	}
 }

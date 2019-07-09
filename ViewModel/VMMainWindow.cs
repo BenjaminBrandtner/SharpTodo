@@ -12,39 +12,35 @@ namespace ViewModel
 {
 	public class VMMainWindow : INotifyPropertyChanged
 	{
-		private ObservableCollection<VMHabiticaTodo> todoList;
+		private Object currentView;
 
-		private String errorMessage;
-		private String successMessage;
-		private String message;
+		private string errorMessage;
+		private string successMessage;
+		private string message;
 		private bool busy;
 
 		public event PropertyChangedEventHandler PropertyChanged;
 
 		public VMMainWindow()
 		{
-			TodoList = new ObservableCollection<VMHabiticaTodo>();
-			FetchCommand = new UserCommand(new Action<object>(FetchTodos));
-			CreateCommand = new UserCommand(new Action<object>(CreateNewTodo));
-			DeleteCommand = new UserCommand(new Action<object>(DeleteTodo));
-			SaveCommand = new UserCommand(new Action<object>(SaveTodo));
-			LoadCommand = new UserCommand(new Action<object>(LoadTodo));
-			CheckOffCommand = new UserCommand(new Action<object>(ChangeTodoCompletionStatus));
 			ShowOptionsCommand = new UserCommand(new Action<object>(ShowOptions));
 			ShowTodoListCommand = new UserCommand(new Action<object>(ShowTodoList));
 
 			Busy = false;
-
-			FetchTodos(null);
+			CurrentView = new VMTodoList(this);
 		}
 
 		//Properties
-		public ObservableCollection<VMHabiticaTodo> TodoList { get => todoList; set => todoList = value; }
+		public object CurrentView
+		{
+			get => currentView;
+			set { currentView = value; OnPropertyChanged(new PropertyChangedEventArgs("CurrentView")); }
+		}
 		public bool Busy
 		{
 			get => busy;
-            set { busy = value; OnPropertyChanged(new PropertyChangedEventArgs("Busy")); }
-        }
+			set { busy = value; OnPropertyChanged(new PropertyChangedEventArgs("Busy")); }
+		}
 		public string ErrorMessage
 		{
 			get => errorMessage;
@@ -63,34 +59,28 @@ namespace ViewModel
 		//Events
 		public void OnPropertyChanged(PropertyChangedEventArgs e) { PropertyChanged?.Invoke(this, e); }
 		//Commands
-		public ICommand FetchCommand { get; set; }
-		public ICommand CreateCommand { get; set; }
-		public ICommand DeleteCommand { get; set; }
-		public ICommand SaveCommand { get; set; }
-		public ICommand CheckOffCommand { get; set; }
-		public ICommand LoadCommand { get; set; }
 		public ICommand ShowOptionsCommand { get; set; }
 		public ICommand ShowTodoListCommand { get; set; }
 
 		//UI Methods
-		private void ClearMessages()
+		internal void ClearMessages()
 		{
 			ErrorMessage = "";
 			SuccessMessage = "";
 			Message = "";
 		}
 
-		private void ShowTodoList(object obj)
+		internal void ShowTodoList(object obj)
 		{
-			throw new NotImplementedException();
+			CurrentView = new VMTodoList(this);
 		}
 
-		private void ShowOptions(object obj)
+		internal void ShowOptions(object obj)
 		{
-			throw new NotImplementedException();
+			CurrentView = new VMOptions(this);
 		}
 
-		private void handleException(Exception e)
+		internal void handleException(Exception e)
 		{
 			switch (e)
 			{
@@ -116,158 +106,5 @@ namespace ViewModel
 					throw (e);
 			}
 		}
-
-		//Todo Methods
-		private async void ChangeTodoCompletionStatus(object obj)
-		{
-			Busy = true;
-			ClearMessages();
-
-			VMHabiticaTodo vmTodo = (VMHabiticaTodo)obj;
-			try
-			{
-				HabiticaClient client = HabiticaClient.GetInstance();
-
-				if (!vmTodo.Completed)
-				{
-					await client.CheckOffTodo(vmTodo.Todo);
-					vmTodo.Completed = true;
-				}
-				else
-				{
-					await client.UncheckTodo(vmTodo.Todo);
-					vmTodo.Completed = false;
-				}
-			}
-			catch (Exception e)
-			{
-				handleException(e);
-			}
-			finally
-			{
-				Busy = false;
-			}
-		}
-
-		private async void SaveTodo(object obj)
-		{
-			Busy = true;
-			ClearMessages();
-
-			VMHabiticaTodo vmTodo = (VMHabiticaTodo)obj;
-
-			try
-			{
-				HabiticaClient client = HabiticaClient.GetInstance();
-				await client.SaveTodo(vmTodo.Todo);
-				SuccessMessage = "Changes saved";
-			}
-			catch (Exception e)
-			{
-				handleException(e);
-			}
-			finally
-			{
-				Busy = false;
-			}
-		}
-
-		private async void LoadTodo(object obj)
-		{
-			Busy = true;
-			ClearMessages();
-
-			VMHabiticaTodo oldVmTodo = (VMHabiticaTodo)obj;
-			int index = TodoList.IndexOf(oldVmTodo);
-
-			try
-			{
-				HabiticaClient client = HabiticaClient.GetInstance();
-				TodoList.Insert(index, new VMHabiticaTodo(await client.LoadTodo(oldVmTodo.Todo)));
-
-				TodoList.Remove(oldVmTodo);
-			}
-			catch (Exception e)
-			{
-				handleException(e);
-			}
-			finally
-			{
-				Busy = false;
-			}
-		}
-
-		private async void DeleteTodo(object obj)
-		{
-			Busy = true;
-			ClearMessages();
-
-			VMHabiticaTodo vmTodo = (VMHabiticaTodo)obj;
-
-			try
-			{
-				HabiticaClient client = HabiticaClient.GetInstance();
-				await client.DeleteTodo(vmTodo.Todo);
-
-				TodoList.Remove(vmTodo);
-			}
-			catch (Exception e)
-			{
-				handleException(e);
-			}
-			finally
-			{
-				Busy = false;
-			}
-		}
-
-		private async void CreateNewTodo(object obj)
-		{
-			Busy = true;
-			ClearMessages();
-
-			try
-			{
-				HabiticaClient client = HabiticaClient.GetInstance();
-				TodoList.Insert(0, new VMHabiticaTodo(await client.CreateNewTodo("new Todo")));
-			}
-			catch (Exception e)
-			{
-				handleException(e);
-			}
-			finally
-			{
-				Busy = false;
-			}
-		}
-
-		private async void FetchTodos(object o)
-		{
-			Busy = true;
-			ClearMessages();
-
-			try
-			{
-				HabiticaClient client = HabiticaClient.GetInstance();
-
-				IList<HabiticaTodo> templist = await client.GetTodos();
-
-				TodoList.Clear();
-
-				foreach (HabiticaTodo h in templist)
-				{
-					todoList.Add(new VMHabiticaTodo(h));
-				}
-			}
-			catch (Exception e)
-			{
-				handleException(e);
-			}
-			finally
-			{
-				Busy = false;
-			}
-		}
-
 	}
 }

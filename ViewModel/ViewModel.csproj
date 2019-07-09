@@ -46,6 +46,7 @@
     <Compile Include="VMMainWindow.cs" />
     <Compile Include="VMHabiticaTodo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VMTodoList.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Backend\Backend.csproj">

@@ -8,32 +8,30 @@
 		mc:Ignorable="d"
 		Title="SharpTodo"
 		xmlns:gif="http://wpfanimatedgif.codeplex.com"
-		Height="470"
+		Height="570"
 		Width="700">
 
 	<Window.DataContext>
 		<vm:VMMainWindow x:Name="MainWindowDataContext" />
 	</Window.DataContext>
 
-	<Window.InputBindings>
-		<KeyBinding Key="R"
-					Modifiers="Ctrl"
-					Command="{Binding FetchCommand}" />
-		<KeyBinding Key="N"
-					Modifiers="Ctrl"
-					Command="{Binding CreateCommand}" />
-		<KeyBinding Key="S"
-					Modifiers="Ctrl"
-					CommandParameter="{Binding SelectedItem, ElementName=ListBoxTodos}"
-					Command="{Binding SaveCommand}" />
-	</Window.InputBindings>
+	<Window.Resources>
+		<DataTemplate x:Name="TodoListTemplate"
+					  DataType="{x:Type vm:VMTodoList}">
+			<local:TodoList DataContext="{Binding}" />
+		</DataTemplate>
+		<DataTemplate x:Name="OptionsTemplate"
+					  DataType="{x:Type vm:VMOptions}">
+			<local:Options DataContext="{Binding}" />
+		</DataTemplate>
+	</Window.Resources>
 
 	<!--Main Grid-->
 	<Grid>
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="1*" />
+			<RowDefinition Height="Auto" />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
@@ -85,62 +83,9 @@
 				   VerticalAlignment="Top" />
 		</DockPanel>
 
-		<!--TodoList-->
-		<DockPanel x:Name="TodoList"
-				   Grid.Row="2">
-			<DockPanel x:Name="TodoListButtons"
-					   DockPanel.Dock="Top"
-					   Margin="10,0">
-				<Button x:Name="ButtonFetch"
-						Command="{Binding FetchCommand}"
-						Style="{StaticResource UIButton}"
-						Margin="0"
-						FontFamily="Consolas"
-						Width="28"
-						FontSize="18"
-						Height="28">
-					<Button.ToolTip>
-						<TextBlock>
-							Reload all Todos from Habitica
-							<LineBreak />
-							Shortcut: <Run FontWeight="Bold">CTRL-R</Run>
-						</TextBlock>
-					</Button.ToolTip>
-					⟳
-				</Button>
-				<Button x:Name="ButtonCreate"
-						Command="{Binding CreateCommand}"
-						Style="{StaticResource UIButton}"
-						Margin="0"
-						FontFamily="Consolas"
-						Width="28"
-						Height="28"
-						HorizontalAlignment="Left"
-						FontSize="18">
-					<Button.ToolTip>
-						<TextBlock>
-							Create a new Todo
-							<LineBreak />
-							Shortcut: <Run FontWeight="Bold">CTRL-N</Run>
-						</TextBlock>
-					</Button.ToolTip>
-					
-					+</Button>
-			</DockPanel>
-			<ListBox x:Name="ListBoxTodos"
-					 ItemsSource="{Binding TodoList}"
-					 ItemTemplate="{StaticResource TodoTemplate}"
-					 ItemContainerStyle="{StaticResource ListBoxItemNoHighlighting}"
-					 VerticalAlignment="Stretch"
-					 Margin="10,0,10,10"
-					 HorizontalContentAlignment="Stretch" />
-		</DockPanel>
-
-		<!--TodoDetails-->
-		<ContentPresenter x:Name="TodoDetails"
-						  Grid.Row="2"
-						  Grid.Column="1"
-						  Content="{Binding SelectedItem, ElementName=ListBoxTodos}"
-						  ContentTemplate="{StaticResource TodoDetailsTemplate}" />
+		<!--TodoList or Options-->
+		<ContentControl Grid.Row="2"
+						Grid.ColumnSpan="2"
+						Content="{Binding CurrentView}" />
 	</Grid>
 </Window>
