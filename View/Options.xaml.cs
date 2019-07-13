@@ -17,7 +17,7 @@ namespace View
     /// <summary>
     /// Interaktionslogik für Options.xaml
     /// </summary>
-    public partial class Options : UserControl
+    public partial class Options : Page
     {
         public Options()
         {

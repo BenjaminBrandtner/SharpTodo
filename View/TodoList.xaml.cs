@@ -18,7 +18,7 @@ namespace View
 	/// <summary>
 	/// Interaction logic for TodoList.xaml
 	/// </summary>
-	public partial class TodoList : UserControl
+	public partial class TodoList : Page
 	{
 		public TodoList()
 		{

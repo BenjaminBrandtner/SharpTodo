@@ -8,19 +8,20 @@
 		mc:Ignorable="d"
 		Title="SharpTodo"
 		xmlns:gif="http://wpfanimatedgif.codeplex.com"
-		Height="570"
-		Width="700">
+		Height="520"
+		Width="650"
+		SizeToContent="WidthAndHeight">
 
 	<Window.DataContext>
 		<vm:VMMainWindow x:Name="MainWindowDataContext" />
 	</Window.DataContext>
 
 	<Window.Resources>
-		<DataTemplate x:Name="TodoListTemplate"
+		<DataTemplate x:Name="VMTodoListTemplate"
 					  DataType="{x:Type vm:VMTodoList}">
 			<local:TodoList DataContext="{Binding}" />
 		</DataTemplate>
-		<DataTemplate x:Name="OptionsTemplate"
+		<DataTemplate x:Name="VMOptionsTemplate"
 					  DataType="{x:Type vm:VMOptions}">
 			<local:Options DataContext="{Binding}" />
 		</DataTemplate>
@@ -31,7 +32,7 @@
 		<Grid.RowDefinitions>
 			<RowDefinition Height="Auto" />
 			<RowDefinition Height="Auto" />
-			<RowDefinition Height="Auto" />
+			<RowDefinition />
 		</Grid.RowDefinitions>
 		<Grid.ColumnDefinitions>
 			<ColumnDefinition />
@@ -54,7 +55,9 @@
 					Grid.Column="0"
 					Grid.Row="1">
 			<Image Source="/images/SharpTodoLogo.png"
-				   Margin="5" />
+				   Margin="5"
+				   MaxWidth="311"
+				   MaxHeight="63" />
 		</StackPanel>
 
 		<!--Messages And Loading-->
@@ -84,8 +87,10 @@
 		</DockPanel>
 
 		<!--TodoList or Options-->
-		<ContentControl Grid.Row="2"
-						Grid.ColumnSpan="2"
-						Content="{Binding CurrentView}" />
+		<Frame x:Name="ContentFrame"
+			   Content="{Binding CurrentView}"
+			   NavigationUIVisibility="Hidden"
+			   Grid.Row="2"
+			   Grid.ColumnSpan="2" />
 	</Grid>
 </Window>
